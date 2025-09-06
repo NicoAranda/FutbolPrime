@@ -72,3 +72,40 @@
 .carousel-control-next-icon {
   filter: invert(1); /* Las hace negras sobre fondo claro */
 }
+
+.my-card{
+  transition: all .5s ease;
+}
+
+.my-card:hover{
+  transform: translateY(-10px);
+  box-shadow: var(--bs-box-shadow-lg); 
+}
+
+a{
+  text-decoration: none;
+}
+
+/* Ajustamos el label para que "flote" */
+.form-outline {
+  position: relative;
+}
+
+.form-outline .form-label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Cuando el input está en focus o tiene texto */
+.form-outline .form-control:focus + .form-label,
+.form-outline .form-control:not(:placeholder-shown) + .form-label {
+  top: 0px;
+  left: 10px;
+  font-size: 0.8rem;
+  color: #0d6efd; /* Azul Bootstrap */
+}
