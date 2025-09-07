@@ -109,3 +109,9 @@ a{
   box-shadow: none !important;
   border-color: #ced4da !important; /* gris Bootstrap, como el normal */
 }
+
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+  }
