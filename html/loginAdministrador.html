@@ -25,8 +25,8 @@
 
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" placeholder="********" required>
-        <div class="invalid-feedback">La contraseña es obligatoria</div>
+        <input type="password" class="form-control" id="password" placeholder="********" required minlength="6">
+        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
       </div>
 
       <div class="d-flex justify-content-between mb-3">
@@ -39,6 +39,9 @@
 
       <div class="d-grid">
         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+      </div>
+      <div class="d-flex justify-content-center mt-4">
+        <a href="../html/loginPage.html" class="text-decoration-none">Volver</a>
       </div>
     </form>
   </div>

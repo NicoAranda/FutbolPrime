@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador</title>
+    <link rel="stylesheet" href="../bootstrap-5.3.8-dist/css/admin.css">
+    <link rel="stylesheet" href="../bootstrap-5.3.8-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Fútbol Prime</a>
+            <div class="d-flex">
+                <span class="text-white me-3"><img src="../img/loginAdmin.png" class="social-icon"> Admin</span>
+                <a href="../html/loginPage.html" class="btn btn-outline-light btn-sm">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex flex-grow-1 bg-whitesmoke">
+        <!-- Sidebar -->
+        <div class="sidebar p-3">
+            <h5 class="fw-bold">Menú</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="./administradorPage.html">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="productos.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./pedidos.html">Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="./agregarProducto.html">Agregar Producto</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="content w-100">
+
+            <!-- Sección Agregar Producto -->
+<div class="card shadow mt-5">
+  <div class="card-header bg-primary text-white">
+    Agregar Producto
+  </div>
+  <div class="card-body">
+    <form id="formAgregarProducto" class="needs-validation" novalidate>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="sku" class="form-label">SKU</label>
+      <input type="text" class="form-control" id="sku" placeholder="Ej: PLT753159" required>
+      <div class="invalid-feedback">El SKU es obligatorio.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre del Producto</label>
+      <input type="text" class="form-control" id="nombre" placeholder="Ej: Camiseta Barcelona" required>
+      <div class="invalid-feedback">El nombre es obligatorio.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="stock" class="form-label">Stock</label>
+      <input type="number" class="form-control" id="stock" placeholder="Ej: 50" required>
+      <div class="invalid-feedback">Ingresa el stock.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="precio" class="form-label">Precio</label>
+      <input type="number" class="form-control" id="precio" placeholder="Ej: 39990" required>
+      <div class="invalid-feedback">Ingresa el precio.</div>
+    </div>
+    <div class="col-md-12">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+      <div class="invalid-feedback">La descripción es obligatoria.</div>
+    </div>
+    <div class="col-md-12">
+      <label for="imagen" class="form-label">Imagen del Producto</label>
+      <input class="form-control" type="file" id="imagen" required>
+      <div class="invalid-feedback">Debes subir una imagen.</div>
+    </div>
+  </div>
+  <div class="mt-3 text-end">
+    <button type="submit" class="btn btn-success">Guardar Producto</button>
+    <button type="reset" class="btn btn-secondary">Limpiar</button>
+  </div>
+</form>
+
+  </div>
+</div>
+
+
+        </div>
+    </div>
+
+    <script src="../bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
