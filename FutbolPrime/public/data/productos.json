@@ -1,0 +1,260 @@
+{
+    "balones": [
+        {
+            "sku": "PLT741256",
+            "nombre": "CFC NK ACADEMY",
+            "precio": 29990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Azul",
+            "stock": 99,
+            "imagen": "/img/BallCHELSEA.webp"
+        },
+        {
+            "sku": "PLT753159",
+            "nombre": "Erling Haaland Academy",
+            "precio": 32990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Azul",
+            "stock": 122,
+            "imagen": "/img/BallHAALAND.webp"
+        },
+        {
+            "sku": "PLT100810",
+            "nombre": "Pelota Final League del Mundial de Clubes FIFA",
+            "precio": 30990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Blanco, Azul y Dorado",
+            "stock": 45,
+            "imagen": "/img/BallMdCFINAL.avif"
+        },
+        {
+            "sku": "PLT956784",
+            "nombre": "Pelota League del Mundial de Clubes FIFA",
+            "precio": 30990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Blanco y Dorado",
+            "stock": 77,
+            "imagen": "/img/BallMdC.avif"
+        },
+        {
+            "sku": "PLT116987",
+            "nombre": "PSG NK ACADEMY",
+            "precio": 30990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Azul",
+            "stock": 37,
+            "imagen": "/img/BallPSG.webp"
+        },
+        {
+            "sku": "PLT459655",
+            "nombre": "PSG NK ACADEMY",
+            "precio": 29990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Dorado",
+            "stock": 200,
+            "imagen": "/img/BallSIG.webp"
+        },
+        {
+            "sku": "PLT779958",
+            "nombre": "SIG ATHLETE - SU25 NIKE",
+            "precio": 32990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Morado",
+            "stock": 67,
+            "imagen": "/img/BallUEFA.avif"
+        },
+        {
+            "sku": "PLT459655",
+            "nombre": "Pelota UCL League GOLD",
+            "precio": 29990,
+            "tipo": "Fútbol",
+            "talla": 5,
+            "color": "Dorado",
+            "stock": 200,
+            "imagen": "/img/BallUEFA.avif"
+        }
+    ],
+    "camisetas": [
+        {
+            "sku": "CMT446889",
+            "nombre": "Camiseta SEVILLA FC",
+            "precio": 99990,
+            "tipo": "Visitante",
+            "color": "Negro con detalles azules",
+            "stock": 34,
+            "imagen": "/img/PoleraSevilla.jpg"
+        },
+        {
+            "sku": "CMT156474",
+            "nombre": "Camiseta Local REAL MADRID",
+            "precio": 88990,
+            "tipo": "Local",
+            "color": "Blanca",
+            "stock": 54,
+            "imagen": "/img/PoleraRealM.jpg"
+        },
+        {
+            "sku": "CMT663878",
+            "nombre": "Camiseta PSG",
+            "precio": 77990,
+            "tipo": "Visitante",
+            "color": "Azul",
+            "stock": 101,
+            "imagen": "/img/PoleraPSG.webp"
+        },
+        {
+            "sku": "CMT459986",
+            "nombre": "Camiseta Local de AC Milan",
+            "precio": 69990,
+            "tipo": "Local",
+            "color": "Rojo y Negro",
+            "stock": 63,
+            "imagen": "/img/PoleraMilan.avif"
+        },
+        {
+            "sku": "CMT101010",
+            "nombre": "Camiseta MESSI BARCELONA",
+            "precio": 110990,
+            "tipo": "Local",
+            "color": "Rojo y Azul",
+            "stock": 3,
+            "imagen": "/img/PoleraMessi.jpg"
+        },
+        {
+            "sku": "CMT903321",
+            "nombre": "Camiseta Marsella",
+            "precio": 65990,
+            "tipo": "Visitante",
+            "color": "Calipso",
+            "stock": 3,
+            "imagen": "/img/PoleraMarsella.jpg"
+        },
+        {
+            "sku": "CMT556984",
+            "nombre": "Camiseta Visitante de Liverpool",
+            "precio": 89990,
+            "tipo": "Visitante",
+            "color": "Negro",
+            "stock": 33,
+            "imagen": "/img/PoleraLiverpool.jpg"
+        },
+        {
+            "sku": "CMT112021",
+            "nombre": "Camiseta MANCHESTER CITY",
+            "precio": 90990,
+            "tipo": "Local",
+            "color": "Celeste",
+            "stock": 50,
+            "imagen": "/img/PoleraCity.avif"
+        }
+    ],
+    "canilleras": [
+        {
+            "sku": "C654321",
+            "nombre": "Canilleras Nike Guard para Adulto",
+            "precio": 17990,
+            "color": "Naranja Fosforescente",
+            "stock": 66,
+            "imagen": "/img/canilleras1.webp"
+        },
+        {
+            "sku": "C693658",
+            "nombre": "Canilleras Adidas edición especial Messi",
+            "precio": 19990,
+            "color": "Celeste con Rosado",
+            "stock": 41,
+            "imagen": "/img/canilleras2.webp"
+        },
+        {
+            "sku": "C741369",
+            "nombre": "Canilleras Adidas Tiro SG para Adulto",
+            "precio": 14990,
+            "color": "Blancas con Negro",
+            "stock": 22,
+            "imagen": "/img/canilleras3.webp"
+        },
+        {
+            "sku": "C846012",
+            "nombre": "Canilleras Adidas Tiro Club para Adulto",
+            "precio": 14990,
+            "color": "Negras con Dorado",
+            "stock": 49,
+            "imagen": "/img/canilleras4.webp"
+        }
+    ],
+    "guantes": [
+        {
+            "sku": "G7784650",
+            "nombre": "Guantes Reusch Attrakt Adulto",
+            "precio": 65990,
+            "color": "Amarillo con Negro",
+            "stock": 74,
+            "imagen": "/img/guante4.webp"
+        },
+        {
+            "sku": "G699630",
+            "nombre": "Guantes VGFV para Niño",
+            "precio": 49990,
+            "color": "Verde con azul",
+            "stock": 11,
+            "imagen": "/img/guante3.webp"
+        },
+        {
+            "sku": "G559843",
+            "nombre": "Guantes VGLC Argel Adulto",
+            "precio": 62990,
+            "color": "Amarillo",
+            "stock": 32,
+            "imagen": "/img/guante2.webp"
+        },
+        {
+            "sku": "G332266",
+            "nombre": "Guantes Vasen Adulto",
+            "precio": 62990,
+            "color": "Blanco",
+            "stock": 32,
+            "imagen": "/img/guante1.webp"
+        }
+    ],
+    "medias": [
+        {
+            "sku": "M020132",
+            "nombre": "Medias Poker Rojas Adulto",
+            "precio": 4990,
+            "color": "Rojas",
+            "stock": 79,
+            "imagen": "/img/medias1.webp"
+        },
+        {
+            "sku": "M040652",
+            "nombre": "Medias Poker Adulto",
+            "precio": 4990,
+            "color": "Azules",
+            "stock": 82,
+            "imagen": "/img/medias2.webp"
+        },
+        {
+            "sku": "M015642",
+            "nombre": "Medias DRB Negro Juveniles",
+            "precio": 6990,
+            "color": "Negro",
+            "stock": 150,
+            "imagen": "/img/medias3.webp"
+        },
+        {
+            "sku": "M065471",
+            "nombre": "Medias DRB Blanco Adulto",
+            "precio": 5990,
+            "color": "Blancas",
+            "stock": 150,
+            "imagen": "/img/medias4.webp"
+        }
+    ]
+}

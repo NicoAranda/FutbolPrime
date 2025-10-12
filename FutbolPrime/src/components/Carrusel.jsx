@@ -1,6 +1,6 @@
-import ofertaImg from '../assets/img/oferta.png';
-import balonesImg from '../assets/img/ofertabalones.png';
-import camisetasImg from '../assets/img/ofertascamisetas.png';
+import ofertaImg from '../../public/img/oferta.png';
+import balonesImg from '../../public/img/ofertabalones.png';
+import camisetasImg from '../../public/img/ofertascamisetas.png';
 
 const carouselItemStyle = {
     backgroundSize: 'cover',

@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/img/futbolprimepng.png";
-import cuenta from "../assets/img/cuenta.png";
+import logo from "../../public/img/futbolprimepng.png";
+import cuenta from "../../public/img/cuenta.png";
 
 export const Header = () => {
   return (
