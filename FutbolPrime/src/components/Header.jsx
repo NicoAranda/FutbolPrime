@@ -11,7 +11,7 @@ export const Header = () => {
           <img
             src={logo}
             alt="Fútbol Prime Logo"
-            className="logo-navbar"
+            className="logo"
           />
           <h1 className="h4 m-0">Fútbol Prime</h1>
         </Link>
@@ -57,7 +57,7 @@ export const Header = () => {
                 <img
                   src={cuenta}
                   alt="Cuenta Logo"
-                  className="social-icon"
+                  className="logo"
                 />
               </NavLink>
             </li>
