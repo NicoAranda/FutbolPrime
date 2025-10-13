@@ -1,0 +1,22 @@
+    .product-card {
+        width: 100%;
+        width: 300px;
+        height: 420px;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        padding: 2rem;
+    }
+
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-img {
+        min-width: 100%;
+        min-height: 180px;
+        /* object-fit: contain; */
+        /* background-color: #f8f9fa; */
+        /* padding: 10px; */
+    }

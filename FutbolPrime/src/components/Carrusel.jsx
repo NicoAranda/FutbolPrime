@@ -1,6 +1,7 @@
 import ofertaImg from '../../public/img/oferta.png';
 import balonesImg from '../../public/img/ofertabalones.png';
 import camisetasImg from '../../public/img/ofertascamisetas.png';
+import { Link, NavLink } from "react-router-dom";
 
 const carouselItemStyle = {
     backgroundSize: 'cover',
@@ -15,14 +16,14 @@ export const Carrusel = () => {
             <section id="ofertasCarousel" className="carousel slide container my-5" data-bs-ride="carousel">
                 <div className="carousel-inner rounded shadow">
 
-                    <a href="ofertasPage.html">
+                    <Link to="/ofertasPage">
                         <div
                             className="carousel-item active text-center p-5"
                             style={{ ...carouselItemStyle, backgroundImage: `url(${ofertaImg})` }}
                         >
                             {/* Opcional: Contenido del carrusel */}
                         </div>
-                    </a>
+                    </Link>
                     <a href="balonesPage.html">
                         <div
                             className="carousel-item text-center p-5"

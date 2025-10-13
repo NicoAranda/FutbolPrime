@@ -71,14 +71,14 @@
             "imagen": "/img/BallUEFA.avif"
         },
         {
-            "sku": "PLT459655",
+            "sku": "PLT019352",
             "nombre": "Pelota UCL League GOLD",
             "precio": 29990,
             "tipo": "Fútbol",
             "talla": 5,
             "color": "Dorado",
             "stock": 200,
-            "imagen": "/img/BallUEFA.avif"
+            "imagen": "/img/BallUEFAGOLD.avif"
         }
     ],
     "camisetas": [
