@@ -57,7 +57,7 @@ export const Header = () => {
                 <img
                   src={cuenta}
                   alt="Cuenta Logo"
-                  className="logo"
+                  className="logo p-4"
                 />
               </NavLink>
             </li>
