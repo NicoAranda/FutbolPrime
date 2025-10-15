@@ -31,7 +31,7 @@ export const Header = () => {
 
         {/* Links */}
         <div className="collapse navbar-collapse" id="navbarColor01">
-          <ul className="navbar-nav ms-auto text-center">
+          <ul className="navbar-nav ms-auto text-center align-items-center">
             <li className="nav-item">
               <NavLink className="nav-link" to="/">
                 Inicio
