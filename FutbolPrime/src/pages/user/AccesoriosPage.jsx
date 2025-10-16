@@ -1,10 +1,6 @@
-import React from 'react'
-import { Carrusel } from '../components/Carrusel'
-import { useState, useEffect } from 'react'
-import { Detalle } from '../components/Detalle'
-
-export const DetallePage = () => {
-
+import { useEffect, useState } from 'react'
+import { Card } from '../../components/Card'
+export const AccesoriosPage = () => {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
@@ -21,13 +17,13 @@ export const DetallePage = () => {
       })
   }, [])
 
-
   return (
     <>
+      <h2 className='mt-4 text-center'>Accesorios</h2>
       <div className="container my-5">
         <div className="row g-4 justify-content-center">
           {productos.map((p) => (
-            <Detalle key={p.sku} producto={p} />
+            <Card key={p.sku} producto={p} />
           ))}
         </div>
       </div>

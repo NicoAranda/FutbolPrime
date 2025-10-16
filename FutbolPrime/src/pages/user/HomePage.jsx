@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react'
-import { Card } from '../components/Card'
+import React from 'react'
+import { Carrusel } from '../../components/Carrusel'
+import { Card } from '../../components/Card'
+import { useState, useEffect } from 'react'
 
-export const OfertasPage = () => {
+export const HomePage = () => {
+
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
@@ -22,8 +25,11 @@ export const OfertasPage = () => {
       })
   }, [])
 
+
   return (
-    <div className="container my-5">
+    <>
+      <Carrusel />
+      <div className="container my-5">
       <h2 className="text-center mb-4">Productos en Oferta</h2>
       <div className="row g-4 justify-content-center">
         {productos.length > 0 ? (
@@ -33,5 +39,6 @@ export const OfertasPage = () => {
         )}
       </div>
     </div>
+    </>
   )
 }

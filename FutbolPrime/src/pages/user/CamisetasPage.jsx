@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Card } from '../components/Card'
-
+import { Card } from '../../components/Card'
 export const CamisetasPage = () => {
 
     const [productos, setProductos] = useState([])

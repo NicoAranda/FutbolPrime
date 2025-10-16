@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import loginImg from '../../public/img/login.jpg'
+import loginImg from '../../../public/img/login.jpg'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 export const RegisterPage = () => {

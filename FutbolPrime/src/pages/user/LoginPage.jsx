@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import loginImg from '../../public/img/login.jpg'
+import loginImg from '../../../public/img/login.jpg'
 import { useEffect } from "react";
 
 

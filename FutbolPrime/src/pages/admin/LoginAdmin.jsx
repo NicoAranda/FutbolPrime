@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import loginAdminImg from '../../public/img/loginAdmin.png'
+import loginAdminImg from '../../../public/img/loginAdmin.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 export const LoginAdmin = () => {
@@ -9,7 +9,7 @@ export const LoginAdmin = () => {
     useEffect(() => {
         'use strict';
 
-        const form = document.getElementById('loginForm');
+        const form = document.getElementById('loginFormAdmin');
         if (!form) return;
 
         const handleSubmit = (event) => {
@@ -20,7 +20,7 @@ export const LoginAdmin = () => {
                 form.classList.add('was-validated');
             } else {
                 alert('Inicio de sesión correcto');
-                navigate('/');
+                navigate('/administrador');
             }
         };
 

@@ -1,20 +1,18 @@
 import { Routes, Route } from "react-router-dom"
 import { Header } from "./components/Header"
-import { HomePage } from "./pages/HomePage"
-import { CamisetasPage } from "./pages/CamisetasPage"
-import './App.css'
-import { AccesoriosPage } from "./pages/AccesoriosPage"
-import { LoginPage } from "./pages/LoginPage"
-import { RegisterPage } from "./pages/RegisterPage"
-import { LoginAdmin } from "./pages/LoginAdmin"
-
-import { NosotrosPage } from "./pages/NosotrosPage"
-
-
-import { BalonesPage } from "./pages/BalonesPage"
-import { DetallePage } from "./pages/DetallePage"
 import { Footer } from "./components/Footer"
-import { OfertasPage } from "./pages/OfertasPage"
+import { HomePage } from "./pages/user/HomePage"
+import { CamisetasPage } from "./pages/user/CamisetasPage"
+import './App.css'
+import { AccesoriosPage } from "./pages/user/AccesoriosPage"
+import { LoginPage } from "./pages/user/LoginPage"
+import { RegisterPage } from "./pages/user/RegisterPage"
+import { LoginAdmin } from "./pages/admin/LoginAdmin"
+import { NosotrosPage } from "./pages/user/NosotrosPage"
+import { BalonesPage } from "./pages/user/BalonesPage"
+import { DetallePage } from "./pages/user/DetallePage"
+import { OfertasPage } from "./pages/user/OfertasPage"
+import { AdministradorPage } from "./pages/admin/AdministradorPage"
 
 function App() {
 
@@ -32,7 +30,7 @@ function App() {
         <Route path="/loginAdmin" element={<LoginAdmin />}/>
         <Route path="/nosotros" element={<NosotrosPage />}/>
         <Route path="/ofertas" element={<OfertasPage />}/>
-        
+        <Route path="/administrador" element={<AdministradorPage />}/>
       </Routes>
       <Footer />
     </>

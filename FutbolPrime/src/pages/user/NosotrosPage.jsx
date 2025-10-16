@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/nosotros.css';
+import '../../assets/nosotros.css';
 
 export const NosotrosPage = () => {
   return (
