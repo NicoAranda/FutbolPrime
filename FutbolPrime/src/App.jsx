@@ -8,6 +8,7 @@ import { AccesoriosPage } from "./pages/AccesoriosPage"
 import { LoginPage } from "./pages/LoginPage"
 import { RegisterPage } from "./pages/RegisterPage"
 import { LoginAdmin } from "./pages/LoginAdmin"
+import { NosotrosPage } from "./pages/NosotrosPage"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}/>
         <Route path="/registro" element={<RegisterPage />}/>
         <Route path="/loginAdmin" element={<LoginAdmin />}/>
+        <Route path="/nosotros" element={<NosotrosPage />}/>
         
       </Routes>
     </>
