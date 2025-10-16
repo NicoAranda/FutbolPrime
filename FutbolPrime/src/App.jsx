@@ -14,6 +14,7 @@ import { NosotrosPage } from "./pages/NosotrosPage"
 import { BalonesPage } from "./pages/BalonesPage"
 import { DetallePage } from "./pages/DetallePage"
 import { Footer } from "./components/Footer"
+import { OfertasPage } from "./pages/OfertasPage"
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/registro" element={<RegisterPage />}/>
         <Route path="/loginAdmin" element={<LoginAdmin />}/>
         <Route path="/nosotros" element={<NosotrosPage />}/>
+        <Route path="/ofertas" element={<OfertasPage />}/>
         
       </Routes>
       <Footer />

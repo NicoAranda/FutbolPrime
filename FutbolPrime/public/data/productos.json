@@ -8,7 +8,8 @@
             "talla": 5,
             "color": "Azul",
             "stock": 99,
-            "imagen": "/img/BallCHELSEA.webp"
+            "imagen": "/img/BallCHELSEA.webp",
+            "oferta": 45990
         },
         {
             "sku": "PLT753159",
@@ -38,7 +39,8 @@
             "talla": 5,
             "color": "Blanco y Dorado",
             "stock": 77,
-            "imagen": "/img/BallMdC.avif"
+            "imagen": "/img/BallMdC.avif",
+            "oferta": 34990
         },
         {
             "sku": "PLT116987",
@@ -98,7 +100,8 @@
             "tipo": "Local",
             "color": "Blanca",
             "stock": 54,
-            "imagen": "/img/PoleraRealM.jpg"
+            "imagen": "/img/PoleraRealM.jpg",
+            "oferta": 109990
         },
         {
             "sku": "CMT663878",
@@ -125,7 +128,8 @@
             "tipo": "Local",
             "color": "Rojo y Azul",
             "stock": 3,
-            "imagen": "/img/PoleraMessi.jpg"
+            "imagen": "/img/PoleraMessi.jpg",
+            "oferta": 134990
         },
         {
             "sku": "CMT903321",
@@ -178,7 +182,8 @@
             "precio": 14990,
             "color": "Blancas con Negro",
             "stock": 22,
-            "imagen": "/img/canilleras3.webp"
+            "imagen": "/img/canilleras3.webp",
+            "oferta": 22990
         },
         {
             "sku": "C846012",
@@ -212,7 +217,8 @@
             "precio": 62990,
             "color": "Amarillo",
             "stock": 32,
-            "imagen": "/img/guante2.webp"
+            "imagen": "/img/guante2.webp",
+            "oferta": 65990
         },
         {
             "sku": "G332266",
@@ -230,7 +236,8 @@
             "precio": 4990,
             "color": "Rojas",
             "stock": 79,
-            "imagen": "/img/medias1.webp"
+            "imagen": "/img/medias1.webp",
+            "oferta": 7500
         },
         {
             "sku": "M040652",
@@ -238,7 +245,8 @@
             "precio": 4990,
             "color": "Azules",
             "stock": 82,
-            "imagen": "/img/medias2.webp"
+            "imagen": "/img/medias2.webp",
+            "oferta": 9990
         },
         {
             "sku": "M015642",
@@ -257,73 +265,5 @@
             "imagen": "/img/medias4.webp"
         }
 
-    ],
-    "ofertas": [
-        {
-            "sku": "OF238564",
-            "nombre": "Media Adidas",
-            "precio": 6000,
-            "color": "Rojas",
-            "stock": 150,
-            "imagen": "/img/medias.adidas.webp"
-        },
-        {
-            "sku": "OF531985",
-            "nombre": "Canillera Futbol Adidas",
-            "precio": 7000,
-            "color": "Azul",
-            "stock": 150,
-            "imagen": "/img/canilleras_azul.wep"
-        },
-        {
-            "sku": "OF695320",
-            "nombre": "Guante de Arquero 4ward",
-            "precio": 6500,
-            "color": "Negro",
-            "stock": 150,
-            "imagen": "/img/guantes_negro.webp"
-        },
-        {
-            "sku": "OF34264",
-            "nombre": "Camiseta Colo-Colo",
-            "precio": 15000,
-            "color": "Negras con Dorado",
-            "stock": 150,
-            "imagen": "/img/camiseta_colocolo.webp"
-        },
-        {
-            "sku": "OF5938576",
-            "nombre": "Medias Puma",
-            "precio": 4990,
-            "color": "Gris",
-            "stock": 150,
-            "imagen": "/img/medias_grisPuma.webp"
-        },
-        {
-            "sku": "OF8926502",
-            "nombre": "Canillera Adidas",
-            "precio": 10500,
-            "color": "Negras con Dorado",
-            "stock": 150,
-            "imagen": "/img/canilleras_negroDorado.webp"
-        },
-        {
-            "sku": "OF6591659",
-            "nombre": "Guante Diadora",
-            "precio": 8950,
-            "color": "Blanco y negro",
-            "stock": 150,
-            "imagen": "/img/guantes_blancoNegro.webp"
-        },
-        {
-            "sku": "OF6739672",
-            "nombre": "Camiseta La U",
-            "precio": 6550,
-            "color": "Azul",
-            "stock": 150,
-            "imagen": "/img/camiseta_LaU.webp"
-        }
-
-        
     ]
 }

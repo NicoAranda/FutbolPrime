@@ -17,8 +17,16 @@ export const Card = ({ producto }) => {
 							<h5 className="card-title">{producto.nombre}</h5>
 							<p className="card-text">{producto.tipo}</p>
 							{/* Este div empuja el precio hacia abajo */}
-							<div className="mt-auto">
-								<p className="fw-bold text-primary">${producto.precio}</p>
+							<div className="mt-auto d-flex justify-content-center gap-4">
+								{producto.oferta
+									? <p className=" text-primary text-decoration-line-through">
+										${producto.oferta}
+									</p>
+									: null}
+
+								<p className="fw-bold text-primary">
+									${producto.precio}
+								</p>
 							</div>
 						</div>
 					</div>

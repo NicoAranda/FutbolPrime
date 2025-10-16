@@ -16,7 +16,7 @@ export const Carrusel = () => {
             <section id="ofertasCarousel" className="carousel slide container my-5" data-bs-ride="carousel">
                 <div className="carousel-inner rounded shadow">
 
-                    <Link to="/ofertasPage">
+                    <Link to="/ofertas">
                         <div
                             className="carousel-item active text-center p-5"
                             style={{ ...carouselItemStyle, backgroundImage: `url(${ofertaImg})` }}
@@ -24,19 +24,19 @@ export const Carrusel = () => {
                             {/* Opcional: Contenido del carrusel */}
                         </div>
                     </Link>
-                    <a href="balonesPage.html">
+                    <Link to="/balones">
                         <div
                             className="carousel-item text-center p-5"
                             style={{ ...carouselItemStyle, backgroundImage: `url(${balonesImg})` }}
                         ></div>
-                    </a>
+                    </Link>
 
-                    <a href="camisetasPage.html">
+                    <Link to="/camisetas">
                         <div
                             className="carousel-item text-center p-5"
                             style={{ ...carouselItemStyle, backgroundImage: `url(${camisetasImg})` }}
                         ></div>
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Controles y Navegación (están bien como están) */}
