@@ -1,45 +1,19 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: consolas, sans-serif;
-}
-
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
   background: #f4f9ff;
 }
 
-/* --- CONTENEDOR --- */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 40px;
-  padding: 40px 0;
-}
-
 /* --- TARJETAS --- */
-.container .box {
+.box {
   position: relative;
   width: 320px;
   height: 420px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s ease;
   border-radius: 12px;
   animation: float 4s ease-in-out infinite;
+  transition: 0.5s ease;
 }
 
-/* --- EFECTOS DE FONDO CON AZUL --- */
-.container .box::before,
-.container .box::after {
+.box::before,
+.box::after {
   content: '';
   position: absolute;
   top: 0;
@@ -54,63 +28,58 @@ body {
   opacity: 0.9;
 }
 
-.container .box:hover::before,
-.container .box:hover::after {
+.box:hover::before,
+.box:hover::after {
   transform: skewX(0deg);
   left: 20px;
   width: calc(100% - 90px);
 }
 
-/* --- ANIMACIÓN DE BRILLO --- */
-.container .box span {
-  display: block;
+/* --- EFECTO DE BRILLO --- */
+.box span {
   position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
 }
 
-.container .box span::before,
-.container .box span::after {
+.box span::before,
+.box span::after {
   content: '';
   position: absolute;
+  width: 100px;
+  height: 100px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 153, 255, 0.2);
   backdrop-filter: blur(10px);
   opacity: 0;
   transition: 0.5s;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
   animation: sparkle 3s ease-in-out infinite;
 }
 
-.container .box span::before {
+.box span::before {
   top: 0;
   left: 0;
-  width: 100px;
-  height: 100px;
 }
 
-.container .box span::after {
+.box span::after {
   bottom: 0;
   right: 0;
-  width: 100px;
-  height: 100px;
   animation-delay: -1.5s;
 }
 
-.container .box:hover span::before,
-.container .box:hover span::after {
+.box:hover span::before,
+.box:hover span::after {
   opacity: 1;
-  background: rgba(0, 153, 255, 0.2);
 }
 
-/* --- CONTENIDO DE LAS TARJETAS --- */
-.container .box .content {
+/* --- CONTENIDO --- */
+.box .content {
   position: relative;
   width: 100%;
   height: 100%;
   padding: 30px 20px;
-  background: rgba(255, 255, 255, 0.95);
+  background: #fff;
   border: 2px solid rgba(0, 136, 255, 0.2);
   box-shadow: 0 8px 20px rgba(0, 136, 255, 0.15);
   border-radius: 12px;
@@ -120,49 +89,28 @@ body {
   text-align: center;
 }
 
-.container .box:hover .content {
+.box:hover .content {
   transform: translateY(-10px);
   box-shadow: 0 15px 25px rgba(0, 136, 255, 0.25);
 }
 
-/* --- TEXTOS --- */
-.container .box .content h2 {
-  font-size: 1.8em;
+.box .content h2 {
+  font-size: 1.5em;
   color: #002a80;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.container .box .content p {
+.box .content p {
   font-size: 1em;
   color: #333;
   line-height: 1.5em;
-  margin-bottom: 20px;
-}
-
-.container .box .content a {
-  display: inline-block;
-  font-size: 1em;
-  color: #fff;
-  background: linear-gradient(90deg, #0066ff, #00bfff);
-  padding: 10px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.container .box .content a:hover {
-  background: linear-gradient(90deg, #0044cc, #0099ff);
-  box-shadow: 0 3px 10px rgba(0, 136, 255, 0.4);
 }
 
 /* --- TÍTULO --- */
 .titulo {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #002a80;
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 2.2em;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* --- ANIMACIONES --- */
@@ -177,11 +125,11 @@ body {
 
 @keyframes sparkle {
   0%, 100% {
-    transform: scale(1) translateY(5px);
+    transform: scale(1);
     opacity: 0.3;
   }
   50% {
-    transform: scale(1.1) translateY(-5px);
+    transform: scale(1.1);
     opacity: 0.7;
   }
 }
