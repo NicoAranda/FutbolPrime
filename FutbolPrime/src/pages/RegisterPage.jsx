@@ -1,11 +1,45 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import loginImg from '../../public/img/login.jpg'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export const RegisterPage = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    'use strict';
+
+    const form = document.getElementById('registerForm');
+    if (!form) return;
+
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    form.addEventListener('submit', function (event) {
+      // Validación de contraseñas iguales
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setCustomValidity('Las contraseñas no coinciden');
+      } else {
+        confirmPassword.setCustomValidity('');
+      }
+
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+        form.classList.add('was-validated');
+      } else {
+        event.preventDefault();
+        alert('Registro exitoso');
+        navigate('/');
+      }
+    });
+
+    return () => form.removeEventListener('submit', () => {});
+  }, [navigate]);
+
   return (
     <>
-      <section className="vh-100 bg-light">
+      <section className="min-vh-100 bg-light d-flex align-items-center">
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-10">

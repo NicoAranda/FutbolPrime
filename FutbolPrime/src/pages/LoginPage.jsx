@@ -1,8 +1,33 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import loginImg from '../../public/img/login.jpg'
+import { useEffect } from "react";
 
 
 export const LoginPage = () => {
+
+    const navigate = useNavigate();
+
+  useEffect(() => {
+    'use strict';
+
+    const form = document.getElementById('loginForm');
+    if (!form) return;
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+      } else {
+        alert('Inicio de sesión correcto');
+        navigate('/');
+      }
+    };
+
+    form.addEventListener('submit', handleSubmit);
+    return () => form.removeEventListener('submit', handleSubmit);
+  }, [navigate]);
 
   return (
     <>
