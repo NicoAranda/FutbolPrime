@@ -1,0 +1,17 @@
+.sidebar {
+  width: 250px; /* Puedes ajustar el ancho */
+  height: 100vh; /* Ocupa todo el alto del viewport */
+  position: fixed; /* Fijo, no se mueve al hacer scroll */
+  top: 0;
+  left: 0;
+  overflow-y: auto; /* Si el contenido crece, permite scroll interno */
+}
+
+.sidebar .nav-link {
+  color: #fff !important; /* Asegura texto blanco */
+  transition: background-color 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}

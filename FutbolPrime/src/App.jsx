@@ -13,26 +13,33 @@ import { BalonesPage } from "./pages/user/BalonesPage"
 import { DetallePage } from "./pages/user/DetallePage"
 import { OfertasPage } from "./pages/user/OfertasPage"
 import { AdministradorPage } from "./pages/admin/AdministradorPage"
+import { UserLayout } from "./layouts/UserLayout"
+import { AdminLayout } from "./layouts/AdminLayout"
 
 function App() {
 
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/balones" element={<BalonesPage/>}/>
-        <Route path="/camisetas" element={<CamisetasPage />}/>
-        <Route path="/accesorios" element={<AccesoriosPage />}/>
-        <Route path="/detalle-producto" element={<DetallePage />}/>
-        <Route path="/login" element={<LoginPage />}/>
-        <Route path="/registro" element={<RegisterPage />}/>
-        <Route path="/loginAdmin" element={<LoginAdmin />}/>
-        <Route path="/nosotros" element={<NosotrosPage />}/>
-        <Route path="/ofertas" element={<OfertasPage />}/>
-        <Route path="/administrador" element={<AdministradorPage />}/>
+        <Route element={<UserLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/balones" element={<BalonesPage />} />
+          <Route path="/camisetas" element={<CamisetasPage />} />
+          <Route path="/accesorios" element={<AccesoriosPage />} />
+          <Route path="/detalle-producto" element={<DetallePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registro" element={<RegisterPage />} />
+          <Route path="/loginAdmin" element={<LoginAdmin />} />
+          <Route path="/nosotros" element={<NosotrosPage />} />
+          <Route path="/ofertas" element={<OfertasPage />} />
+        </Route>
+
+        <Route path="/administrador" element={<AdminLayout />}>
+          <Route index element={<AdministradorPage />} />
+          {/* Aquí puedes agregar más subrutas admin */}
+          {/* <Route path="productos" element={<ProductosAdminPage />} /> */}
+        </Route>
       </Routes>
-      <Footer />
     </>
   )
 }
