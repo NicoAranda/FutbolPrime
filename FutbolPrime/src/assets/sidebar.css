@@ -1,17 +1,47 @@
 .sidebar {
-  width: 250px; /* Puedes ajustar el ancho */
-  height: 100vh; /* Ocupa todo el alto del viewport */
-  position: fixed; /* Fijo, no se mueve al hacer scroll */
-  top: 0;
-  left: 0;
-  overflow-y: auto; /* Si el contenido crece, permite scroll interno */
+  width: 250px;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1040;
 }
 
 .sidebar .nav-link {
-  color: #fff !important; /* Asegura texto blanco */
+  color: #fff !important;
   transition: background-color 0.3s ease;
+  padding: 10px 12px;
+  border-radius: 8px;
 }
 
 .sidebar .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar .active-link {
+  background-color: rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
+/* Desktop: Sidebar fijo y visible */
+@media (min-width: 992px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .content-admin {
+    margin-left: 250px;
+  }
+}
+
+/* Mobile: Sidebar oculto, se despliega */
+@media (max-width: 991px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .content-admin {
+    margin-left: 0;
+  }
 }

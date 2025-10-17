@@ -15,6 +15,8 @@ import { OfertasPage } from "./pages/user/OfertasPage"
 import { AdministradorPage } from "./pages/admin/AdministradorPage"
 import { UserLayout } from "./layouts/UserLayout"
 import { AdminLayout } from "./layouts/AdminLayout"
+import { Productos } from "./pages/admin/ProductosPage"
+import { PedidosClientes } from "./components/PedidosClientes"
 
 function App() {
 
@@ -38,7 +40,10 @@ function App() {
           <Route index element={<AdministradorPage />} />
           {/* Aquí puedes agregar más subrutas admin */}
           {/* <Route path="productos" element={<ProductosAdminPage />} /> */}
+          <Route path="/administrador/productos" element={<Productos />} />
+          <Route path="/administrador/pedidos" element={<PedidosClientes />} />
         </Route>
+
       </Routes>
     </>
   )

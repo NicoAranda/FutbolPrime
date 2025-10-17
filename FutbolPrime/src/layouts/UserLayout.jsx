@@ -7,7 +7,7 @@ export const UserLayout = () => {
     <>
       <Header />
       <main>
-        <Outlet /> {/* Aquí se renderizan las páginas públicas */}
+        <Outlet />
       </main>
       <Footer />
     </>
