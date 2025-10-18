@@ -1,8 +1,12 @@
 import { useCart } from "../../context/CartContext";
 import "../../assets/carrito.css";
+import { useNavigate } from "react-router-dom"
+
 
 export const CarritoPage = () => {
   const { cart, removeFromCart, updateQuantity, applyCoupon, total, discount, finalTotal } = useCart();
+   const navigate = useNavigate()
+  
 
   const envio = 5000;
   const iva = Math.round(total * 0.19);
@@ -93,7 +97,12 @@ export const CarritoPage = () => {
                   Aplicar cupón
                 </button>
 
-                <button className="btn btn-primary w-100 mt-3">Finalizar compra</button>
+                <button
+                  className="btn btn-primary w-100 mt-3 fw-semibold"
+                  onClick={() => navigate("/FutbolPrime/checkout")}
+                >
+                  Finalizar Compra
+                </button>
               </div>
             </div>
           </div>

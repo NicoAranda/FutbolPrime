@@ -16,6 +16,7 @@ import { Productos } from "./pages/admin/ProductosPage"
 import { PedidosPage } from "./pages/admin/PedidosPage"
 import { AgregarProductoPage } from "./pages/admin/AgregarProductoPage"
 import { CarritoPage } from "./pages/user/CarritoPage"
+import { CheckoutPage } from "./pages/user/CheckoutPage"
 import './App.css'
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="nosotros" element={<NosotrosPage />} />
           <Route path="ofertas" element={<OfertasPage />} />
           <Route path="carrito" element={<CarritoPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
           
           
         </Route>
