@@ -28,12 +28,12 @@ export const AgregarProductoPage = () => {
   }, [])
 
   return (
-    <div className="content w-100">
-      <div className="card shadow mt-5">
-        <div className="card-header bg-primary text-white">
+    <div className="agregar-container d-flex justify-content-center align-items-center" >
+      <div className="card shadow-lg w-100">
+        <div className="card-header bg-primary text-white fs-5 fw-bold text-center">
           Agregar Producto
         </div>
-        <div className="card-body">
+        <div className="card-body p-4">
           <form
             ref={formRef}
             className="needs-validation"

@@ -46,3 +46,17 @@
     margin-left: 0;
   }
 }
+
+.agregar-container {
+  margin-left: 270px; /* antes 250px */
+  margin-right: 30px; /* nuevo: deja un poco de aire al lado derecho */
+  transition: all 0.3s ease;
+}
+
+/* En pantallas pequeñas, elimina el margen */
+@media (max-width: 991px) {
+  .agregar-container {
+    margin-left: 0;
+    padding: 20px;
+  }
+}
