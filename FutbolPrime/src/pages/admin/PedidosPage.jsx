@@ -5,8 +5,10 @@ import '../../assets/sidebar.css'
 export const PedidosPage = () => {
     return (
         <>
-            <div className="content-admin card shadow mt-5">
-                <PedidosClientes />
+            <div className="content-admin bg-whitesmoke p-4">
+                <div className="card shadow">
+                    <PedidosClientes />
+                </div>
             </div>
         </>
     )

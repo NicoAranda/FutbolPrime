@@ -34,6 +34,7 @@ export const SideBar = () => {
           <li className="nav-item">
             <NavLink
               to="/administrador"
+              end
               className={({ isActive }) =>
                 `nav-link text-white ${isActive ? 'active-link' : ''}`
               }

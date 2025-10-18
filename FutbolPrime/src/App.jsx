@@ -16,8 +16,8 @@ import { AdministradorPage } from "./pages/admin/AdministradorPage"
 import { UserLayout } from "./layouts/UserLayout"
 import { AdminLayout } from "./layouts/AdminLayout"
 import { Productos } from "./pages/admin/ProductosPage"
-import { PedidosClientes } from "./components/PedidosClientes"
-
+import { PedidosPage } from "./pages/admin/PedidosPage"
+import { AgregarProductoPage } from "./pages/admin/AgregarProductoPage"
 function App() {
 
   return (
@@ -41,7 +41,8 @@ function App() {
           {/* Aquí puedes agregar más subrutas admin */}
           {/* <Route path="productos" element={<ProductosAdminPage />} /> */}
           <Route path="/administrador/productos" element={<Productos />} />
-          <Route path="/administrador/pedidos" element={<PedidosClientes />} />
+          <Route path="/administrador/pedidos" element={<PedidosPage />} />
+          <Route path="/administrador/agregar-producto" element={<AgregarProductoPage />} />
         </Route>
 
       </Routes>
