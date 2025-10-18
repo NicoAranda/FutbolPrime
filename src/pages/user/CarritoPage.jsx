@@ -2,101 +2,104 @@ import { useCart } from "../../context/CartContext";
 import "../../assets/carrito.css";
 
 export const CarritoPage = () => {
-  const { cartItems = [], removeFromCart, updateQuantity, applyCoupon, total = 0, discount = 0, finalTotal = 0 } = useCart();
+  const { cart, removeFromCart, updateQuantity, applyCoupon, total, discount, finalTotal } = useCart();
+
+  const envio = 5000;
+  const iva = Math.round(total * 0.19);
+  const subtotal = total;
+  const totalConIvaYEnvio = finalTotal + iva + envio;
 
   return (
-    <div className="carrito-wrapper d-flex flex-column min-vh-100">
-      <div className="flex-grow-1">
-        <div className="carrito-container container py-5">
-          <h2 className="text-center mb-4">🛍️ Tu Carrito de Compras</h2>
+    <div className="container py-5 carrito-page">
+      <h2 className="text-center mb-4">🛒 Tu Carrito de Compras</h2>
 
-          {cartItems.length === 0 ? (
-            <p className="text-center text-muted">Tu carrito está vacío.</p>
-          ) : (
-            <>
-              <table className="table table-hover align-middle text-center shadow-sm rounded">
-                <thead className="table-primary">
-                  <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Subtotal</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.nombre}</td>
-                      <td>${item.precio.toLocaleString()}</td>
-                      <td>
-                        <input
-                          type="number"
-                          min="1"
-                          value={item.cantidad}
-                          onChange={(e) =>
-                            updateQuantity(item.id, parseInt(e.target.value))
-                          }
-                          className="form-control form-control-sm text-center"
-                          style={{ width: "80px", margin: "auto" }}
-                        />
-                      </td>
-                      <td>${(item.precio * item.cantidad).toLocaleString()}</td>
-                      <td>
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={() => removeFromCart(item.id)}
-                        >
-                          🗑️
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+      {cart.length === 0 ? (
+        <p className="text-center text-muted">Tu carrito está vacío.</p>
+      ) : (
+        <div className="row g-4">
+          {/* 🧾 Productos */}
+          <div className="col-lg-8">
+            {cart.map((item) => (
+              <div key={item.sku} className="card shadow-sm mb-3 p-3 d-flex flex-column flex-md-row align-items-center justify-content-between text-center text-md-start">
+                <div className="d-flex align-items-center flex-column flex-md-row">
+                  <img
+                    src={item.imagen}
+                    alt={item.nombre}
+                    style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                    className="rounded mb-2 mb-md-0 me-md-3"
+                  />
+                  <div>
+                    <h6 className="mb-1">{item.nombre}</h6>
+                    <p className="mb-0 text-muted">${item.precio.toLocaleString("es-CL")}</p>
+                  </div>
+                </div>
 
-              <div className="coupon-section text-center my-4">
+                {/* ✅ Controles responsivos */}
+                <div className="d-flex flex-column align-items-center mt-3 mt-md-0">
+                  <div className="input-group input-group-sm mb-2" style={{ width: "100px" }}>
+                    <button className="btn btn-outline-secondary" onClick={() => updateQuantity(item.sku, item.cantidad - 1)}>-</button>
+                    <input
+                      type="text"
+                      readOnly
+                      value={item.cantidad}
+                      className="form-control text-center"
+                    />
+                    <button className="btn btn-outline-secondary" onClick={() => updateQuantity(item.sku, item.cantidad + 1)}>+</button>
+                  </div>
+
+                  {/* 🧹 Botón eliminar centrado en móvil */}
+                  <button
+                    className="btn btn-danger btn-sm w-100"
+                    style={{ maxWidth: "90px" }}
+                    onClick={() => removeFromCart(item.sku)}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 💰 Resumen del pedido */}
+          <div className="col-lg-4">
+            <div className="card shadow-sm p-4">
+              <h5 className="fw-bold mb-3 text-center">Resumen del pedido</h5>
+
+              <p className="d-flex justify-content-between">
+                <span>Subtotal</span> <strong>${subtotal.toLocaleString("es-CL")}</strong>
+              </p>
+              <p className="d-flex justify-content-between">
+                <span>IVA (19%)</span> <strong>${iva.toLocaleString("es-CL")}</strong>
+              </p>
+              <p className="d-flex justify-content-between">
+                <span>Envío</span> <strong>${envio.toLocaleString("es-CL")}</strong>
+              </p>
+              <hr />
+              <p className="d-flex justify-content-between fs-5 fw-bold">
+                <span>Total</span> <span>${totalConIvaYEnvio.toLocaleString("es-CL")}</span>
+              </p>
+
+              <div className="mt-3 text-center">
                 <input
                   type="text"
                   placeholder="Código de descuento"
-                  className="form-control d-inline w-auto"
                   id="couponInput"
+                  className="form-control mb-2"
                 />
                 <button
-                  className="btn btn-success ms-2"
-                  onClick={() => {
-                    const code = document.getElementById("couponInput").value;
-                    applyCoupon(code);
-                  }}
+                  className="btn btn-outline-success w-100"
+                  onClick={() => applyCoupon(document.getElementById("couponInput").value)}
                 >
-                  Aplicar Cupón
+                  Aplicar cupón
                 </button>
-              </div>
 
-              <div className="resumen-compra text-center mt-4">
-                <p>
-                  Subtotal: <strong>${total.toLocaleString()}</strong>
-                </p>
-                {discount > 0 && (
-                  <p>
-                    Descuento:{" "}
-                    <span className="text-success">
-                      -${discount.toLocaleString()}
-                    </span>
-                  </p>
-                )}
-                <h4>
-                  Total a pagar: <strong>${finalTotal.toLocaleString()}</strong>
-                </h4>
-
-                <button className="btn btn-primary mt-3">
-                  Finalizar Compra
-                </button>
+                <button className="btn btn-primary w-100 mt-3">Finalizar compra</button>
               </div>
-            </>
-          )}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
+export default CarritoPage;
