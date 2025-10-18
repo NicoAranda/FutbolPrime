@@ -27,7 +27,7 @@ function App() {
           <Route path="balones" element={<BalonesPage />} />
           <Route path="camisetas" element={<CamisetasPage />} />
           <Route path="accesorios" element={<AccesoriosPage />} />
-          <Route path="detalle-producto" element={<DetallePage />} />
+          <Route path="/FutbolPrime/detalle-producto/:sku" element={<DetallePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="registro" element={<RegisterPage />} />
           <Route path="loginAdmin" element={<LoginAdmin />} />
