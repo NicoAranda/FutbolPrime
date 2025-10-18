@@ -1,10 +1,14 @@
 import { useLocation } from "react-router-dom"
 import { useCart } from "../../context/CartContext"
+import { useState } from "react"
+import { ToastNotification } from "../../components/ToastNotification"
 
 export const DetallePage = () => {
   const { state } = useLocation()
   const { addToCart } = useCart()
   const producto = state?.producto
+
+  const [showToast, setShowToast] = useState(false)
 
   if (!producto) {
     return (
@@ -15,6 +19,11 @@ export const DetallePage = () => {
   }
 
   const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, '')}`
+
+  const handleAddToCart = () => {
+    addToCart(producto)
+    setShowToast(true)
+  }
 
   return (
     <div className="container py-5">
@@ -37,12 +46,19 @@ export const DetallePage = () => {
 
           <button
             className="btn btn-success w-100 fw-semibold mt-3"
-            onClick={() => addToCart(producto)}
+            onClick={handleAddToCart}
           >
             🛒 Agregar al carrito
           </button>
         </div>
       </div>
+
+      {/* ✅ Notificación flotante */}
+      <ToastNotification
+        message="Producto agregado al carrito 🛍️"
+        show={showToast}
+        onClose={() => setShowToast(false)}
+      />
     </div>
   )
 }
