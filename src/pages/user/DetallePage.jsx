@@ -1,19 +1,34 @@
-import { useLocation } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import { useCart } from "../../context/CartContext"
-import { useState } from "react"
 import { ToastNotification } from "../../components/ToastNotification"
 
 export const DetallePage = () => {
-  const { state } = useLocation()
+  const { sku } = useParams()
   const { addToCart } = useCart()
-  const producto = state?.producto
-
+  const [producto, setProducto] = useState(null)
   const [showToast, setShowToast] = useState(false)
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}data/productos.json`)
+      .then((res) => res.json())
+      .then((data) => {
+        const todosLosProductos = [
+          ...(data.balones || []),
+          ...(data.camisetas || []),
+          ...(data.canilleras || []),
+          ...(data.guantes || []),
+          ...(data.medias || [])
+        ]
+        const encontrado = todosLosProductos.find((p) => p.sku === sku)
+        setProducto(encontrado || null)
+      })
+  }, [sku])
 
   if (!producto) {
     return (
-      <div className="container text-center py-5">
-        <h4 className="text-muted">No se encontró el producto.</h4>
+      <div className="container text-center my-5">
+        <h2 className="text-danger">Producto no encontrado</h2>
       </div>
     )
   }
@@ -28,6 +43,7 @@ export const DetallePage = () => {
   return (
     <div className="container py-5">
       <div className="row align-items-center">
+        {/* Imagen */}
         <div className="col-md-6 text-center mb-4 mb-md-0">
           <img
             src={urlImagen}
@@ -36,11 +52,13 @@ export const DetallePage = () => {
             style={{ maxHeight: "400px", objectFit: "cover" }}
           />
         </div>
+
+        {/* Información del producto */}
         <div className="col-md-6">
           <h2>{producto.nombre}</h2>
           <p className="text-muted">{producto.tipo}</p>
           <h4 className="text-primary fw-bold mb-3">
-            ${producto.precio.toLocaleString()}
+            ${producto.precio.toLocaleString("es-CL")}
           </h4>
           <p>{producto.descripcion || "Sin descripción disponible."}</p>
 
@@ -53,7 +71,7 @@ export const DetallePage = () => {
         </div>
       </div>
 
-      {/* ✅ Notificación flotante */}
+      {/* 🔔 Notificación */}
       <ToastNotification
         message="Producto agregado al carrito 🛍️"
         show={showToast}
@@ -62,3 +80,4 @@ export const DetallePage = () => {
     </div>
   )
 }
+export default DetallePage

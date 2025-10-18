@@ -9,6 +9,8 @@ export const Card = ({ producto }) => {
   const [showToast, setShowToast] = useState(false)
   const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`
 
+  const formatoPrecio = (precio) => precio.toLocaleString("es-CL")
+
   const handleAddToCart = () => {
     addToCart(producto)
     setShowToast(true)
@@ -18,8 +20,9 @@ export const Card = ({ producto }) => {
     <>
       <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center g-md-5 g-lg-5">
         <div className="card product-card h-100 d-flex flex-column">
+          {/* Enlace al detalle */}
           <NavLink
-            to="/FutbolPrime/detalle-producto"
+            to={`/FutbolPrime/detalle-producto/${producto.sku}`}
             state={{ producto }}
             className="text-decoration-none text-dark flex-grow-1"
           >
@@ -35,14 +38,17 @@ export const Card = ({ producto }) => {
               <div className="mt-auto d-flex justify-content-center gap-4">
                 {producto.oferta && (
                   <p className="text-primary text-decoration-line-through">
-                    ${producto.oferta}
+                    ${formatoPrecio(producto.oferta)}
                   </p>
                 )}
-                <p className="fw-bold text-primary">${producto.precio}</p>
+                <p className="fw-bold text-primary">
+                  ${formatoPrecio(producto.precio)}
+                </p>
               </div>
             </div>
           </NavLink>
 
+          {/* Botón agregar al carrito */}
           <div className="p-3 border-top">
             <button
               className="btn btn-success w-100 fw-semibold"
@@ -54,7 +60,7 @@ export const Card = ({ producto }) => {
         </div>
       </div>
 
-      {/* ✅ Notificación */}
+      {/* Notificación toast */}
       <ToastNotification
         message="Producto agregado al carrito 🛍️"
         show={showToast}
@@ -63,3 +69,4 @@ export const Card = ({ producto }) => {
     </>
   )
 }
+export default Card
