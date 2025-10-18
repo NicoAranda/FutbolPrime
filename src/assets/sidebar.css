@@ -1,15 +1,22 @@
+/* === SIDEBAR === */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
   width: 250px;
-  margin-right: 290px;
-  transition: transform 0.3s ease-in-out;
+  background-color: #0d6efd;
   z-index: 1040;
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
+/* Links */
 .sidebar .nav-link {
   color: #fff !important;
-  transition: background-color 0.3s ease;
   padding: 10px 12px;
   border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
 .sidebar .nav-link:hover {
@@ -21,7 +28,7 @@
   font-weight: 600;
 }
 
-/* Desktop: Sidebar fijo y visible */
+/* === Desktop === */
 @media (min-width: 992px) {
   .sidebar {
     transform: translateX(0);
@@ -32,10 +39,17 @@
   }
 }
 
-/* Mobile: Sidebar oculto, se despliega */
+/* === Mobile & Tablet === */
 @media (max-width: 991px) {
   .sidebar {
     transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #0d6efd;
+    z-index: 1050;
   }
 
   .sidebar.show {
@@ -47,16 +61,87 @@
   }
 }
 
-.agregar-container {
-  margin-left: 270px; /* antes 250px */
-  margin-right: 30px; /* nuevo: deja un poco de aire al lado derecho */
-  transition: all 0.3s ease;
+/* === Overlay cuando el sidebar está abierto === */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1039;
+  display: none;
 }
 
-/* En pantallas pequeñas, elimina el margen */
-@media (max-width: 991px) {
-  .agregar-container {
-    margin-left: 0;
-    padding: 20px;
+.sidebar.show + .sidebar-overlay {
+  display: block;
+}
+
+/* === Botón Hamburguesa === */
+.btn-toggle-sidebar {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1060;
+  background-color: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.6rem;
+  padding: 6px 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Ocultar el botón en escritorio */
+@media (min-width: 992px) {
+  .btn-toggle-sidebar {
+    display: none;
   }
+}
+
+/* === Contenedor Principal del Admin === */
+.admin-layout {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* === Contenido === */
+.content-admin {
+  flex: 1;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Ajuste en tablet */
+@media (max-width: 991px) {
+  .content-admin {
+    padding: 1.5rem;
+  }
+}
+
+/* Ajuste en móvil */
+@media (max-width: 576px) {
+  .content-admin {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .content-admin .card,
+  .content-admin table {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+/* === Ajuste global === */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
 }

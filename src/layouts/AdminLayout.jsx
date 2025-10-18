@@ -3,11 +3,12 @@ import { SideBar } from "../components/SideBar";
 
 export const AdminLayout = () => {
   return (
-    <div className="d-flex">
+    <div className="admin-layout">
       <SideBar />
-      <main className="flex-grow-1 p-4">
-        <Outlet /> 
+      <main className="content-admin">
+        <Outlet />
       </main>
     </div>
+
   );
 };

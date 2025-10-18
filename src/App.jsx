@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { HomePage } from "./pages/user/HomePage"
 import { CamisetasPage } from "./pages/user/CamisetasPage"
 import { AccesoriosPage } from "./pages/user/AccesoriosPage"
@@ -21,7 +21,10 @@ function App() {
   return (
     <>
       <Routes>
-        {/* RUTAS DEL USUARIO */}
+        {/* 🔹 Redirección automática al inicio */}
+        <Route path="/" element={<Navigate to="/FutbolPrime" />} />
+
+        {/* 🔹 RUTAS DEL USUARIO */}
         <Route path="/FutbolPrime" element={<UserLayout />}>
           <Route index element={<HomePage />} />
           <Route path="balones" element={<BalonesPage />} />
@@ -35,13 +38,16 @@ function App() {
           <Route path="ofertas" element={<OfertasPage />} />
         </Route>
 
-        {/* RUTAS DEL ADMIN */}
+        {/* 🔹 RUTAS DEL ADMINISTRADOR */}
         <Route path="/administrador" element={<AdminLayout />}>
           <Route index element={<AdministradorPage />} />
           <Route path="productos" element={<Productos />} />
           <Route path="pedidos" element={<PedidosPage />} />
           <Route path="agregar-producto" element={<AgregarProductoPage />} />
         </Route>
+
+        {/* 🔹 Redirección por defecto si la ruta no existe */}
+        <Route path="*" element={<Navigate to="/FutbolPrime" />} />
       </Routes>
     </>
   )

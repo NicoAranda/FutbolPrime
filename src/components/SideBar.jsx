@@ -18,9 +18,10 @@ export const SideBar = () => {
     <>
       {/* Botón hamburguesa visible solo en móviles */}
       <button
-        className="btn btn-primary d-lg-none m-3"
+        className="btn-toggle-sidebar"
         onClick={() => setShowSidebar(!showSidebar)}
       >
+        ☰
       </button>
 
       {/* Sidebar (fijo en desktop / offcanvas en mobile) */}
@@ -92,7 +93,13 @@ export const SideBar = () => {
             </NavLink>
           </li>
         </ul>
-      </div>  
+      </div>
+      {showSidebar && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setShowSidebar(false)}
+        ></div>
+      )}
     </>
   )
 }
