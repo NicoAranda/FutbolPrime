@@ -100,33 +100,39 @@
   }
 }
 
-/* === Contenedor Principal del Admin === */
+/* === Contenedor principal del Admin === */
 .admin-layout {
   display: flex;
-  flex-direction: row;
   min-height: 100vh;
-  width: 100%;
+  background-color: #f8f9fa;
   overflow-x: hidden;
 }
 
 /* === Contenido === */
 .content-admin {
-  flex: 1;
-  background-color: #f8f9fa;
-  min-height: 100vh;
-  padding: 2rem;
-  transition: margin-left 0.3s ease;
-  overflow-x: hidden;
+  flex-grow: 1;
+  padding: 2rem 3rem; /* ← da aire en ambos lados */
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center; /* centra el contenido horizontalmente */
+  align-items: flex-start;  /* desde arriba */
+  width: 100%;
 }
 
-/* Ajuste en tablet */
+/* El contenido interior */
+.content-admin > * {
+  width: 100%;
+  max-width: 1200px; /* centrado y equilibrado */
+  margin: 0 auto;
+}
+
+/* === Responsivo === */
 @media (max-width: 991px) {
   .content-admin {
     padding: 1.5rem;
   }
 }
 
-/* Ajuste en móvil */
 @media (max-width: 576px) {
   .content-admin {
     padding: 1rem;
@@ -145,3 +151,51 @@ html, body {
   width: 100%;
   overflow-x: hidden;
 }
+/* === TARJETAS DASHBOARD (ADMIN) === */
+.dashboard-cards {
+  display: flex;
+  justify-content: center;     /* Centra horizontalmente */
+  align-items: stretch;        /* Todas igual altura */
+  gap: 2rem;                   /* Espacio entre tarjetas */
+  flex-wrap: wrap;             /* Responsivo en pantallas pequeñas */
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  flex: 1 1 250px;             /* Mismo ancho mínimo */
+  max-width: 300px;            /* Máximo tamaño */
+  height: 180px;               /* Fijo para que no se deformen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  text-align: center;
+}
+
+.dashboard-card h5 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.dashboard-card p {
+  margin: 0.5rem 0 0;
+  font-size: 1.8rem;
+}
+
+/* Colores */
+.dashboard-card.blue { background-color: #0d6efd; }
+.dashboard-card.green { background-color: #198754; }
+.dashboard-card.yellow { background-color: #ffc107; }
+
+/* Ajuste móvil */
+@media (max-width: 768px) {
+  .dashboard-card {
+    height: 140px;
+    font-size: 0.9rem;
+  }
+}
+

@@ -23,53 +23,67 @@ export const AdministradorPage = () => {
   }, [])
 
   return (
-    <div className="content-admin bg-whitesmoke p-4">
-      <div className='row g-3 mb-4'>
-        <CardAdmin color='primary' titulo='Productos' cantidad={productos.length}/>
-        <CardAdmin color='success' titulo='Ganancias Mensuales' cantidad='$1.076.990'/>
-        <CardAdmin color='warning' titulo='Usuarios' cantidad='110'/>
-      </div>
-
-      <div className="card shadow">
-        <div className="card-header bg-primary text-white">
-          Productos Agregados
+    <div className="content-admin d-flex flex-column align-items-center p-4">
+      <div className="dashboard-container w-100" style={{ maxWidth: "1200px" }}>
+        {/* Tarjetas superiores */}
+        <div className="dashboard-cards">
+          <div className="dashboard-card blue">
+            <h5>Productos</h5>
+            <p>{productos.length}</p>
+          </div>
+          <div className="dashboard-card green">
+            <h5>Ganancias Mensuales</h5>
+            <p>$1.076.990</p>
+          </div>
+          <div className="dashboard-card yellow">
+            <h5>Usuarios</h5>
+            <p>110</p>
+          </div>
         </div>
 
-        <div className="card-body table-responsive">
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>SKU</th>
-                <th>Producto</th>
-                <th>Stock</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productos.length > 0 ? (
-                productos.map((p) => (
-                  <ProductosAgregados
-                    key={p.sku}
-                    sku={p.sku}
-                    nombre={p.nombre}
-                    stock={p.stock}
-                    precio={p.precio}
-                  />
-                ))
-              ) : (
+        {/* Tabla de productos */}
+        <div className="card shadow mb-5">
+          <div className="card-header bg-primary text-white">
+            Productos Agregados
+          </div>
+
+          <div className="card-body table-responsive">
+            <table className="table table-striped table-hover align-middle text-center">
+              <thead>
                 <tr>
-                  <td colSpan="4" className="text-center text-muted">
-                    No hay productos disponibles.
-                  </td>
+                  <th>SKU</th>
+                  <th>Producto</th>
+                  <th>Stock</th>
+                  <th>Precio</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {productos.length > 0 ? (
+                  productos.map((p) => (
+                    <ProductosAgregados
+                      key={p.sku}
+                      sku={p.sku}
+                      nombre={p.nombre}
+                      stock={p.stock}
+                      precio={p.precio}
+                    />
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4" className="text-center text-muted">
+                      No hay productos disponibles.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      <div className="card shadow mt-5">
-        <PedidosClientes />
+        {/* Pedidos de clientes */}
+        <div className="card shadow mt-4">
+          <PedidosClientes />
+        </div>
       </div>
     </div>
   )
