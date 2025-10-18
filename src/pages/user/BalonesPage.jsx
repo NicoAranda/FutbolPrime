@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Card } from '../../components/Card'
+import { Card } from "../../components/Card"
 export const BalonesPage = () => {
 
     const [productos, setProductos] = useState([])

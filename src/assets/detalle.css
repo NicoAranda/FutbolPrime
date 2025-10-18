@@ -1,0 +1,16 @@
+.detalle-card {
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.detalle-img {
+  object-fit: contain;
+}
+
+.btn-success {
+  transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #28a745d8;
+}

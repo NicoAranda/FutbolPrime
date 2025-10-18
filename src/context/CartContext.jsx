@@ -6,13 +6,13 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [discount, setDiscount] = useState(0);
 
-  // Agregar producto
+  // 🛒 Agregar producto
   const addToCart = (producto) => {
     setCart((prevCart) => {
-      const existe = prevCart.find((item) => item.id === producto.id);
+      const existe = prevCart.find((item) => item.sku === producto.sku);
       if (existe) {
         return prevCart.map((item) =>
-          item.id === producto.id
+          item.sku === producto.sku
             ? { ...item, cantidad: item.cantidad + 1 }
             : item
         );
@@ -21,25 +21,25 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Eliminar producto
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  // ❌ Eliminar producto
+  const removeFromCart = (sku) => {
+    setCart((prevCart) => prevCart.filter((item) => item.sku !== sku));
   };
 
-  // Actualizar cantidad
-  const updateQuantity = (id, cantidad) => {
+  // 🔢 Actualizar cantidad
+  const updateQuantity = (sku, cantidad) => {
     if (cantidad <= 0) return;
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id ? { ...item, cantidad } : item
+        item.sku === sku ? { ...item, cantidad } : item
       )
     );
   };
 
-  // Vaciar carrito
+  // 🧹 Vaciar carrito
   const clearCart = () => setCart([]);
 
-  // Aplicar cupón
+  // 🎟️ Aplicar cupón
   const applyCoupon = (code) => {
     const coupons = { DESCUENTO10: 0.1, FUTBOL20: 0.2 };
     if (coupons[code]) {
@@ -50,14 +50,17 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Totales
-  const total = cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  // 💰 Totales
+  const total = cart.reduce(
+    (acc, item) => acc + item.precio * item.cantidad,
+    0
+  );
   const finalTotal = total - total * discount;
 
   return (
     <CartContext.Provider
       value={{
-        cart, // 👈 nombre correcto
+        cart,
         addToCart,
         removeFromCart,
         updateQuantity,

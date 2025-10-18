@@ -1,6 +1,6 @@
 import React from 'react'
 import { Carrusel } from '../../components/Carrusel'
-import { Card } from '../../components/Card'
+import { Card } from "../../components/Card"
 import { useState, useEffect } from 'react'
 
 export const HomePage = () => {
