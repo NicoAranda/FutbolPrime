@@ -15,6 +15,7 @@ import { AdminLayout } from "./layouts/AdminLayout"
 import { Productos } from "./pages/admin/ProductosPage"
 import { PedidosPage } from "./pages/admin/PedidosPage"
 import { AgregarProductoPage } from "./pages/admin/AgregarProductoPage"
+import { CarritoPage } from "./pages/user/CarritoPage"
 import './App.css'
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
           <Route path="loginAdmin" element={<LoginAdmin />} />
           <Route path="nosotros" element={<NosotrosPage />} />
           <Route path="ofertas" element={<OfertasPage />} />
+          <Route path="carrito" element={<CarritoPage />} />
+          
+          
         </Route>
 
         {/* 🔹 RUTAS DEL ADMINISTRADOR */}

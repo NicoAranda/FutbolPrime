@@ -40,6 +40,12 @@ export const Header = () => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/FutbolPrime/carrito">
+              Ver Carrito
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
               <NavLink className="nav-link" to="/FutbolPrime/nosotros">
                 Nosotros
               </NavLink>
