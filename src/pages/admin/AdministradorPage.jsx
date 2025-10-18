@@ -8,7 +8,7 @@ export const AdministradorPage = () => {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
-    fetch('/data/productos.json')
+    fetch(`${import.meta.env.BASE_URL}data/productos.json`)
       .then((res) => res.json())
       .then((data) => {
         const todosLosProductos = [

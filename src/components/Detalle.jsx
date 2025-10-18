@@ -2,6 +2,8 @@ import React from 'react'
 
 export const Detalle = ({producto}) => {
 
+    const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, '')}`
+
     const handleClic = () => {
         alert('Producto Comprado')
     }
@@ -11,7 +13,7 @@ export const Detalle = ({producto}) => {
             <div className="container my-5">
                 <div className="row align-items-center">
                     <div className="col-md-6 mb-4 mb-md-0">
-                        <img src={producto.imagen} alt="Pelota Final League del Mundial de Clubes FIFA"
+                        <img src={urlImagen} alt="Pelota Final League del Mundial de Clubes FIFA"
                             className="img-fluid rounded" />
                     </div>
                     <div className="col-md-6">

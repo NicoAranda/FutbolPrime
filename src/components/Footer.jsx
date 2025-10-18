@@ -13,15 +13,15 @@ export const Footer = () => {
 
         <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
           <h6 className="text-uppercase fw-bold mb-3">Ayuda</h6>
-          <p><NavLink to="/login" className="text-white text-decoration-none">Iniciar Sesión</NavLink></p>
+          <p><NavLink to="/FutbolPrime/login" className="text-white text-decoration-none">Iniciar Sesión</NavLink></p>
           <p><NavLink to="" className="text-white text-decoration-none">Contáctanos</NavLink></p>
         </div>
 
         <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
           <h6 className="text-uppercase fw-bold mb-3">Productos</h6>
-          <p><NavLink to="/camisetas" className="text-white text-decoration-none">Camisetas</NavLink></p>
-          <p><NavLink to="/balones" className="text-white text-decoration-none">Balones</NavLink></p>
-          <p><NavLink to="/accesorios" className="text-white text-decoration-none">Accesorios</NavLink></p>
+          <p><NavLink to="/FutbolPrime/camisetas" className="text-white text-decoration-none">Camisetas</NavLink></p>
+          <p><NavLink to="/FutbolPrime/balones" className="text-white text-decoration-none">Balones</NavLink></p>
+          <p><NavLink to="/FutbolPrime/accesorios" className="text-white text-decoration-none">Accesorios</NavLink></p>
         </div>
 
         <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">

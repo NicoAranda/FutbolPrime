@@ -1,9 +1,6 @@
 import { Routes, Route } from "react-router-dom"
-import { Header } from "./components/Header"
-import { Footer } from "./components/Footer"
 import { HomePage } from "./pages/user/HomePage"
 import { CamisetasPage } from "./pages/user/CamisetasPage"
-import './App.css'
 import { AccesoriosPage } from "./pages/user/AccesoriosPage"
 import { LoginPage } from "./pages/user/LoginPage"
 import { RegisterPage } from "./pages/user/RegisterPage"
@@ -18,33 +15,33 @@ import { AdminLayout } from "./layouts/AdminLayout"
 import { Productos } from "./pages/admin/ProductosPage"
 import { PedidosPage } from "./pages/admin/PedidosPage"
 import { AgregarProductoPage } from "./pages/admin/AgregarProductoPage"
-function App() {
+import './App.css'
 
+function App() {
   return (
     <>
       <Routes>
-        <Route element={<UserLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/balones" element={<BalonesPage />} />
-          <Route path="/camisetas" element={<CamisetasPage />} />
-          <Route path="/accesorios" element={<AccesoriosPage />} />
-          <Route path="/detalle-producto" element={<DetallePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/registro" element={<RegisterPage />} />
-          <Route path="/loginAdmin" element={<LoginAdmin />} />
-          <Route path="/nosotros" element={<NosotrosPage />} />
-          <Route path="/ofertas" element={<OfertasPage />} />
+        {/* RUTAS DEL USUARIO */}
+        <Route path="/FutbolPrime" element={<UserLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="balones" element={<BalonesPage />} />
+          <Route path="camisetas" element={<CamisetasPage />} />
+          <Route path="accesorios" element={<AccesoriosPage />} />
+          <Route path="detalle-producto" element={<DetallePage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="registro" element={<RegisterPage />} />
+          <Route path="loginAdmin" element={<LoginAdmin />} />
+          <Route path="nosotros" element={<NosotrosPage />} />
+          <Route path="ofertas" element={<OfertasPage />} />
         </Route>
 
+        {/* RUTAS DEL ADMIN */}
         <Route path="/administrador" element={<AdminLayout />}>
           <Route index element={<AdministradorPage />} />
-          {/* Aquí puedes agregar más subrutas admin */}
-          {/* <Route path="productos" element={<ProductosAdminPage />} /> */}
-          <Route path="/administrador/productos" element={<Productos />} />
-          <Route path="/administrador/pedidos" element={<PedidosPage />} />
-          <Route path="/administrador/agregar-producto" element={<AgregarProductoPage />} />
+          <Route path="productos" element={<Productos />} />
+          <Route path="pedidos" element={<PedidosPage />} />
+          <Route path="agregar-producto" element={<AgregarProductoPage />} />
         </Route>
-
       </Routes>
     </>
   )

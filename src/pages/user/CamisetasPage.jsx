@@ -5,7 +5,7 @@ export const CamisetasPage = () => {
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
-        fetch('/data/productos.json')
+        fetch(`${import.meta.env.BASE_URL}data/productos.json`)
             .then((res) => res.json())
             .then((data) => setProductos(data.camisetas));
 

@@ -3,13 +3,16 @@ import { NavLink } from "react-router-dom"
 import '../assets/card.css'
 
 export const Card = ({ producto }) => {
+
+	const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, '')}`
+
 	return (
 		<>
 			<div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center g-md-5 g-lg-5">
-				<NavLink to="/detalle-producto" className="text-decoration-none text-dark">
+				<NavLink to="/FutbolPrime/detalle-producto" className="text-decoration-none text-dark">
 					<div className="card product-card h-100 d-flex flex-column">
 						<img
-							src={producto.imagen}
+							src={urlImagen}
 							className="card-img-top product-img"
 							alt={producto.nombre}
 						/>

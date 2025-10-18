@@ -21,7 +21,7 @@ export const LoginPage = () => {
         form.classList.add('was-validated');
       } else {
         alert('Inicio de sesión correcto');
-        navigate('/');
+        navigate('/FutbolPrime');
       }
     };
 
@@ -71,7 +71,7 @@ export const LoginPage = () => {
                         <p className="mb-5 pb-lg-2">¿No tienes cuenta?
                           <NavLink to="/registro">Resgístrate aquí</NavLink>
                         </p>
-                        <NavLink to="/loginAdmin" className="small text-muted mt-4">
+                        <NavLink to="/FutbolPrime/loginAdmin" className="small text-muted mt-4">
                           Iniciar como administrador
                         </NavLink>
                       </form>

@@ -4,7 +4,7 @@ export const AccesoriosPage = () => {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
-    fetch('/data/productos.json')
+    fetch(`${import.meta.env.BASE_URL}data/productos.json`)
       .then((res) => res.json())
       .then((data) => {
         // Unimos los tres arrays en uno solo

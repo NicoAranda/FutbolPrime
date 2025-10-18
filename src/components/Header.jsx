@@ -7,12 +7,8 @@ export const Header = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         {/* Marca */}
-        <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-          <img
-            src={logo}
-            alt="Fútbol Prime Logo"
-            className="logo"
-          />
+        <Link className="navbar-brand d-flex align-items-center gap-2" to="/FutbolPrime">
+          <img src={logo} alt="Fútbol Prime Logo" className="logo" />
           <h1 className="h4 m-0">Fútbol Prime</h1>
         </Link>
 
@@ -33,37 +29,33 @@ export const Header = () => {
         <div className="collapse navbar-collapse" id="navbarColor01">
           <ul className="navbar-nav ms-auto text-center align-items-center">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">
+              <NavLink className="nav-link" to="/FutbolPrime">
                 Inicio
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/nosotros">
+              <NavLink className="nav-link" to="/FutbolPrime/nosotros">
                 Nosotros
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/balones">
+              <NavLink className="nav-link" to="/FutbolPrime/balones">
                 Balones
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/camisetas">
+              <NavLink className="nav-link" to="/FutbolPrime/camisetas">
                 Camisetas
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/accesorios">
+              <NavLink className="nav-link" to="/FutbolPrime/accesorios">
                 Accesorios
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/login">
-                <img
-                  src={cuenta}
-                  alt="Cuenta Logo"
-                  className="logo p-4"
-                />
+              <NavLink className="nav-link" to="/FutbolPrime/login">
+                <img src={cuenta} alt="Cuenta Logo" className="logo p-4" />
               </NavLink>
             </li>
           </ul>

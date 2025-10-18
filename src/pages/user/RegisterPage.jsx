@@ -30,7 +30,7 @@ export const RegisterPage = () => {
       } else {
         event.preventDefault();
         alert('Registro exitoso');
-        navigate('/');
+        navigate('/FutbolPrime');
       }
     });
 
