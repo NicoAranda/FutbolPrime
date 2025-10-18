@@ -29,7 +29,13 @@ export const Header = () => {
         <div className="collapse navbar-collapse" id="navbarColor01">
           <ul className="navbar-nav ms-auto text-center align-items-center">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/FutbolPrime">
+              <NavLink
+                to="/FutbolPrime"
+                end
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
                 Inicio
               </NavLink>
             </li>
@@ -59,6 +65,7 @@ export const Header = () => {
               </NavLink>
             </li>
           </ul>
+
         </div>
       </div>
     </nav>
