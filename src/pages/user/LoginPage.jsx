@@ -69,7 +69,7 @@ export const LoginPage = () => {
 
                         <NavLink className="small text-muted mt-8" to="">¿Olvidaste tu contraseña?</NavLink>
                         <p className="mb-5 pb-lg-2">¿No tienes cuenta?
-                          <NavLink to="/registro">Resgístrate aquí</NavLink>
+                          <NavLink to="/FutbolPrime/registro">Resgístrate aquí</NavLink>
                         </p>
                         <NavLink to="/FutbolPrime/loginAdmin" className="small text-muted mt-4">
                           Iniciar como administrador
