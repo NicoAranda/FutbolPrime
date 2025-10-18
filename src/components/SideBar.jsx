@@ -11,7 +11,7 @@ export const SideBar = () => {
   const handleCerrarSesion = (e) => {
     e.preventDefault();
     alert("Sesión Cerrada, hasta pronto..");
-    navigate('/')
+    navigate('/FutbolPrime');
   }
 
   return (
@@ -82,7 +82,6 @@ export const SideBar = () => {
 
           <li className="nav-item mt-auto">
             <NavLink
-              to="/"
               onClick={(e) => {
                 setShowSidebar(false)
                 handleCerrarSesion(e)
