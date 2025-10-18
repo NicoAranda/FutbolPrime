@@ -31,7 +31,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      <section className="vh-100 bg-smoke">
+      <section className="min-vh-100 bg-smoke d-flex align-items-center">
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10">
