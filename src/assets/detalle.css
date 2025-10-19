@@ -14,3 +14,85 @@
 .btn-success:hover {
   background-color: #28a745d8;
 }
+/* ===== Diseño general ===== */
+.detalle-container {
+  max-width: 1100px;
+}
+
+.detalle-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+}
+
+/* ===== Imagen ===== */
+.detalle-imagen {
+  flex: 1 1 400px;
+  text-align: center;
+}
+
+.detalle-imagen img {
+  max-width: 100%;
+  max-height: 450px;
+  object-fit: contain;
+  border-radius: 15px;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+/* ===== Información ===== */
+.detalle-info {
+  flex: 1 1 400px;
+}
+
+.detalle-info h2 {
+  font-size: 1.9rem;
+  color: #222;
+}
+
+.descripcion {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.detalle-info ul li {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #444;
+}
+
+/* ===== Botón ===== */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: scale(1.03);
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 768px) {
+  .detalle-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .detalle-info {
+    width: 100%;
+  }
+
+  .detalle-imagen img {
+    max-height: 300px;
+  }
+}

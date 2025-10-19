@@ -1,269 +1,328 @@
 {
-    "balones": [
-        {
-            "sku": "PLT741256",
-            "nombre": "CFC NK ACADEMY",
-            "precio": 29990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Azul",
-            "stock": 99,
-            "imagen": "/img/BallCHELSEA.webp",
-            "oferta": 45990
-        },
-        {
-            "sku": "PLT753159",
-            "nombre": "Erling Haaland Academy",
-            "precio": 32990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Azul",
-            "stock": 122,
-            "imagen": "/img/BallHAALAND.webp"
-        },
-        {
-            "sku": "PLT100810",
-            "nombre": "Pelota Final League del Mundial de Clubes FIFA",
-            "precio": 30990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Blanco, Azul y Dorado",
-            "stock": 45,
-            "imagen": "/img/BallMdCFINAL.avif"
-        },
-        {
-            "sku": "PLT956784",
-            "nombre": "Pelota League del Mundial de Clubes FIFA",
-            "precio": 30990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Blanco y Dorado",
-            "stock": 77,
-            "imagen": "/img/BallMdC.avif",
-            "oferta": 34990
-        },
-        {
-            "sku": "PLT116987",
-            "nombre": "PSG NK ACADEMY",
-            "precio": 30990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Azul",
-            "stock": 37,
-            "imagen": "/img/BallPSG.webp"
-        },
-        {
-            "sku": "PLT459655",
-            "nombre": "PSG NK ACADEMY",
-            "precio": 29990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Dorado",
-            "stock": 200,
-            "imagen": "/img/BallSIG.webp"
-        },
-        {
-            "sku": "PLT779958",
-            "nombre": "SIG ATHLETE - SU25 NIKE",
-            "precio": 32990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Morado",
-            "stock": 67,
-            "imagen": "/img/BallUEFA.avif"
-        },
-        {
-            "sku": "PLT019352",
-            "nombre": "Pelota UCL League GOLD",
-            "precio": 29990,
-            "tipo": "Fútbol",
-            "talla": 5,
-            "color": "Dorado",
-            "stock": 200,
-            "imagen": "/img/BallUEFAGOLD.avif"
-        }
-    ],
-    "camisetas": [
-        {
-            "sku": "CMT446889",
-            "nombre": "Camiseta SEVILLA FC",
-            "precio": 99990,
-            "tipo": "Visitante",
-            "color": "Negro con detalles azules",
-            "stock": 34,
-            "imagen": "/img/PoleraSevilla.jpg"
-        },
-        {
-            "sku": "CMT156474",
-            "nombre": "Camiseta Local REAL MADRID",
-            "precio": 88990,
-            "tipo": "Local",
-            "color": "Blanca",
-            "stock": 54,
-            "imagen": "/img/PoleraRealM.jpg",
-            "oferta": 109990
-        },
-        {
-            "sku": "CMT663878",
-            "nombre": "Camiseta PSG",
-            "precio": 77990,
-            "tipo": "Visitante",
-            "color": "Azul",
-            "stock": 101,
-            "imagen": "/img/PoleraPSG.webp"
-        },
-        {
-            "sku": "CMT459986",
-            "nombre": "Camiseta Local de AC Milan",
-            "precio": 69990,
-            "tipo": "Local",
-            "color": "Rojo y Negro",
-            "stock": 63,
-            "imagen": "/img/PoleraMilan.avif"
-        },
-        {
-            "sku": "CMT101010",
-            "nombre": "Camiseta MESSI BARCELONA",
-            "precio": 110990,
-            "tipo": "Local",
-            "color": "Rojo y Azul",
-            "stock": 3,
-            "imagen": "/img/PoleraMessi.jpg",
-            "oferta": 134990
-        },
-        {
-            "sku": "CMT903321",
-            "nombre": "Camiseta Marsella",
-            "precio": 65990,
-            "tipo": "Visitante",
-            "color": "Calipso",
-            "stock": 3,
-            "imagen": "/img/PoleraMarsella.jpg"
-        },
-        {
-            "sku": "CMT556984",
-            "nombre": "Camiseta Visitante de Liverpool",
-            "precio": 89990,
-            "tipo": "Visitante",
-            "color": "Negro",
-            "stock": 33,
-            "imagen": "/img/PoleraLiverpool.jpg"
-        },
-        {
-            "sku": "CMT112021",
-            "nombre": "Camiseta MANCHESTER CITY",
-            "precio": 90990,
-            "tipo": "Local",
-            "color": "Celeste",
-            "stock": 50,
-            "imagen": "/img/PoleraCity.avif"
-        }
-    ],
-    "canilleras": [
-        {
-            "sku": "C654321",
-            "nombre": "Canilleras Nike Guard para Adulto",
-            "precio": 17990,
-            "color": "Naranja Fosforescente",
-            "stock": 66,
-            "imagen": "/img/canilleras1.webp"
-        },
-        {
-            "sku": "C693658",
-            "nombre": "Canilleras Adidas edición especial Messi",
-            "precio": 19990,
-            "color": "Celeste con Rosado",
-            "stock": 41,
-            "imagen": "/img/canilleras2.webp"
-        },
-        {
-            "sku": "C741369",
-            "nombre": "Canilleras Adidas Tiro SG para Adulto",
-            "precio": 14990,
-            "color": "Blancas con Negro",
-            "stock": 22,
-            "imagen": "/img/canilleras3.webp",
-            "oferta": 22990
-        },
-        {
-            "sku": "C846012",
-            "nombre": "Canilleras Adidas Tiro Club para Adulto",
-            "precio": 14990,
-            "color": "Negras con Dorado",
-            "stock": 49,
-            "imagen": "/img/canilleras4.webp"
-        }
-    ],
-    "guantes": [
-        {
-            "sku": "G7784650",
-            "nombre": "Guantes Reusch Attrakt Adulto",
-            "precio": 65990,
-            "color": "Amarillo con Negro",
-            "stock": 74,
-            "imagen": "/img/guante4.webp"
-        },
-        {
-            "sku": "G699630",
-            "nombre": "Guantes VGFV para Niño",
-            "precio": 49990,
-            "color": "Verde con azul",
-            "stock": 11,
-            "imagen": "/img/guante3.webp"
-        },
-        {
-            "sku": "G559843",
-            "nombre": "Guantes VGLC Argel Adulto",
-            "precio": 62990,
-            "color": "Amarillo",
-            "stock": 32,
-            "imagen": "/img/guante2.webp",
-            "oferta": 65990
-        },
-        {
-            "sku": "G332266",
-            "nombre": "Guantes Vasen Adulto",
-            "precio": 62990,
-            "color": "Blanco",
-            "stock": 32,
-            "imagen": "/img/guante1.webp"
-        }
-    ],
-    "medias": [
-        {
-            "sku": "M020132",
-            "nombre": "Medias Poker Rojas Adulto",
-            "precio": 4990,
-            "color": "Rojas",
-            "stock": 79,
-            "imagen": "/img/medias1.webp",
-            "oferta": 7500
-        },
-        {
-            "sku": "M040652",
-            "nombre": "Medias Poker Adulto",
-            "precio": 4990,
-            "color": "Azules",
-            "stock": 82,
-            "imagen": "/img/medias2.webp",
-            "oferta": 9990
-        },
-        {
-            "sku": "M015642",
-            "nombre": "Medias DRB Negro Juveniles",
-            "precio": 6990,
-            "color": "Negro",
-            "stock": 150,
-            "imagen": "/img/medias3.webp"
-        },
-        {
-            "sku": "M065471",
-            "nombre": "Medias DRB Blanco Adulto",
-            "precio": 5990,
-            "color": "Blancas",
-            "stock": 150,
-            "imagen": "/img/medias4.webp"
-        }
-
-    ]
+  "balones": [
+    {
+      "sku": "PLT741256",
+      "nombre": "CFC NK ACADEMY",
+      "precio": 29990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Azul",
+      "stock": 99,
+      "imagen": "/img/BallCHELSEA.webp",
+      "oferta": 45990,
+      "marca": "Nike",
+      "descripcion": "Balón de entrenamiento del Chelsea FC con diseño resistente y duradero. Ideal para césped natural o sintético."
+    },
+    {
+      "sku": "PLT753159",
+      "nombre": "Erling Haaland Academy",
+      "precio": 32990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Azul",
+      "stock": 122,
+      "imagen": "/img/BallHAALAND.webp",
+      "marca": "Puma",
+      "descripcion": "Balón oficial inspirado en Erling Haaland, con gran control y precisión en el toque."
+    },
+    {
+      "sku": "PLT100810",
+      "nombre": "Pelota Final League del Mundial de Clubes FIFA",
+      "precio": 30990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Blanco, Azul y Dorado",
+      "stock": 45,
+      "imagen": "/img/BallMdCFINAL.avif",
+      "marca": "Adidas",
+      "descripcion": "Balón edición especial para el Mundial de Clubes FIFA. Diseño elegante con detalles dorados y excelente vuelo."
+    },
+    {
+      "sku": "PLT956784",
+      "nombre": "Pelota League del Mundial de Clubes FIFA",
+      "precio": 30990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Blanco y Dorado",
+      "stock": 77,
+      "imagen": "/img/BallMdC.avif",
+      "oferta": 34990,
+      "marca": "Adidas",
+      "descripcion": "Balón oficial de la League del Mundial de Clubes FIFA, resistente y con gran respuesta al impacto."
+    },
+    {
+      "sku": "PLT116987",
+      "nombre": "PSG NK ACADEMY",
+      "precio": 30990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Azul",
+      "stock": 37,
+      "imagen": "/img/BallPSG.webp",
+      "marca": "Nike",
+      "descripcion": "Balón oficial de entrenamiento del Paris Saint-Germain. Ofrece un toque suave y excelente control."
+    },
+    {
+      "sku": "PLT459655",
+      "nombre": "PSG NK ACADEMY DORADO",
+      "precio": 29990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Dorado",
+      "stock": 200,
+      "imagen": "/img/BallSIG.webp",
+      "marca": "Nike",
+      "descripcion": "Versión dorada del balón PSG Academy, ideal para sesiones de entrenamiento o colección."
+    },
+    {
+      "sku": "PLT779958",
+      "nombre": "SIG ATHLETE - SU25 NIKE",
+      "precio": 32990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Morado",
+      "stock": 67,
+      "imagen": "/img/BallUEFA.avif",
+      "marca": "Nike",
+      "descripcion": "Balón de diseño exclusivo SU25, con estructura texturizada que ofrece excelente control y durabilidad."
+    },
+    {
+      "sku": "PLT019352",
+      "nombre": "Pelota UCL League GOLD",
+      "precio": 29990,
+      "tipo": "Fútbol",
+      "talla": 5,
+      "color": "Dorado",
+      "stock": 200,
+      "imagen": "/img/BallUEFAGOLD.avif",
+      "marca": "Adidas",
+      "descripcion": "Balón inspirado en la UEFA Champions League con acabado dorado brillante. Ideal para fanáticos y entrenamientos."
+    }
+  ],
+  "camisetas": [
+    {
+      "sku": "CMT446889",
+      "nombre": "Camiseta SEVILLA FC",
+      "precio": 99990,
+      "tipo": "Visitante",
+      "color": "Negro con detalles azules",
+      "stock": 34,
+      "imagen": "/img/PoleraSevilla.jpg",
+      "marca": "Castore",
+      "descripcion": "Camiseta oficial visitante del Sevilla FC. Confeccionada en tela ligera y transpirable."
+    },
+    {
+      "sku": "CMT156474",
+      "nombre": "Camiseta Local REAL MADRID",
+      "precio": 88990,
+      "tipo": "Local",
+      "color": "Blanca",
+      "stock": 54,
+      "imagen": "/img/PoleraRealM.jpg",
+      "oferta": 109990,
+      "marca": "Adidas",
+      "descripcion": "Camiseta oficial del Real Madrid temporada 2025. Diseño clásico blanco con detalles dorados."
+    },
+    {
+      "sku": "CMT663878",
+      "nombre": "Camiseta PSG",
+      "precio": 77990,
+      "tipo": "Visitante",
+      "color": "Azul",
+      "stock": 101,
+      "imagen": "/img/PoleraPSG.webp",
+      "marca": "Nike",
+      "descripcion": "Camiseta visitante del Paris Saint-Germain. Comodidad y estilo con tecnología Dri-FIT."
+    },
+    {
+      "sku": "CMT459986",
+      "nombre": "Camiseta Local de AC Milan",
+      "precio": 69990,
+      "tipo": "Local",
+      "color": "Rojo y Negro",
+      "stock": 63,
+      "imagen": "/img/PoleraMilan.avif",
+      "marca": "Puma",
+      "descripcion": "Camiseta local del AC Milan. Diseño tradicional con franjas rojas y negras, perfecta para hinchas."
+    },
+    {
+      "sku": "CMT101010",
+      "nombre": "Camiseta MESSI BARCELONA",
+      "precio": 110990,
+      "tipo": "Local",
+      "color": "Rojo y Azul",
+      "stock": 3,
+      "imagen": "/img/PoleraMessi.jpg",
+      "oferta": 134990,
+      "marca": "Nike",
+      "descripcion": "Edición especial de la camiseta del FC Barcelona usada por Lionel Messi. Coleccionable exclusiva."
+    },
+    {
+      "sku": "CMT903321",
+      "nombre": "Camiseta Marsella",
+      "precio": 65990,
+      "tipo": "Visitante",
+      "color": "Calipso",
+      "stock": 3,
+      "imagen": "/img/PoleraMarsella.jpg",
+      "marca": "Puma",
+      "descripcion": "Camiseta visitante del Olympique de Marsella. Diseño moderno con detalles en calipso claro."
+    },
+    {
+      "sku": "CMT556984",
+      "nombre": "Camiseta Visitante de Liverpool",
+      "precio": 89990,
+      "tipo": "Visitante",
+      "color": "Negro",
+      "stock": 33,
+      "imagen": "/img/PoleraLiverpool.jpg",
+      "marca": "Nike",
+      "descripcion": "Camiseta visitante del Liverpool FC. Tela transpirable con detalles minimalistas en negro."
+    },
+    {
+      "sku": "CMT112021",
+      "nombre": "Camiseta MANCHESTER CITY",
+      "precio": 90990,
+      "tipo": "Local",
+      "color": "Celeste",
+      "stock": 50,
+      "imagen": "/img/PoleraCity.avif",
+      "marca": "Puma",
+      "descripcion": "Camiseta local del Manchester City. Diseño celeste clásico con ajuste cómodo y ligero."
+    }
+  ],
+  "canilleras": [
+    {
+      "sku": "C654321",
+      "nombre": "Canilleras Nike Guard para Adulto",
+      "precio": 17990,
+      "color": "Naranja Fosforescente",
+      "stock": 66,
+      "imagen": "/img/canilleras1.webp",
+      "marca": "Nike",
+      "descripcion": "Canilleras ligeras con espuma protectora y diseño ergonómico. Protección sin perder movilidad."
+    },
+    {
+      "sku": "C693658",
+      "nombre": "Canilleras Adidas edición especial Messi",
+      "precio": 19990,
+      "color": "Celeste con Rosado",
+      "stock": 41,
+      "imagen": "/img/canilleras2.webp",
+      "marca": "Adidas",
+      "descripcion": "Canilleras edición especial inspiradas en Lionel Messi. Ligeras, cómodas y con estilo único."
+    },
+    {
+      "sku": "C741369",
+      "nombre": "Canilleras Adidas Tiro SG para Adulto",
+      "precio": 14990,
+      "color": "Blancas con Negro",
+      "stock": 22,
+      "imagen": "/img/canilleras3.webp",
+      "oferta": 22990,
+      "marca": "Adidas",
+      "descripcion": "Canilleras Adidas Tiro con ajuste firme y cobertura total. Protección superior y ventilación."
+    },
+    {
+      "sku": "C846012",
+      "nombre": "Canilleras Adidas Tiro Club para Adulto",
+      "precio": 14990,
+      "color": "Negras con Dorado",
+      "stock": 49,
+      "imagen": "/img/canilleras4.webp",
+      "marca": "Adidas",
+      "descripcion": "Canilleras Tiro Club de alto rendimiento, con amortiguación ligera y diseño elegante dorado."
+    }
+  ],
+  "guantes": [
+    {
+      "sku": "G7784650",
+      "nombre": "Guantes Reusch Attrakt Adulto",
+      "precio": 65990,
+      "color": "Amarillo con Negro",
+      "stock": 74,
+      "imagen": "/img/guante4.webp",
+      "marca": "Reusch",
+      "descripcion": "Guantes profesionales Reusch con palma de látex para máximo agarre en cualquier clima."
+    },
+    {
+      "sku": "G699630",
+      "nombre": "Guantes VGFV para Niño",
+      "precio": 49990,
+      "color": "Verde con Azul",
+      "stock": 11,
+      "imagen": "/img/guante3.webp",
+      "marca": "VGFV",
+      "descripcion": "Guantes de arquero para niños, ligeros y con excelente protección en los dedos."
+    },
+    {
+      "sku": "G559843",
+      "nombre": "Guantes VGLC Argel Adulto",
+      "precio": 62990,
+      "color": "Amarillo",
+      "stock": 32,
+      "imagen": "/img/guante2.webp",
+      "oferta": 65990,
+      "marca": "VGLC",
+      "descripcion": "Guantes de portero VGLC Argel con gran amortiguación y durabilidad."
+    },
+    {
+      "sku": "G332266",
+      "nombre": "Guantes Vasen Adulto",
+      "precio": 62990,
+      "color": "Blanco",
+      "stock": 32,
+      "imagen": "/img/guante1.webp",
+      "marca": "Vasen",
+      "descripcion": "Guantes blancos clásicos con palma antideslizante y ajuste firme para porteros exigentes."
+    }
+  ],
+  "medias": [
+    {
+      "sku": "M020132",
+      "nombre": "Medias Poker Rojas Adulto",
+      "precio": 4990,
+      "color": "Rojas",
+      "stock": 79,
+      "imagen": "/img/medias1.webp",
+      "oferta": 7500,
+      "marca": "Poker",
+      "talla": "Única",
+      "descripcion": "Medias deportivas rojas, elásticas y transpirables, ideales para entrenamiento o partidos."
+    },
+    {
+      "sku": "M040652",
+      "nombre": "Medias Poker Adulto",
+      "precio": 4990,
+      "color": "Azules",
+      "stock": 82,
+      "imagen": "/img/medias2.webp",
+      "oferta": 9990,
+      "marca": "Poker",
+      "talla": "Única",
+      "descripcion": "Medias deportivas azules con costuras reforzadas y material que absorbe la humedad."
+    },
+    {
+      "sku": "M015642",
+      "nombre": "Medias DRB Negro Juveniles",
+      "precio": 6990,
+      "color": "Negro",
+      "stock": 150,
+      "imagen": "/img/medias3.webp",
+      "marca": "DRB",
+      "talla": "Juvenil",
+      "descripcion": "Medias negras juveniles DRB, cómodas y duraderas. Ajuste anatómico para máximo rendimiento."
+    },
+    {
+      "sku": "M065471",
+      "nombre": "Medias DRB Blanco Adulto",
+      "precio": 5990,
+      "color": "Blancas",
+      "stock": 150,
+      "imagen": "/img/medias4.webp",
+      "marca": "DRB",
+      "talla": "Adulto",
+      "descripcion": "Medias blancas DRB para adulto, fabricadas en algodón y elastano para mayor confort."
+    }
+  ]
 }

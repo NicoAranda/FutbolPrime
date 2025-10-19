@@ -62,7 +62,7 @@ export const Card = ({ producto }) => {
 
       {/* Notificación toast */}
       <ToastNotification
-        message="Producto agregado al carrito 🛍️"
+        message="Producto agregado al carrito correctamente."
         show={showToast}
         onClose={() => setShowToast(false)}
       />

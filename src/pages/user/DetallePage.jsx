@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useCart } from "../../context/CartContext"
 import { ToastNotification } from "../../components/ToastNotification"
+import "../../assets/detalle.css"
 
 export const DetallePage = () => {
   const { sku } = useParams()
@@ -13,15 +14,14 @@ export const DetallePage = () => {
     fetch(`${import.meta.env.BASE_URL}data/productos.json`)
       .then((res) => res.json())
       .then((data) => {
-        const todosLosProductos = [
+        const todos = [
           ...(data.balones || []),
           ...(data.camisetas || []),
           ...(data.canilleras || []),
           ...(data.guantes || []),
           ...(data.medias || [])
         ]
-        const encontrado = todosLosProductos.find((p) => p.sku === sku)
-        setProducto(encontrado || null)
+        setProducto(todos.find((p) => p.sku === sku) || null)
       })
   }, [sku])
 
@@ -33,45 +33,43 @@ export const DetallePage = () => {
     )
   }
 
-  const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, '')}`
-
   const handleAddToCart = () => {
     addToCart(producto)
     setShowToast(true)
   }
 
+  const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`
+
   return (
-    <div className="container py-5">
-      <div className="row align-items-center">
-        {/* Imagen */}
-        <div className="col-md-6 text-center mb-4 mb-md-0">
-          <img
-            src={urlImagen}
-            alt={producto.nombre}
-            className="img-fluid rounded shadow"
-            style={{ maxHeight: "400px", objectFit: "cover" }}
-          />
+    <div className="detalle-container container py-5">
+      <div className="detalle-layout">
+        {/* Imagen del producto */}
+        <div className="detalle-imagen">
+          <img src={urlImagen} alt={producto.nombre} className="img-fluid shadow-lg" />
         </div>
 
         {/* Información del producto */}
-        <div className="col-md-6">
-          <h2>{producto.nombre}</h2>
-          <p className="text-muted">{producto.tipo}</p>
-          <h4 className="text-primary fw-bold mb-3">
-            ${producto.precio.toLocaleString("es-CL")}
-          </h4>
-          <p>{producto.descripcion || "Sin descripción disponible."}</p>
+        <div className="detalle-info">
+          <h2 className="fw-bold mb-2">{producto.nombre}</h2>
+          <p className="text-muted mb-3">{producto.tipo}</p>
+          <p className="descripcion mb-4">{producto.descripcion}</p>
 
-          <button
-            className="btn btn-success w-100 fw-semibold mt-3"
-            onClick={handleAddToCart}
-          >
-            🛒 Agregar al carrito
+          <ul className="list-unstyled mb-4">
+            <li><strong>SKU:</strong> {producto.sku}</li>
+            {producto.marca && <li><strong>Marca:</strong> {producto.marca}</li>}
+            {producto.talla && <li><strong>Talla:</strong> {producto.talla}</li>}
+            <li><strong>Color:</strong> {producto.color}</li>
+            <li><strong>Stock:</strong> {producto.stock} unidades</li>
+          </ul>
+
+          <h3 className="text-primary fw-bold mb-4">${producto.precio.toLocaleString("es-CL")}</h3>
+
+          <button className="btn btn-primary w-100 fw-semibold" onClick={handleAddToCart}>
+            🛒 Comprar
           </button>
         </div>
       </div>
 
-      {/* 🔔 Notificación */}
       <ToastNotification
         message="Producto agregado al carrito 🛍️"
         show={showToast}
@@ -80,4 +78,5 @@ export const DetallePage = () => {
     </div>
   )
 }
+
 export default DetallePage
