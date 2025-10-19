@@ -2,7 +2,7 @@ import { useCart } from "../../context/CartContext"
 import { useState } from "react"
 
 export const CheckoutPage = () => {
-  const { cart, total, clearCart } = useCart() // 👈 se agregó clearCart
+  const { cart, total, clearCart } = useCart()
   const [formData, setFormData] = useState({
     nombre: "",
     correo: "",
@@ -13,9 +13,10 @@ export const CheckoutPage = () => {
 
   const [warningRun, setWarningRun] = useState("")
   const [warningCorreo, setWarningCorreo] = useState("")
+  const [envio, setEnvio] = useState(0)
+  const [envioCalculado, setEnvioCalculado] = useState(false) // 🚚 indicador visual
 
   const iva = Math.round(total * 0.19)
-  const envio = 5000
   const totalFinal = total + iva + envio
 
   // ✅ Validar RUN chileno
@@ -69,6 +70,24 @@ export const CheckoutPage = () => {
     return true
   }
 
+  // 🚚 Calcular envío solo al terminar de escribir
+  const calcularEnvio = () => {
+    if (formData.direccion.trim() !== "" && formData.ciudad.trim() !== "") {
+      const ciudad = formData.ciudad.toLowerCase()
+      let costo = 0
+
+      if (ciudad.includes("santiago")) costo = 5000
+      else if (ciudad.includes("valparaiso") || ciudad.includes("viña")) costo = 7000
+      else costo = 10000
+
+      setEnvio(costo)
+      setEnvioCalculado(true)
+    } else {
+      setEnvio(0)
+      setEnvioCalculado(false)
+    }
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target
 
@@ -101,10 +120,11 @@ export const CheckoutPage = () => {
       return
     }
 
-    // ✅ Vaciar carrito después de confirmar compra
     alert("✅ ¡Compra realizada con éxito!")
-    clearCart() // 👈 aquí se limpia el carrito
-    setFormData({ nombre: "", correo: "", direccion: "", ciudad: "", run: "" }) // limpia formulario
+    clearCart()
+    setFormData({ nombre: "", correo: "", direccion: "", ciudad: "", run: "" })
+    setEnvio(0)
+    setEnvioCalculado(false)
   }
 
   return (
@@ -112,7 +132,7 @@ export const CheckoutPage = () => {
       <h2 className="text-center mb-4"> Detalle de Compra</h2>
 
       <div className="row g-4">
-        {/* 🛍️ Resumen de Productos */}
+        {/* 🛍️ Productos */}
         <div className="col-md-7">
           <div className="card shadow-sm p-4">
             <h4 className="mb-3">Productos en tu carrito</h4>
@@ -157,18 +177,32 @@ export const CheckoutPage = () => {
               <span>IVA (19%)</span>
               <strong>${iva.toLocaleString("es-CL")}</strong>
             </div>
-            <div className="d-flex justify-content-between">
-              <span>Envío</span>
-              <strong>${envio.toLocaleString("es-CL")}</strong>
-            </div>
+
+            {envio > 0 ? (
+              <div className="d-flex justify-content-between fade-in">
+                <span>Envío</span>
+                <strong>${envio.toLocaleString("es-CL")}</strong>
+              </div>
+            ) : (
+              <div className="text-muted small mt-2">
+                Ingresa tu dirección y ciudad, luego sal del campo para calcular envío 🚚
+              </div>
+            )}
+
             <hr />
             <div className="d-flex justify-content-between fs-5">
               <span>Total a pagar</span>
               <strong>${totalFinal.toLocaleString("es-CL")}</strong>
             </div>
+
+            {envioCalculado && (
+              <div className="text-success small mt-2 fade-in">
+                ✅ Envío calculado correctamente
+              </div>
+            )}
           </div>
 
-          {/* 📦 Datos del comprador */}
+          {/* 📦 Formulario */}
           <div className="card shadow-sm p-4">
             <h5 className="mb-3">Datos del Envío</h5>
             <form onSubmit={handleSubmit}>
@@ -220,6 +254,7 @@ export const CheckoutPage = () => {
                   name="direccion"
                   value={formData.direccion}
                   onChange={handleChange}
+                  onBlur={calcularEnvio} // 👈 calcula al salir del campo
                   required
                 />
               </div>
@@ -232,6 +267,8 @@ export const CheckoutPage = () => {
                   name="ciudad"
                   value={formData.ciudad}
                   onChange={handleChange}
+                  onBlur={calcularEnvio} // 👈 calcula al salir del campo
+                  required
                 />
               </div>
 
