@@ -17,6 +17,7 @@ import { PedidosPage } from "./pages/admin/PedidosPage"
 import { AgregarProductoPage } from "./pages/admin/AgregarProductoPage"
 import { CarritoPage } from "./pages/user/CarritoPage"
 import { CheckoutPage } from "./pages/user/CheckoutPage"
+import { WishlistPage } from "./pages/user/WishlistPage"
 import './App.css'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="ofertas" element={<OfertasPage />} />
           <Route path="carrito" element={<CarritoPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="wishlist" element={<WishlistPage />} />
           
           
         </Route>
