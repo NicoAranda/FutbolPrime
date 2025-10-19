@@ -1,50 +1,54 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { useCart } from "../context/CartContext"
-import { useWishlist } from "../context/WishlistContext" // ⭐ nuevo
-import { ToastNotification } from "./ToastNotification"
-import { Star } from "lucide-react" // ⭐ ícono de estrella
+import { useListaDeseos } from "../context/ListaDeseosContext" // ✅ importación correcta
+import { NotificacionEmergente } from "./NotificacionEmergente"
+import { Star } from "lucide-react" // ⭐ Ícono de estrella
 import "../assets/card.css"
 
 export const Card = ({ producto }) => {
   const { addToCart } = useCart()
-  const { toggleWishlist, isInWishlist } = useWishlist() // ⭐ nuevo
-  const [showToast, setShowToast] = useState(false)
+  const { alternarListaDeseos, estaEnListaDeseos } = useListaDeseos() // ✅ nombres en español
+  const [mostrarNotificacion, setMostrarNotificacion] = useState(false)
+
   const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`
 
   const formatoPrecio = (precio) => precio.toLocaleString("es-CL")
 
-  const handleAddToCart = () => {
+  // ✅ Agregar producto al carrito
+  const agregarAlCarrito = () => {
     addToCart(producto)
-    setShowToast(true)
+    setMostrarNotificacion(true)
   }
 
-  const favorito = isInWishlist(producto.sku) // ⭐ verifica si está guardado
+  // ⭐ Verificar si está en la lista de deseos
+  const esFavorito = estaEnListaDeseos(producto.sku)
 
-  const handleToggleWishlist = (e) => {
-    e.preventDefault() // evita abrir el detalle
-    toggleWishlist(producto)
+  // ⭐ Alternar lista de deseos
+  const manejarAlternarFavorito = (e) => {
+    e.preventDefault() // Evita que se abra el detalle
+    alternarListaDeseos(producto)
   }
 
   return (
     <>
       <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center g-md-5 g-lg-5">
         <div className="card product-card h-100 d-flex flex-column position-relative">
-          
+
           {/* ⭐ Botón de favoritos */}
           <button
             className="wishlist-btn"
-            onClick={handleToggleWishlist}
-            title={favorito ? "Quitar de favoritos" : "Agregar a favoritos"}
+            onClick={manejarAlternarFavorito}
+            title={esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}
           >
             <Star
               size={22}
-              fill={favorito ? "#FFD700" : "transparent"}
-              stroke={favorito ? "#FFD700" : "#666"}
+              fill={esFavorito ? "#FFD700" : "transparent"}
+              stroke={esFavorito ? "#FFD700" : "#666"}
             />
           </button>
 
-          {/* Enlace al detalle */}
+          {/* 🔍 Enlace al detalle */}
           <NavLink
             to={`/FutbolPrime/detalle-producto/${producto.sku}`}
             state={{ producto }}
@@ -72,11 +76,11 @@ export const Card = ({ producto }) => {
             </div>
           </NavLink>
 
-          {/* Botón agregar al carrito */}
+          {/* 🛒 Botón agregar al carrito */}
           <div className="p-3 border-top">
             <button
               className="btn btn-success w-100 fw-semibold"
-              onClick={handleAddToCart}
+              onClick={agregarAlCarrito}
             >
               🛒 Agregar al carrito
             </button>
@@ -84,11 +88,11 @@ export const Card = ({ producto }) => {
         </div>
       </div>
 
-      {/* Notificación toast */}
-      <ToastNotification
-        message="Producto agregado al carrito correctamente."
-        show={showToast}
-        onClose={() => setShowToast(false)}
+      {/* ✅ Notificación de confirmación */}
+      <NotificacionEmergente
+        mensaje="Producto agregado al carrito correctamente 🛍️"
+        mostrar={mostrarNotificacion}
+        cerrar={() => setMostrarNotificacion(false)}
       />
     </>
   )
