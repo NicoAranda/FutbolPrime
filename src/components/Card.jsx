@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { useCart } from "../context/CartContext"
+import { useWishlist } from "../context/WishlistContext" // ⭐ nuevo
 import { ToastNotification } from "./ToastNotification"
+import { Star } from "lucide-react" // ⭐ ícono de estrella
 import "../assets/card.css"
 
 export const Card = ({ producto }) => {
   const { addToCart } = useCart()
+  const { toggleWishlist, isInWishlist } = useWishlist() // ⭐ nuevo
   const [showToast, setShowToast] = useState(false)
   const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`
 
@@ -16,10 +19,31 @@ export const Card = ({ producto }) => {
     setShowToast(true)
   }
 
+  const favorito = isInWishlist(producto.sku) // ⭐ verifica si está guardado
+
+  const handleToggleWishlist = (e) => {
+    e.preventDefault() // evita abrir el detalle
+    toggleWishlist(producto)
+  }
+
   return (
     <>
       <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center g-md-5 g-lg-5">
-        <div className="card product-card h-100 d-flex flex-column">
+        <div className="card product-card h-100 d-flex flex-column position-relative">
+          
+          {/* ⭐ Botón de favoritos */}
+          <button
+            className="wishlist-btn"
+            onClick={handleToggleWishlist}
+            title={favorito ? "Quitar de favoritos" : "Agregar a favoritos"}
+          >
+            <Star
+              size={22}
+              fill={favorito ? "#FFD700" : "transparent"}
+              stroke={favorito ? "#FFD700" : "#666"}
+            />
+          </button>
+
           {/* Enlace al detalle */}
           <NavLink
             to={`/FutbolPrime/detalle-producto/${producto.sku}`}
@@ -69,4 +93,5 @@ export const Card = ({ producto }) => {
     </>
   )
 }
+
 export default Card
