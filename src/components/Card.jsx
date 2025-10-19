@@ -1,30 +1,30 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { useCart } from "../context/CartContext"
-import { useListaDeseos } from "../context/ListaDeseosContext" // ✅ importación correcta
+import { useListaDeseos } from "../context/ListaDeseosContext" 
 import { NotificacionEmergente } from "./NotificacionEmergente"
-import { Star } from "lucide-react" // ⭐ Ícono de estrella
+import { Star } from "lucide-react" 
 import "../assets/card.css"
 
 export const Card = ({ producto }) => {
   const { addToCart } = useCart()
-  const { alternarListaDeseos, estaEnListaDeseos } = useListaDeseos() // ✅ nombres en español
+  const { alternarListaDeseos, estaEnListaDeseos } = useListaDeseos() 
   const [mostrarNotificacion, setMostrarNotificacion] = useState(false)
 
   const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`
 
   const formatoPrecio = (precio) => precio.toLocaleString("es-CL")
 
-  // ✅ Agregar producto al carrito
+  //  Agregar producto al carrito
   const agregarAlCarrito = () => {
     addToCart(producto)
     setMostrarNotificacion(true)
   }
 
-  // ⭐ Verificar si está en la lista de deseos
+  // Verificar si está en la lista de deseos
   const esFavorito = estaEnListaDeseos(producto.sku)
 
-  // ⭐ Alternar lista de deseos
+  //  Alternar lista de deseos
   const manejarAlternarFavorito = (e) => {
     e.preventDefault() // Evita que se abra el detalle
     alternarListaDeseos(producto)
@@ -35,7 +35,7 @@ export const Card = ({ producto }) => {
       <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center g-md-5 g-lg-5">
         <div className="card product-card h-100 d-flex flex-column position-relative">
 
-          {/* ⭐ Botón de favoritos */}
+          {/* Botón de favoritos */}
           <button
             className="wishlist-btn"
             onClick={manejarAlternarFavorito}
@@ -48,7 +48,7 @@ export const Card = ({ producto }) => {
             />
           </button>
 
-          {/* 🔍 Enlace al detalle */}
+          {/* Enlace al detalle */}
           <NavLink
             to={`/FutbolPrime/detalle-producto/${producto.sku}`}
             state={{ producto }}
@@ -82,15 +82,15 @@ export const Card = ({ producto }) => {
               className="btn btn-success w-100 fw-semibold"
               onClick={agregarAlCarrito}
             >
-              🛒 Agregar al carrito
+               Agregar al carrito
             </button>
           </div>
         </div>
       </div>
 
-      {/* ✅ Notificación de confirmación */}
+      
       <NotificacionEmergente
-        mensaje="Producto agregado al carrito correctamente 🛍️"
+        mensaje="Producto agregado al carrito correctamente "
         mostrar={mostrarNotificacion}
         cerrar={() => setMostrarNotificacion(false)}
       />

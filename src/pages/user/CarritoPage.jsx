@@ -11,15 +11,15 @@ export const CarritoPage = () => {
   const totalFinal = total + iva + envio
 
   const handleCheckout = () => {
-    navigate("/FutbolPrime/checkout")
+    navigate("/FutbolPrime/pago") 
   }
 
   return (
     <div className="container my-5 px-3">
-      <h2 className="text-center mb-4">🛒 Tu Carrito de Compras</h2>
+      <h2 className="text-center mb-4"> Tu Carrito de Compras</h2>
 
       <div className="row g-4">
-        {/* 🛍️ Lista de productos */}
+        {/*  Lista de productos */}
         <div className="col-12 col-md-8">
           <div className="card shadow-sm p-3">
             {cart.length === 0 ? (
@@ -73,7 +73,7 @@ export const CarritoPage = () => {
           </div>
         </div>
 
-        {/* 🧾 Resumen del pedido */}
+        {/* Resumen del pedido */}
         <div className="col-12 col-md-4">
           <div className="card shadow-sm p-4">
             <h5 className="mb-3 text-center">Resumen del pedido</h5>
@@ -124,7 +124,7 @@ export const CarritoPage = () => {
               onClick={handleCheckout}
               disabled={cart.length === 0}
             >
-              Finalizar Compra
+              Continuar Compra
             </button>
           </div>
         </div>

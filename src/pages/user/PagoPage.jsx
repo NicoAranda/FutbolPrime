@@ -110,9 +110,9 @@ export const PagoPage = () => {
     setTarjeta((prev) => ({ ...prev, [name]: value }))
   }
 
-  //  Simular pago
   const procesarPago = (e) => {
     e.preventDefault()
+
     if (!validarRun(formData.run) || !validarCorreo(formData.correo) || !validarTarjeta()) {
       return
     }
@@ -123,31 +123,43 @@ export const PagoPage = () => {
       setProcesando(false)
 
       const exito = Math.random() < 0.7
+
+      // ⚠️ Guardamos una copia literal de los datos antes de limpiar el carrito
+      const subtotalFijo = total
+      const ivaFijo = Math.round(subtotalFijo * 0.19)
+      const totalFinalFijo = subtotalFijo + ivaFijo + envio
+
       const datosCompra = {
-        comprador: formData,
-        productos: cart,
-        total: totalFinal,
-        envio,
-        iva,
-        tarjeta,
+        comprador: { ...formData },
+        productos: [...cart],
+        subtotal: subtotalFijo,
+        iva: ivaFijo,
+        envio: envio,
+        total: totalFinalFijo,
+        tarjeta: { ...tarjeta },
         fecha: new Date().toLocaleString("es-CL"),
       }
 
       if (exito) {
-        clearCart()
+
+        const pedidosPrevios = JSON.parse(localStorage.getItem("pedidos") || "[]")
+        localStorage.setItem("pedidos", JSON.stringify([...pedidosPrevios, datosCompra]))
         setResultadoPago({ exito: true, datos: datosCompra })
+        setTimeout(() => clearCart(), 1000)
       } else {
         const motivos = [
-          "Fondos insuficientes ",
-          "Error en el banco ",
+          "Fondos insuficientes",
+          "Error en la conexión con el banco",
           "Tarjeta vencida",
-          "Transacción sospechosa ",
+          "Pago sospechoso bloqueado",
         ]
         const motivo = motivos[Math.floor(Math.random() * motivos.length)]
         setResultadoPago({ exito: false, motivo, datos: datosCompra })
       }
     }, 2000)
   }
+
+
 
   //  Pantalla de carga
   if (procesando) {
@@ -160,7 +172,7 @@ export const PagoPage = () => {
     )
   }
 
-  // Resultado del pago (aceptado o rechazado)
+
   if (resultadoPago) {
     return (
       <div className="container my-5 text-center">
@@ -178,7 +190,6 @@ export const PagoPage = () => {
           </>
         )}
 
-        {/*  Detalles comunes a ambos casos */}
         <div className="card shadow-sm p-4 text-start mx-auto" style={{ maxWidth: "700px" }}>
           <h5 className="fw-bold mb-3"> Detalles de la Compra</h5>
           <p><strong>Fecha:</strong> {resultadoPago.datos.fecha}</p>
@@ -197,32 +208,34 @@ export const PagoPage = () => {
             ))}
           </ul>
 
-          <p><strong>Subtotal:</strong> ${total.toLocaleString("es-CL")}</p>
-          <p><strong>IVA (19%):</strong> ${iva.toLocaleString("es-CL")}</p>
-          <p><strong>Envío:</strong> ${envio.toLocaleString("es-CL")}</p>
-          <h5 className="text-primary fw-bold">Total: ${totalFinal.toLocaleString("es-CL")}</h5>
+          <p><strong>Subtotal:</strong> ${resultadoPago.datos.subtotal.toLocaleString("es-CL")}</p>
+          <p><strong>IVA (19%):</strong> ${resultadoPago.datos.iva.toLocaleString("es-CL")}</p>
+          <p><strong>Envío:</strong> ${resultadoPago.datos.envio.toLocaleString("es-CL")}</p>
+          <h5 className="text-primary fw-bold"> Total: ${resultadoPago.datos.total.toLocaleString("es-CL")}
+          </h5>
+
         </div>
 
         {resultadoPago.exito ? (
           <button className="btn btn-primary mt-4" onClick={() => navigate("/FutbolPrime/pedidos")}>
-             Ver mis pedidos
+            Ver mis pedidos
           </button>
         ) : (
           <button className="btn btn-secondary mt-4" onClick={() => setResultadoPago(null)}>
-             Intentar nuevamente
+            Intentar nuevamente
           </button>
         )}
       </div>
     )
   }
 
-  //  Formulario con resumen
+
   return (
     <div className="container my-5">
       <h2 className="text-center mb-4"> Finalizar Compra</h2>
 
       <div className="row g-4">
-        {/*  Resumen de compra siempre visible */}
+
         <div className="col-md-5">
           <div className="card shadow-sm p-4">
             <h5 className="fw-bold mb-3 text-center">Resumen de la Compra</h5>
@@ -241,7 +254,7 @@ export const PagoPage = () => {
           </div>
         </div>
 
-        {/* Formulario */}
+
         <div className="col-md-7">
           <div className="card shadow-sm p-4">
             <form onSubmit={procesarPago}>
@@ -268,7 +281,7 @@ export const PagoPage = () => {
               {warningTarjeta && <small className="text-danger">{warningTarjeta}</small>}
 
               <button type="submit" className="btn btn-primary w-100 mt-3 fw-semibold">
-                 Finalizar Compra
+                Finalizar Compra
               </button>
             </form>
           </div>

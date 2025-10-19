@@ -13,7 +13,7 @@ export const ListaDeseosPage = () => {
           Marca la estrella en los productos que te gusten para guardarlos aquí.
         </p>
         <NavLink to="/FutbolPrime" className="btn btn-primary mt-3">
-          🔙 Volver a la tienda
+           Volver a la tienda
         </NavLink>
       </div>
     )
@@ -51,7 +51,7 @@ export const ListaDeseosPage = () => {
                   className="btn btn-outline-danger w-100 fw-semibold"
                   onClick={() => alternarListaDeseos(producto)}
                 >
-                  ❌ Quitar de favoritos
+                   Quitar de favoritos
                 </button>
               </div>
             </div>
