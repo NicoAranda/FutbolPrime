@@ -3,7 +3,6 @@ import { MemoryRouter } from "react-router-dom"
 import { describe, it, expect, vi } from "vitest"
 import { Header } from "../components/Header"
 
-<<<<<<< Updated upstream
 
 vi.mock("../context/CartContext", () => ({
   useCart: () => ({
@@ -11,8 +10,6 @@ vi.mock("../context/CartContext", () => ({
   }),
 }))
 
-=======
->>>>>>> Stashed changes
 vi.mock("../context/ListaDeseosContext", () => ({
   useListaDeseos: () => ({
     listaDeseos: [],
