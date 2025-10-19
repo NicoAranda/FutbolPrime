@@ -1,5 +1,6 @@
 import React from 'react'
 import { ListaUsuarios } from '../../components/ListaUsuarios'
+import { ModificarUsuario } from './ModificarUsuario'
 
 export const Usuario = () => {
     return (
