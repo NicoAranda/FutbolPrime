@@ -45,3 +45,19 @@ main {
 footer {
   margin-top: auto; /* asegura que el footer quede abajo */
 }
+/* === Ícono de cuenta más pequeño y redondeado === */
+.icono-cuenta {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #0011ff; /* contraste sobre fondo azul */
+  padding: 4px;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icono-cuenta:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+

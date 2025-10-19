@@ -1,9 +1,10 @@
-import { Link, NavLink } from "react-router-dom";
-import { useWishlist } from "../context/WishlistContext";
-import { Heart } from "lucide-react";
+import { Link, NavLink } from "react-router-dom"
+import { useCart } from "../context/CartContext"
+import { useListaDeseos } from "../context/ListaDeseosContext"
+import { Heart, ShoppingCart } from "lucide-react"
 
 export const Header = () => {
-  const { wishlist } = useWishlist();
+  const { wishlist } = useWishlist(); // 💙 obtenemos la lista de deseos
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -44,12 +45,6 @@ export const Header = () => {
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="carrito">
-                Ver Carrito
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
               <NavLink className="nav-link" to="nosotros">
                 Nosotros
               </NavLink>
@@ -77,26 +72,41 @@ export const Header = () => {
             <li className="nav-item position-relative mx-2">
               <NavLink className="nav-link" to="wishlist" title="Lista de deseos">
                 <Heart size={22} />
-                {wishlist.length > 0 && (
+                {listaDeseos.length > 0 && (
                   <span
                     className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark"
                     style={{ fontSize: "0.7rem" }}
                   >
-                    {wishlist.length}
+                    {listaDeseos.length}
                   </span>
                 )}
               </NavLink>
             </li>
 
-            {/* 👤 Login / Cuenta */}
+            {/* 🛒 Carrito */}
+            <li className="nav-item position-relative mx-2">
+              <NavLink className="nav-link" to="carrito" title="Ver carrito">
+                <ShoppingCart size={22} />
+                {cantidadCarrito > 0 && (
+                  <span
+                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark"
+                    style={{ fontSize: "0.7rem" }}
+                  >
+                    {cantidadCarrito}
+                  </span>
+                )}
+              </NavLink>
+            </li>
+
+            {/* 👤 Login */}
             <li className="nav-item">
-              <NavLink className="nav-link" to="login">
-                <img src="/img/cuenta.png" alt="Cuenta Logo" className="logo p-4" />
+              <NavLink className="nav-link" to="login" title="Iniciar sesión">
+                <img src="/img/cuenta.png" alt="Cuenta" className="icono-cuenta" />
               </NavLink>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}

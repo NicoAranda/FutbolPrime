@@ -71,6 +71,18 @@ export const SideBar = () => {
 
           <li className="nav-item">
             <NavLink
+              to="/administrador/usuarios"
+              className={({ isActive }) =>
+                `nav-link text-white ${isActive ? 'active-link' : ''}`
+              }
+              onClick={() => setShowSidebar(false)}
+            >
+              Usuarios
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
               to="/administrador/agregar-producto"
               className={({ isActive }) =>
                 `nav-link text-white ${isActive ? 'active-link' : ''}`
@@ -78,6 +90,18 @@ export const SideBar = () => {
               onClick={() => setShowSidebar(false)}
             >
               Agregar Producto
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
+              to="/administrador/agregar-categoria"
+              className={({ isActive }) =>
+                `nav-link text-white ${isActive ? 'active-link' : ''}`
+              }
+              onClick={() => setShowSidebar(false)}
+            >
+              Agregar Categoria
             </NavLink>
           </li>
 

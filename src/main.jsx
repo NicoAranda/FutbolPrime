@@ -5,14 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import App from './App.jsx'
 import { CartProvider } from './context/CartContext.jsx' // ✅ Import correcto
-import { WishlistProvider } from './context/WishlistContext.jsx' // ✅ Import correcto
+import { ListaDeseosProvider } from './context/ListaDeseosContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <CartProvider>
-      <WishlistProvider>
+      <ListaDeseosProvider>
       <App />
-      </WishlistProvider>
+      </ListaDeseosProvider>
     </CartProvider> 
   </BrowserRouter>
 )

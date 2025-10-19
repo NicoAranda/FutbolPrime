@@ -15,10 +15,14 @@ import { AdminLayout } from "./layouts/AdminLayout"
 import { Productos } from "./pages/admin/ProductosPage"
 import { PedidosPage } from "./pages/admin/PedidosPage"
 import { AgregarProductoPage } from "./pages/admin/AgregarProductoPage"
+import { AgregarCategoriaPage } from "./pages/admin/AgregarCategoriaPage"
 import { CarritoPage } from "./pages/user/CarritoPage"
-import { CheckoutPage } from "./pages/user/CheckoutPage"
-import { WishlistPage } from "./pages/user/WishlistPage"
+import { PagoPage } from "./pages/user/PagoPage"
+import { ListaDeseosPage } from "./pages/user/ListaDeseosPage"
+import { ConfirmacionPage } from "./pages/user/ConfirmacionPage"
 import './App.css'
+import { Usuario } from "./pages/admin/Usuarios"
+import { CrearUsuario } from "./pages/admin/CrearUsuario"
 
 function App() {
   return (
@@ -40,8 +44,9 @@ function App() {
           <Route path="nosotros" element={<NosotrosPage />} />
           <Route path="ofertas" element={<OfertasPage />} />
           <Route path="carrito" element={<CarritoPage />} />
-          <Route path="checkout" element={<CheckoutPage />} />
-          <Route path="wishlist" element={<WishlistPage />} />
+          <Route path="pago" element={<PagoPage />} />
+          <Route path="listadeseos" element={<ListaDeseosPage />} />
+          <Route path="confirmacion" element={<ConfirmacionPage />} />
           
           
         </Route>
@@ -51,7 +56,10 @@ function App() {
           <Route index element={<AdministradorPage />} />
           <Route path="productos" element={<Productos />} />
           <Route path="pedidos" element={<PedidosPage />} />
+          <Route path="usuarios" element={<Usuario />} />
+          <Route path="crear-usuario" element={<CrearUsuario />} />
           <Route path="agregar-producto" element={<AgregarProductoPage />} />
+          <Route path="agregar-categoria" element={<AgregarCategoriaPage/>} />
         </Route>
 
         {/* 🔹 Redirección por defecto si la ruta no existe */}

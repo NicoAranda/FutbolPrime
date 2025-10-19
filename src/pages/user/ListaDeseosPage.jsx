@@ -1,14 +1,14 @@
 import React from "react"
-import { useWishlist } from "../../context/WishlistContext"
+import { useListaDeseos } from "../../context/ListaDeseosContext"
 import { NavLink } from "react-router-dom"
 
-export const WishlistPage = () => {
-  const { wishlist, toggleWishlist } = useWishlist()
+export const ListaDeseosPage = () => {
+  const { listaDeseos, alternarListaDeseos } = useListaDeseos()
 
-  if (wishlist.length === 0) {
+  if (listaDeseos.length === 0) {
     return (
       <div className="container text-center my-5">
-        <h3> Tu lista de deseos está vacía</h3>
+        <h3>Tu lista de deseos está vacía</h3>
         <p className="text-muted">
           Marca la estrella en los productos que te gusten para guardarlos aquí.
         </p>
@@ -21,27 +21,27 @@ export const WishlistPage = () => {
 
   return (
     <div className="container my-5">
-      <h2 className="text-center mb-4"> Mis Favoritos</h2>
+      <h2 className="text-center mb-4">Mis Favoritos</h2>
       <div className="row g-4">
-        {wishlist.map((p) => (
-          <div key={p.sku} className="col-sm-6 col-md-4 col-lg-3">
+        {listaDeseos.map((producto) => (
+          <div key={producto.sku} className="col-sm-6 col-md-4 col-lg-3">
             <div className="card shadow-sm h-100 text-center product-card position-relative">
               <NavLink
-                to={`/FutbolPrime/detalle-producto/${p.sku}`}
-                state={{ producto: p }}
+                to={`/FutbolPrime/detalle-producto/${producto.sku}`}
+                state={{ producto }}
                 className="text-decoration-none text-dark"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}${p.imagen.replace(/^\//, "")}`}
+                  src={`${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`}
                   className="card-img-top p-3"
-                  alt={p.nombre}
+                  alt={producto.nombre}
                   style={{ height: "220px", objectFit: "contain" }}
                 />
                 <div className="card-body">
-                  <h5>{p.nombre}</h5>
-                  <p className="text-muted">{p.tipo}</p>
+                  <h5>{producto.nombre}</h5>
+                  <p className="text-muted">{producto.tipo}</p>
                   <p className="fw-bold text-primary mb-0">
-                    ${p.precio.toLocaleString("es-CL")}
+                    ${producto.precio.toLocaleString("es-CL")}
                   </p>
                 </div>
               </NavLink>
@@ -49,7 +49,7 @@ export const WishlistPage = () => {
               <div className="p-3 border-top">
                 <button
                   className="btn btn-outline-danger w-100 fw-semibold"
-                  onClick={() => toggleWishlist(p)}
+                  onClick={() => alternarListaDeseos(producto)}
                 >
                   ❌ Quitar de favoritos
                 </button>
@@ -62,4 +62,4 @@ export const WishlistPage = () => {
   )
 }
 
-export default WishlistPage
+export default ListaDeseosPage
