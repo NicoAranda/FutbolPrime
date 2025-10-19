@@ -1,52 +1,53 @@
-/* ===== Estilos del carrito ===== */
-.card {
-  border-radius: 10px;
-  background-color: #fff;
-}
-
-.btn {
+/* 🖼️ Imagen del producto */
+.carrito-img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
   border-radius: 8px;
 }
 
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.btn-primary:hover {
-  background-color: #0069d9;
-}
-
-.btn-outline-success {
-  border-color: #198754;
-  color: #198754;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-outline-success:hover {
-  background-color: #198754;
-  color: white;
-}
-
-.card h5 {
-  font-weight: 600;
-}
-
-.card strong {
-  color: #0d6efd;
-}
-
-.list-group-item {
-  border: none;
-}
-
-@media (max-width: 768px) {
-  .card {
-    padding: 1.5rem !important;
+/* 📱 Responsive: vista móvil */
+@media (max-width: 576px) {
+  /* Contenedor del producto */
+  .d-flex.flex-sm-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
   }
 
-  .btn {
-    font-size: 14px;
+  /* Imagen más pequeña aún en móviles */
+  .carrito-img {
+    width: 45px;
+    height: 45px;
   }
+
+  /* Botón eliminar adaptado */
+  .eliminar-btn {
+    width: auto;
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+
+  /* Reduce el espacio entre controles */
+  .d-flex.align-items-center.justify-content-center.gap-2.flex-wrap {
+    gap: 0.4rem !important;
+  }
+
+  /* Ajusta el texto */
+  h6 {
+    font-size: 0.9rem;
+  }
+
+  small {
+    font-size: 0.8rem;
+  }
+}
+
+/* 🧾 General - margen y proporción */
+.card {
+  border-radius: 12px;
+}
+
+.btn {
+  border-radius: 10px;
 }

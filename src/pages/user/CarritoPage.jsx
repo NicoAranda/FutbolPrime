@@ -15,13 +15,13 @@ export const CarritoPage = () => {
   }
 
   return (
-    <div className="container my-5">
+    <div className="container my-5 px-3">
       <h2 className="text-center mb-4">🛒 Tu Carrito de Compras</h2>
 
       <div className="row g-4">
         {/* 🛍️ Lista de productos */}
-        <div className="col-md-8">
-          <div className="card shadow-sm p-4">
+        <div className="col-12 col-md-8">
+          <div className="card shadow-sm p-3">
             {cart.length === 0 ? (
               <p className="text-center text-muted fs-5 mb-0">
                 Tu carrito está vacío.
@@ -30,29 +30,30 @@ export const CarritoPage = () => {
               cart.map((item) => (
                 <div
                   key={item.sku}
-                  className="d-flex align-items-center justify-content-between border-bottom py-3"
+                  className="d-flex flex-column flex-sm-row align-items-center justify-content-between border-bottom py-3 gap-3"
                 >
-                  <div className="d-flex align-items-center gap-3">
+                  <div className="d-flex align-items-center gap-3 text-center text-sm-start">
                     <img
                       src={`${import.meta.env.BASE_URL}${item.imagen.replace(/^\//, "")}`}
                       alt={item.nombre}
-                      style={{ width: "80px", height: "80px", objectFit: "cover" }}
-                      className="rounded"
+                      className="rounded carrito-img"
                     />
                     <div>
-                      <h6 className="mb-0">{item.nombre}</h6>
-                      <small className="text-muted">${item.precio.toLocaleString("es-CL")}</small>
+                      <h6 className="mb-1">{item.nombre}</h6>
+                      <small className="text-muted">
+                        ${item.precio.toLocaleString("es-CL")}
+                      </small>
                     </div>
                   </div>
 
-                  <div className="d-flex align-items-center gap-2">
+                  <div className="d-flex align-items-center justify-content-center gap-2 flex-wrap">
                     <button
                       className="btn btn-outline-secondary btn-sm"
                       onClick={() => updateQuantity(item.sku, item.cantidad - 1)}
                     >
                       -
                     </button>
-                    <span>{item.cantidad}</span>
+                    <span className="fw-semibold">{item.cantidad}</span>
                     <button
                       className="btn btn-outline-secondary btn-sm"
                       onClick={() => updateQuantity(item.sku, item.cantidad + 1)}
@@ -60,7 +61,7 @@ export const CarritoPage = () => {
                       +
                     </button>
                     <button
-                      className="btn btn-danger btn-sm"
+                      className="btn btn-danger btn-sm eliminar-btn"
                       onClick={() => removeFromCart(item.sku)}
                     >
                       Eliminar
@@ -73,7 +74,7 @@ export const CarritoPage = () => {
         </div>
 
         {/* 🧾 Resumen del pedido */}
-        <div className="col-md-4">
+        <div className="col-12 col-md-4">
           <div className="card shadow-sm p-4">
             <h5 className="mb-3 text-center">Resumen del pedido</h5>
 
