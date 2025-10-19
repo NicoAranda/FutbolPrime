@@ -109,7 +109,7 @@ export const CheckoutPage = () => {
 
   return (
     <div className="container my-5">
-      <h2 className="text-center mb-4">🧾 Detalle de Compra</h2>
+      <h2 className="text-center mb-4"> Detalle de Compra</h2>
 
       <div className="row g-4">
         {/* 🛍️ Resumen de Productos */}
