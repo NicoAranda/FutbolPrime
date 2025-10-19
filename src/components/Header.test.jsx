@@ -29,7 +29,7 @@ describe("Header", () => {
     expect(logo).toBeInTheDocument()
   })
 
-  it("muestra enlaces de navegación", () => {
+  it("muestra enlaces", () => {
     render(
       <MemoryRouter>
         <Header />
