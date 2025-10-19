@@ -7,7 +7,7 @@ export const Header = () => {
   const { cart } = useCart()
   const { listaDeseos } = useListaDeseos()
 
-  // Contador de productos en carrito
+
   const cantidadCarrito = cart.reduce((acc, item) => acc + item.cantidad, 0)
 
   return (

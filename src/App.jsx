@@ -23,15 +23,16 @@ import { ConfirmacionPage } from "./pages/user/ConfirmacionPage"
 import './App.css'
 import { Usuario } from "./pages/admin/Usuarios"
 import { CrearUsuario } from "./pages/admin/CrearUsuario"
+import { ModificarUsuario } from "./pages/admin/ModificarUsuario"
 
 function App() {
   return (
     <>
       <Routes>
-        {/* 🔹 Redirección automática al inicio */}
+        {/* Redirección automática al inicio */}
         <Route path="/" element={<Navigate to="/FutbolPrime" />} />
 
-        {/* 🔹 RUTAS DEL USUARIO */}
+        {/* RUTAS DEL USUARIO */}
         <Route path="/FutbolPrime" element={<UserLayout />}>
           <Route index element={<HomePage />} />
           <Route path="balones" element={<BalonesPage />} />
@@ -51,18 +52,19 @@ function App() {
           
         </Route>
 
-        {/* 🔹 RUTAS DEL ADMINISTRADOR */}
+        {/* RUTAS DEL ADMINISTRADOR */}
         <Route path="/administrador" element={<AdminLayout />}>
           <Route index element={<AdministradorPage />} />
           <Route path="productos" element={<Productos />} />
           <Route path="pedidos" element={<PedidosPage />} />
           <Route path="usuarios" element={<Usuario />} />
           <Route path="crear-usuario" element={<CrearUsuario />} />
+          <Route path="/administrador/modificar-usuario/:id" element={<ModificarUsuario />} />
           <Route path="agregar-producto" element={<AgregarProductoPage />} />
           <Route path="agregar-categoria" element={<AgregarCategoriaPage/>} />
         </Route>
 
-        {/* 🔹 Redirección por defecto si la ruta no existe */}
+        {/* Redirección por defecto si la ruta no existe */}
         <Route path="*" element={<Navigate to="/FutbolPrime" />} />
       </Routes>
     </>

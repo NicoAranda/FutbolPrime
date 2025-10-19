@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import data from '../../public/data/usuarios.json' 
+import data from '../../public/data/usuarios.json'
 import { Link } from 'react-router-dom'
 
 export const ListaUsuarios = () => {
@@ -54,12 +54,10 @@ export const ListaUsuarios = () => {
                                 <td>{usuario.correo}</td>
                                 <td>{usuario.rol}</td>
                                 <td>
-                                    <button
-                                        className="btn btn-warning btn-sm me-2"
-                                        onClick={() => handleModificar(usuario.id)}
-                                    >
+                                    <Link to={`/administrador/modificar-usuario/${usuario.id}`} className="btn btn-warning btn-sm me-2">
                                         Modificar
-                                    </button>
+                                    </Link>
+
                                     <button
                                         className="btn btn-danger btn-sm"
                                         onClick={() => handleEliminar(usuario.id)}
