@@ -13,19 +13,17 @@ export const CheckoutPage = () => {
   })
 
   const [warningRun, setWarningRun] = useState("")
+  const [warningCorreo, setWarningCorreo] = useState("")
 
   const iva = Math.round(total * 0.19)
   const envio = 5000
   const totalFinal = total + iva + envio
 
-  // ✅ Validar RUN chileno
+  // ✅ Validar formato RUN chileno
   const validarRun = (runInput) => {
-    setWarningRun("") // Limpia mensaje anterior
-
-    // Quitar espacios y convertir a mayúsculas
+    setWarningRun("") // limpia advertencia previa
     const run = runInput.toUpperCase().replace(/\s+/g, "")
 
-    // Mensaje guía
     if (!/^[0-9]+-[0-9K]$/.test(run)) {
       setWarningRun("⚠️ El RUN debe ir sin puntos y con guion (ej: 12345678-5).")
       return false
@@ -37,7 +35,7 @@ export const CheckoutPage = () => {
       return false
     }
 
-    // Reemplazar DV K por 0
+    // Reemplazar K por 0
     let dv = dvIngresado
     if (dv === "K") {
       setWarningRun("⚠️ El dígito verificador 'K' fue reemplazado automáticamente por '0'.")
@@ -45,7 +43,7 @@ export const CheckoutPage = () => {
       dv = "0"
     }
 
-    // Validar DV real
+    // Calcular dígito verificador real
     let suma = 0
     let multiplicador = 2
     for (let i = numero.length - 1; i >= 0; i--) {
@@ -63,13 +61,30 @@ export const CheckoutPage = () => {
     return true
   }
 
+  // ✅ Validar correo electrónico
+  const validarCorreo = (correo) => {
+    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!correoRegex.test(correo)) {
+      setWarningCorreo("⚠️ Ingresa un correo electrónico válido (ej: usuario@dominio.cl).")
+      return false
+    }
+    setWarningCorreo("")
+    return true
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target
 
     if (name === "run") {
-      if (value.length > 11) return // Máximo 11 caracteres
+      if (value.length > 11) return // máximo 11 caracteres
       setFormData((prev) => ({ ...prev, run: value }))
       validarRun(value)
+      return
+    }
+
+    if (name === "correo") {
+      setFormData((prev) => ({ ...prev, correo: value }))
+      validarCorreo(value)
       return
     }
 
@@ -82,7 +97,12 @@ export const CheckoutPage = () => {
     if (!formData.nombre || !formData.correo || !formData.direccion || !formData.run) {
       alert("Por favor, completa todos los campos obligatorios.")
       return
-    }       
+    }
+
+    if (!validarCorreo(formData.correo) || !validarRun(formData.run)) {
+      alert("Corrige los errores antes de continuar.")
+      return
+    }
 
     alert("✅ ¡Compra realizada con éxito!")
   }
@@ -92,7 +112,7 @@ export const CheckoutPage = () => {
       <h2 className="text-center mb-4">🧾 Detalle de Compra</h2>
 
       <div className="row g-4">
-        {/* 🛍️ Resumen de Productos */}
+        {/* 🛍️ Resumen de productos */}
         <div className="col-md-7">
           <div className="card shadow-sm p-4">
             <h4 className="mb-3">Productos en tu carrito</h4>
@@ -122,7 +142,7 @@ export const CheckoutPage = () => {
           </div>
         </div>
 
-        {/* 💳 Resumen del Pedido */}
+        {/* 💳 Resumen del pedido */}
         <div className="col-md-5">
           <div className="card shadow-sm p-4 mb-4">
             <h5 className="mb-3">Resumen del Pedido</h5>
@@ -171,9 +191,7 @@ export const CheckoutPage = () => {
                   onChange={handleChange}
                   required
                 />
-                {warningRun && (
-                  <small className="text-danger d-block mt-1">{warningRun}</small>
-                )}
+                {warningRun && <small className="text-danger d-block mt-1">{warningRun}</small>}
               </div>
 
               <div className="mb-3">
@@ -186,6 +204,7 @@ export const CheckoutPage = () => {
                   onChange={handleChange}
                   required
                 />
+                {warningCorreo && <small className="text-danger d-block mt-1">{warningCorreo}</small>}
               </div>
 
               <div className="mb-3">
