@@ -16,18 +16,15 @@ export const Card = ({ producto }) => {
 
   const formatoPrecio = (precio) => precio.toLocaleString("es-CL")
 
-  //  Agregar producto al carrito
   const agregarAlCarrito = () => {
     addToCart(producto)
     setMostrarNotificacion(true)
   }
 
-  // Verificar si está en la lista de deseos
   const esFavorito = estaEnListaDeseos(producto.sku)
 
-  //  Alternar lista de deseos
   const manejarAlternarFavorito = (e) => {
-    e.preventDefault() // Evita que se abra el detalle
+    e.preventDefault() 
     alternarListaDeseos(producto)
   }
 
@@ -36,7 +33,6 @@ export const Card = ({ producto }) => {
       <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center g-md-5 g-lg-5">
         <div className="card product-card h-100 d-flex flex-column position-relative">
 
-          {/* Botón de favoritos */}
           <button
             className="wishlist-btn"
             onClick={manejarAlternarFavorito}
@@ -49,7 +45,6 @@ export const Card = ({ producto }) => {
             />
           </button>
 
-          {/* Enlace al detalle */}
           <NavLink
             to={`/FutbolPrime/detalle-producto/${producto.sku}`}
             state={{ producto }}
@@ -77,7 +72,6 @@ export const Card = ({ producto }) => {
             </div>
           </NavLink>
 
-          {/* 🛒 Botón agregar al carrito */}
           <div className="p-3 border-top">
             <button
               className="btn btn-success w-100 fw-semibold"
