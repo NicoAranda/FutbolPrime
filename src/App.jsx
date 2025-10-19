@@ -18,6 +18,7 @@ import { AgregarProductoPage } from "./pages/admin/AgregarProductoPage"
 import { CarritoPage } from "./pages/user/CarritoPage"
 import { PagoPage } from "./pages/user/PagoPage"
 import { ListaDeseosPage } from "./pages/user/ListaDeseosPage"
+import { ConfirmacionPage } from "./pages/user/ConfirmacionPage"
 import './App.css'
 
 function App() {
@@ -40,8 +41,9 @@ function App() {
           <Route path="nosotros" element={<NosotrosPage />} />
           <Route path="ofertas" element={<OfertasPage />} />
           <Route path="carrito" element={<CarritoPage />} />
-          <Route path="Pago" element={<PagoPage />} />
-          <Route path="ListaDeseos" element={<ListaDeseosPage />} />
+          <Route path="pago" element={<PagoPage />} />
+          <Route path="listadeseos" element={<ListaDeseosPage />} />
+          <Route path="confirmacion" element={<ConfirmacionPage />} />
           
           
         </Route>
