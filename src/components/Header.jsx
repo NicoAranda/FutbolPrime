@@ -4,11 +4,15 @@ import { useListaDeseos } from "../context/ListaDeseosContext"
 import { Heart, ShoppingCart } from "lucide-react"
 
 export const Header = () => {
+<<<<<<< Updated upstream
   const { cart } = useCart()
   const { listaDeseos } = useListaDeseos()
 
 
   const cantidadCarrito = cart.reduce((acc, item) => acc + item.cantidad, 0)
+=======
+  const { wishlist } = useListaDeseos(); // 💙 obtenemos la lista de deseos
+>>>>>>> Stashed changes
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
