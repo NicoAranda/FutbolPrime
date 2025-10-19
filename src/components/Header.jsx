@@ -1,9 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
-import { useWishlist } from "../context/WishlistContext";
-import { Heart } from "lucide-react";
+import { Link, NavLink } from "react-router-dom"
+import { useWishlist } from "../context/WishlistContext"
+import { Heart } from "lucide-react"
 
 export const Header = () => {
-  const { wishlist } = useWishlist(); // 💙 obtenemos la lista de deseos
+  const { wishlist } = useWishlist() // 💙 obtenemos la lista de deseos
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -90,13 +90,13 @@ export const Header = () => {
 
             {/* 👤 Login / Cuenta */}
             <li className="nav-item">
-              <NavLink className="nav-link" to="login">
-                <img src="/img/cuenta.png" alt="Cuenta Logo" className="logo p-4" />
+              <NavLink className="nav-link" to="login" title="Iniciar sesión">
+                <img src="/img/cuenta.png" alt="Cuenta" className="icono-cuenta" />
               </NavLink>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
