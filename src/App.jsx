@@ -21,6 +21,7 @@ import { CheckoutPage } from "./pages/user/CheckoutPage"
 import { WishlistPage } from "./pages/user/WishlistPage"
 import './App.css'
 import { Usuario } from "./pages/admin/Usuarios"
+import { CrearUsuario } from "./pages/admin/CrearUsuario"
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="productos" element={<Productos />} />
           <Route path="pedidos" element={<PedidosPage />} />
           <Route path="usuarios" element={<Usuario />} />
+          <Route path="crear-usuario" element={<CrearUsuario />} />
           <Route path="agregar-producto" element={<AgregarProductoPage />} />
           <Route path="agregar-categoria" element={<AgregarCategoriaPage/>} />
         </Route>

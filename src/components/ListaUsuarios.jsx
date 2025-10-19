@@ -1,24 +1,10 @@
 import React, { useState } from 'react'
 import data from '../../public/data/usuarios.json' 
+import { Link } from 'react-router-dom'
 
 export const ListaUsuarios = () => {
 
     const [usuarios, setUsuarios] = useState(data.usuarios)
-
-    const handleCrear = () => {
-        const nombre = prompt('Ingrese el nombre del nuevo usuario:')
-        const correo = prompt('Ingrese el correo del usuario:')
-        const rol = prompt('Ingrese el rol (Administrador / Cliente / Vendedor):')
-        if (nombre && correo && rol) {
-            const nuevoUsuario = {
-                id: usuarios.length + 1,
-                nombre,
-                correo,
-                rol
-            }
-            setUsuarios([...usuarios, nuevoUsuario])
-        }
-    }
 
     const handleModificar = (id) => {
         const usuario = usuarios.find(u => u.id === id)
@@ -46,9 +32,9 @@ export const ListaUsuarios = () => {
             </div>
             <div className="card-body table-responsive">
                 <div className="mb-3 text-end">
-                    <button onClick={handleCrear} className="btn btn-success btn-sm">
+                    <Link to="/administrador/crear-usuario" className="btn btn-success btn-sm">
                         Crear Usuario
-                    </button>
+                    </Link>
                 </div>
                 <table className="table table-striped table-hover">
                     <thead>
