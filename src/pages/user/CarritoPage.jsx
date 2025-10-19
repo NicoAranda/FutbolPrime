@@ -88,10 +88,6 @@ export const CarritoPage = () => {
                   <span>IVA (19%)</span>
                   <strong>${iva.toLocaleString("es-CL")}</strong>
                 </div>
-                <div className="d-flex justify-content-between">
-                  <span>Envío</span>
-                  <strong>${envio.toLocaleString("es-CL")}</strong>
-                </div>
                 <hr />
                 <div className="d-flex justify-content-between fs-5">
                   <span>Total</span>
