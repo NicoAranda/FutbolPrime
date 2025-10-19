@@ -1,0 +1,22 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Nicolas Aranda",
+      "correo": "n.aranda@duocuc.cl",
+      "rol": "Administrador"
+    },
+    {
+      "id": 2,
+      "nombre": "Fernanda Figueroa",
+      "correo": "fer.figueroav@duocuc.cl",
+      "rol": "Administrador"
+    },
+    {
+      "id": 3,
+      "nombre": "Benjamin Larrondo",
+      "correo": "ben.moralesl@duocuc.cl",
+      "rol": "Administrador"
+    }
+  ]
+}
