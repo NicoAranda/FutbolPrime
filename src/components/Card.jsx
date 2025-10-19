@@ -11,7 +11,8 @@ export const Card = ({ producto }) => {
   const { alternarListaDeseos, estaEnListaDeseos } = useListaDeseos() 
   const [mostrarNotificacion, setMostrarNotificacion] = useState(false)
 
-  const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`
+  const urlImagen = `${import.meta.env.BASE_URL}/${producto.imagen.replace(/^\//, "")}`
+
 
   const formatoPrecio = (precio) => precio.toLocaleString("es-CL")
 
