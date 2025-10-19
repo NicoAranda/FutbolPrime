@@ -9,23 +9,81 @@ export const CheckoutPage = () => {
     correo: "",
     direccion: "",
     ciudad: "",
+    run: "",
   })
+
+  const [warningRun, setWarningRun] = useState("")
 
   const iva = Math.round(total * 0.19)
   const envio = 5000
   const totalFinal = total + iva + envio
 
+  // ✅ Validar RUN chileno
+  const validarRun = (runInput) => {
+    setWarningRun("") // Limpia mensaje anterior
+
+    // Quitar espacios y convertir a mayúsculas
+    const run = runInput.toUpperCase().replace(/\s+/g, "")
+
+    // Mensaje guía
+    if (!/^[0-9]+-[0-9K]$/.test(run)) {
+      setWarningRun("⚠️ El RUN debe ir sin puntos y con guion (ej: 12345678-5).")
+      return false
+    }
+
+    const [numero, dvIngresado] = run.split("-")
+    if (numero.length > 8) {
+      setWarningRun("⚠️ El RUN no puede tener más de 8 dígitos antes del guion.")
+      return false
+    }
+
+    // Reemplazar DV K por 0
+    let dv = dvIngresado
+    if (dv === "K") {
+      setWarningRun("⚠️ El dígito verificador 'K' fue reemplazado automáticamente por '0'.")
+      setFormData((prev) => ({ ...prev, run: `${numero}-0` }))
+      dv = "0"
+    }
+
+    // Validar DV real
+    let suma = 0
+    let multiplicador = 2
+    for (let i = numero.length - 1; i >= 0; i--) {
+      suma += parseInt(numero[i]) * multiplicador
+      multiplicador = multiplicador < 7 ? multiplicador + 1 : 2
+    }
+    const resto = 11 - (suma % 11)
+    const dvCalculado = resto === 11 ? "0" : resto === 10 ? "K" : resto.toString()
+
+    if (dv !== dvCalculado && !(dv === "0" && dvCalculado === "K")) {
+      setWarningRun("❌ RUN inválido, revisa el dígito verificador.")
+      return false
+    }
+
+    return true
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target
+
+    if (name === "run") {
+      if (value.length > 11) return // Máximo 11 caracteres
+      setFormData((prev) => ({ ...prev, run: value }))
+      validarRun(value)
+      return
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!formData.nombre || !formData.correo || !formData.direccion) {
+
+    if (!formData.nombre || !formData.correo || !formData.direccion || !formData.run) {
       alert("Por favor, completa todos los campos obligatorios.")
       return
-    }
+    }       
+
     alert("✅ ¡Compra realizada con éxito!")
   }
 
@@ -103,16 +161,19 @@ export const CheckoutPage = () => {
                 />
               </div>
 
-               <div className="mb-3">
-                <label className="form-label">Run</label>
+              <div className="mb-3">
+                <label className="form-label">RUN</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="Run"
+                  name="run"
                   value={formData.run}
                   onChange={handleChange}
                   required
                 />
+                {warningRun && (
+                  <small className="text-danger d-block mt-1">{warningRun}</small>
+                )}
               </div>
 
               <div className="mb-3">
@@ -160,4 +221,5 @@ export const CheckoutPage = () => {
     </div>
   )
 }
+
 export default CheckoutPage
