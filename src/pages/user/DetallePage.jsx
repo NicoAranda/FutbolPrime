@@ -34,7 +34,7 @@ export const DetallePage = () => {
     )
   }
 
-  // ✅ Agregar producto al carrito
+
   const manejarAgregarCarrito = () => {
     addToCart(producto)
     setMostrarNotificacion(true)
@@ -45,12 +45,9 @@ export const DetallePage = () => {
   return (
     <div className="detalle-container container py-5">
       <div className="detalle-layout">
-        {/* 🖼️ Imagen del producto */}
         <div className="detalle-imagen">
           <img src={urlImagen} alt={producto.nombre} className="img-fluid shadow-lg rounded" />
         </div>
-
-        {/* 📋 Información del producto */}
         <div className="detalle-info">
           <h2 className="fw-bold mb-2">{producto.nombre}</h2>
           <p className="text-muted mb-3">{producto.tipo}</p>
@@ -74,14 +71,12 @@ export const DetallePage = () => {
             className="btn btn-primary w-100 fw-semibold"
             onClick={manejarAgregarCarrito}
           >
-            🛒 Agregar al carrito
+             Agregar al carrito
           </button>
         </div>
       </div>
-
-      {/* ✅ Notificación en español */}
       <NotificacionEmergente
-        mensaje="Producto agregado al carrito 🛍️"
+        mensaje="Producto agregado al carrito "
         mostrar={mostrarNotificacion}
         cerrar={() => setMostrarNotificacion(false)}
       />
