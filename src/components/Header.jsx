@@ -3,7 +3,7 @@ import { useWishlist } from "../context/WishlistContext";
 import { Heart } from "lucide-react";
 
 export const Header = () => {
-  const { wishlist } = useWishlist(); // 💙 obtenemos la lista de deseos
+  const { wishlist } = useWishlist();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
