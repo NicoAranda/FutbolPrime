@@ -1,14 +1,14 @@
 import { useEffect } from "react"
 
-export const ToastNotification = ({ message, show, onClose }) => {
+export const NotificacionEmergente = ({ mensaje, mostrar, cerrar }) => {
   useEffect(() => {
-    if (show) {
-      const timer = setTimeout(onClose, 2000) // se oculta en 2 segundos
-      return () => clearTimeout(timer)
+    if (mostrar) {
+      const temporizador = setTimeout(cerrar, 2000)
+      return () => clearTimeout(temporizador)
     }
-  }, [show])
+  }, [mostrar])
 
-  if (!show) return null
+  if (!mostrar) return null
 
   return (
     <div
@@ -22,12 +22,12 @@ export const ToastNotification = ({ message, show, onClose }) => {
         aria-atomic="true"
       >
         <div className="d-flex">
-          <div className="toast-body fw-semibold">{message}</div>
+          <div className="toast-body fw-semibold">{mensaje}</div>
           <button
             type="button"
             className="btn-close btn-close-white me-2 m-auto"
-            aria-label="Close"
-            onClick={onClose}
+            aria-label="Cerrar"
+            onClick={cerrar}
           ></button>
         </div>
       </div>
