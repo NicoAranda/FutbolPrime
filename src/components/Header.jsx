@@ -74,7 +74,7 @@ export const Header = () => {
 
             
             <li className="nav-item position-relative mx-2">
-              <NavLink className="nav-link" to="wishlist" title="Lista de deseos">
+              <NavLink className="nav-link" to="listadeseos" title="Lista de deseos">
                 <Heart size={22} />
                 {listaDeseos.length > 0 && (
                   <span
