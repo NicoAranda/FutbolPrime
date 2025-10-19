@@ -1,12 +1,18 @@
 import { render, screen } from "@testing-library/react"
 import { MemoryRouter } from "react-router-dom"
-import { describe, expect, it, vi } from "vitest"
+import { describe, it, expect, vi } from "vitest"
 import { Header } from "../components/Header"
 
-// 🧠 Mock del hook personalizado (para evitar error)
-vi.mock("../context/WishlistContext", () => ({
-  useWishlist: () => ({
-    wishlist: [], // simulamos una lista vacía
+
+vi.mock("../context/CartContext", () => ({
+  useCart: () => ({
+    cart: [],
+  }),
+}))
+
+vi.mock("../context/ListaDeseosContext", () => ({
+  useListaDeseos: () => ({
+    listaDeseos: [],
   }),
 }))
 
@@ -18,9 +24,8 @@ describe("Header", () => {
       </MemoryRouter>
     )
 
-    // Verifica texto y logo
     expect(screen.getByText(/Fútbol Prime/i)).toBeInTheDocument()
-    const logo = screen.getByRole("img", { name: /Fútbol Prime/i })
+    const logo = screen.getByRole("img", { name: /Fútbol Prime Logo/i })
     expect(logo).toBeInTheDocument()
   })
 
@@ -31,9 +36,8 @@ describe("Header", () => {
       </MemoryRouter>
     )
 
-    const links = ["Inicio", "Balones", "Camisetas", "Accesorios"]
-    links.forEach((link) => {
-      expect(screen.getByText(link)).toBeInTheDocument()
-    })
+    expect(screen.getByText(/Inicio/i)).toBeInTheDocument()
+    expect(screen.getByText(/Nosotros/i)).toBeInTheDocument()
+    expect(screen.getByText(/Camisetas/i)).toBeInTheDocument()
   })
 })

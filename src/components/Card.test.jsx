@@ -1,23 +1,23 @@
-import { render, screen, fireEvent } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { MemoryRouter } from "react-router-dom"
 import { describe, it, expect, vi } from "vitest"
 import { Card } from "../components/Card"
 
-// 🧩 Mock de los contextos
+
 vi.mock("../context/CartContext", () => ({
   useCart: () => ({
     addToCart: vi.fn(),
   }),
 }))
 
-vi.mock("../context/WishlistContext", () => ({
-  useWishlist: () => ({
-    toggleWishlist: vi.fn(),
-    isInWishlist: () => false,
+vi.mock("../context/ListaDeseosContext", () => ({
+  useListaDeseos: () => ({
+    alternarListaDeseos: vi.fn(),
+    estaEnListaDeseos: () => false,
   }),
 }))
 
-// Mock de ToastNotification para evitar render real
+
 vi.mock("../components/ToastNotification", () => ({
   ToastNotification: () => <div data-testid="toast">Toast Mock</div>,
 }))
