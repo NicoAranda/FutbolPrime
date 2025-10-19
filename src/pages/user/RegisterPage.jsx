@@ -90,7 +90,7 @@ export const RegisterPage = () => {
                         </div>
 
                         <p className="mb-5 pb-lg-2 text-center" >¿Ya tienes cuenta?
-                          <NavLink to="/login" >Inicia sesión aquí</NavLink>
+                          <NavLink to="/FutbolPrime/login" >Inicia sesión aquí</NavLink>
                         </p>
                       </form>
                     </div>
