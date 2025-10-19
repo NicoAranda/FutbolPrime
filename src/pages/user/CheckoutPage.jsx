@@ -2,8 +2,7 @@ import { useCart } from "../../context/CartContext"
 import { useState } from "react"
 
 export const CheckoutPage = () => {
-  const { cart, total } = useCart()
-
+  const { cart, total, clearCart } = useCart() // 👈 se agregó clearCart
   const [formData, setFormData] = useState({
     nombre: "",
     correo: "",
@@ -19,9 +18,9 @@ export const CheckoutPage = () => {
   const envio = 5000
   const totalFinal = total + iva + envio
 
-  // ✅ Validar formato RUN chileno
+  // ✅ Validar RUN chileno
   const validarRun = (runInput) => {
-    setWarningRun("") // limpia advertencia previa
+    setWarningRun("")
     const run = runInput.toUpperCase().replace(/\s+/g, "")
 
     if (!/^[0-9]+-[0-9K]$/.test(run)) {
@@ -35,7 +34,6 @@ export const CheckoutPage = () => {
       return false
     }
 
-    // Reemplazar K por 0
     let dv = dvIngresado
     if (dv === "K") {
       setWarningRun("⚠️ El dígito verificador 'K' fue reemplazado automáticamente por '0'.")
@@ -43,7 +41,6 @@ export const CheckoutPage = () => {
       dv = "0"
     }
 
-    // Calcular dígito verificador real
     let suma = 0
     let multiplicador = 2
     for (let i = numero.length - 1; i >= 0; i--) {
@@ -76,7 +73,7 @@ export const CheckoutPage = () => {
     const { name, value } = e.target
 
     if (name === "run") {
-      if (value.length > 11) return // máximo 11 caracteres
+      if (value.length > 11) return
       setFormData((prev) => ({ ...prev, run: value }))
       validarRun(value)
       return
@@ -104,7 +101,10 @@ export const CheckoutPage = () => {
       return
     }
 
+    // ✅ Vaciar carrito después de confirmar compra
     alert("✅ ¡Compra realizada con éxito!")
+    clearCart() // 👈 aquí se limpia el carrito
+    setFormData({ nombre: "", correo: "", direccion: "", ciudad: "", run: "" }) // limpia formulario
   }
 
   return (
@@ -112,7 +112,7 @@ export const CheckoutPage = () => {
       <h2 className="text-center mb-4">🧾 Detalle de Compra</h2>
 
       <div className="row g-4">
-        {/* 🛍️ Resumen de productos */}
+        {/* 🛍️ Resumen de Productos */}
         <div className="col-md-7">
           <div className="card shadow-sm p-4">
             <h4 className="mb-3">Productos en tu carrito</h4>
@@ -121,7 +121,10 @@ export const CheckoutPage = () => {
             ) : (
               <ul className="list-group list-group-flush">
                 {cart.map((item) => (
-                  <li key={item.sku} className="list-group-item d-flex justify-content-between align-items-center">
+                  <li
+                    key={item.sku}
+                    className="list-group-item d-flex justify-content-between align-items-center"
+                  >
                     <div className="d-flex align-items-center gap-3">
                       <img
                         src={`${import.meta.env.BASE_URL}${item.imagen.replace(/^\//, "")}`}
@@ -142,7 +145,7 @@ export const CheckoutPage = () => {
           </div>
         </div>
 
-        {/* 💳 Resumen del pedido */}
+        {/* 💳 Resumen del Pedido */}
         <div className="col-md-5">
           <div className="card shadow-sm p-4 mb-4">
             <h5 className="mb-3">Resumen del Pedido</h5>
@@ -204,7 +207,9 @@ export const CheckoutPage = () => {
                   onChange={handleChange}
                   required
                 />
-                {warningCorreo && <small className="text-danger d-block mt-1">{warningCorreo}</small>}
+                {warningCorreo && (
+                  <small className="text-danger d-block mt-1">{warningCorreo}</small>
+                )}
               </div>
 
               <div className="mb-3">
