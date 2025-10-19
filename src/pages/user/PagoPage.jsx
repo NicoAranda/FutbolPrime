@@ -1,9 +1,12 @@
 import { useCart } from "../../context/CartContext"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const PagoPage = () => {
   const { cart, total, clearCart } = useCart()
-  const [datosFormulario, setDatosFormulario] = useState({
+  const navigate = useNavigate()
+
+  const [formData, setFormData] = useState({
     nombre: "",
     correo: "",
     direccion: "",
@@ -11,205 +14,261 @@ export const PagoPage = () => {
     run: "",
   })
 
-  const [alertaRun, setAlertaRun] = useState("")
-  const [alertaCorreo, setAlertaCorreo] = useState("")
-  const [costoEnvio, setCostoEnvio] = useState(0)
-  const [envioListo, setEnvioListo] = useState(false)
+  const [tarjeta, setTarjeta] = useState({
+    titular: "",
+    numero: "",
+    expiracion: "",
+    cvv: "",
+  })
+
+  const [warningRun, setWarningRun] = useState("")
+  const [warningCorreo, setWarningCorreo] = useState("")
+  const [warningTarjeta, setWarningTarjeta] = useState("")
+  const [envio, setEnvio] = useState(0)
+  const [envioCalculado, setEnvioCalculado] = useState(false)
+  const [resultadoPago, setResultadoPago] = useState(null)
+  const [procesando, setProcesando] = useState(false)
 
   const iva = Math.round(total * 0.19)
-  const totalFinal = total + iva + costoEnvio
+  const totalFinal = total + iva + envio
 
-  // ✅ Validar RUN chileno
-  const validarRun = (runIngresado) => {
-    setAlertaRun("")
-    const run = runIngresado.toUpperCase().replace(/\s+/g, "")
-
+  //  Validaciones
+  const validarRun = (runInput) => {
+    setWarningRun("")
+    const run = runInput.toUpperCase().replace(/\s+/g, "")
     if (!/^[0-9]+-[0-9K]$/.test(run)) {
-      setAlertaRun("⚠️ El RUN debe ir sin puntos y con guion (ej: 12345678-5).")
+      setWarningRun(" El RUN debe ir sin puntos y con guion (ej: 12345678-5).")
       return false
     }
-
     const [numero, dvIngresado] = run.split("-")
-    if (numero.length > 8) {
-      setAlertaRun("⚠️ El RUN no puede tener más de 8 dígitos antes del guion.")
-      return false
-    }
-
-    let dv = dvIngresado
-    if (dv === "K") {
-      setAlertaRun("⚠️ El dígito verificador 'K' fue reemplazado automáticamente por '0'.")
-      setDatosFormulario((prev) => ({ ...prev, run: `${numero}-0` }))
-      dv = "0"
-    }
-
     let suma = 0
     let multiplicador = 2
     for (let i = numero.length - 1; i >= 0; i--) {
       suma += parseInt(numero[i]) * multiplicador
       multiplicador = multiplicador < 7 ? multiplicador + 1 : 2
     }
-
     const resto = 11 - (suma % 11)
     const dvCalculado = resto === 11 ? "0" : resto === 10 ? "K" : resto.toString()
-
-    if (dv !== dvCalculado && !(dv === "0" && dvCalculado === "K")) {
-      setAlertaRun("❌ RUN inválido, revisa el dígito verificador.")
+    if (dvIngresado !== dvCalculado) {
+      setWarningRun(" RUN inválido.")
       return false
     }
-
     return true
   }
 
-  // ✅ Validar correo electrónico
   const validarCorreo = (correo) => {
     const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!correoRegex.test(correo)) {
-      setAlertaCorreo("⚠️ Ingresa un correo electrónico válido (ej: usuario@dominio.cl).")
+      setWarningCorreo(" Correo electrónico inválido.")
       return false
     }
-    setAlertaCorreo("")
+    setWarningCorreo("")
     return true
   }
 
-  // 🚚 Calcular envío cuando el usuario termina de escribir
+  const validarTarjeta = () => {
+    const { titular, numero, expiracion, cvv } = tarjeta
+    if (!titular || !numero || !expiracion || !cvv) {
+      setWarningTarjeta(" Completa todos los datos de la tarjeta.")
+      return false
+    }
+    if (!/^[0-9]{16}$/.test(numero.replace(/\s+/g, ""))) {
+      setWarningTarjeta(" Número de tarjeta inválido (16 dígitos).")
+      return false
+    }
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiracion)) {
+      setWarningTarjeta("Fecha inválida (usa MM/AA).")
+      return false
+    }
+    if (!/^[0-9]{3,4}$/.test(cvv)) {
+      setWarningTarjeta(" CVV inválido.")
+      return false
+    }
+    setWarningTarjeta("")
+    return true
+  }
+
   const calcularEnvio = () => {
-    if (datosFormulario.direccion.trim() !== "" && datosFormulario.ciudad.trim() !== "") {
-      const ciudad = datosFormulario.ciudad.toLowerCase()
-      let costo = 0
-
-      if (ciudad.includes("santiago")) costo = 5000
-      else if (ciudad.includes("valparaíso") || ciudad.includes("viña")) costo = 7000
-      else costo = 10000
-
-      setCostoEnvio(costo)
-      setEnvioListo(true)
-    } else {
-      setCostoEnvio(0)
-      setEnvioListo(false)
+    if (formData.direccion && formData.ciudad) {
+      const ciudad = formData.ciudad.toLowerCase()
+      if (ciudad.includes("santiago")) setEnvio(5000)
+      else if (ciudad.includes("valparaíso") || ciudad.includes("viña")) setEnvio(7000)
+      else setEnvio(10000)
+      setEnvioCalculado(true)
     }
   }
 
-  const manejarCambio = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
-
-    if (name === "run") {
-      if (value.length > 11) return
-      setDatosFormulario((prev) => ({ ...prev, run: value }))
-      validarRun(value)
-      return
-    }
-
-    if (name === "correo") {
-      setDatosFormulario((prev) => ({ ...prev, correo: value }))
-      validarCorreo(value)
-      return
-    }
-
-    setDatosFormulario((prev) => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
+    if (name === "run") validarRun(value)
+    if (name === "correo") validarCorreo(value)
   }
 
-  const manejarEnvio = (e) => {
+  const handleTarjetaChange = (e) => {
+    const { name, value } = e.target
+    setTarjeta((prev) => ({ ...prev, [name]: value }))
+  }
+
+  //  Simular pago
+  const procesarPago = (e) => {
     e.preventDefault()
-
-    if (!datosFormulario.nombre || !datosFormulario.correo || !datosFormulario.direccion || !datosFormulario.run) {
-      alert("Por favor, completa todos los campos obligatorios.")
+    if (!validarRun(formData.run) || !validarCorreo(formData.correo) || !validarTarjeta()) {
       return
     }
 
-    if (!validarCorreo(datosFormulario.correo) || !validarRun(datosFormulario.run)) {
-      alert("Corrige los errores antes de continuar.")
-      return
-    }
+    setProcesando(true)
 
-    alert("✅ ¡Compra realizada con éxito!")
-    clearCart()
-    setDatosFormulario({ nombre: "", correo: "", direccion: "", ciudad: "", run: "" })
-    setCostoEnvio(0)
-    setEnvioListo(false)
+    setTimeout(() => {
+      setProcesando(false)
+
+      const exito = Math.random() < 0.7
+      const datosCompra = {
+        comprador: formData,
+        productos: cart,
+        total: totalFinal,
+        envio,
+        iva,
+        tarjeta,
+        fecha: new Date().toLocaleString("es-CL"),
+      }
+
+      if (exito) {
+        clearCart()
+        setResultadoPago({ exito: true, datos: datosCompra })
+      } else {
+        const motivos = [
+          "Fondos insuficientes ",
+          "Error en el banco ",
+          "Tarjeta vencida",
+          "Transacción sospechosa ",
+        ]
+        const motivo = motivos[Math.floor(Math.random() * motivos.length)]
+        setResultadoPago({ exito: false, motivo, datos: datosCompra })
+      }
+    }, 2000)
   }
 
+  //  Pantalla de carga
+  if (procesando) {
+    return (
+      <div className="d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+        <div className="spinner-border text-primary" role="status" style={{ width: "4rem", height: "4rem" }}></div>
+        <h4 className="mt-4">Procesando pago...</h4>
+        <p className="text-muted">Por favor, no cierres esta ventana.</p>
+      </div>
+    )
+  }
+
+  // Resultado del pago (aceptado o rechazado)
+  if (resultadoPago) {
+    return (
+      <div className="container my-5 text-center">
+        {resultadoPago.exito ? (
+          <>
+            <h2 className="text-success fw-bold mb-3"> ¡Pago Aceptado!</h2>
+            <p className="text-muted mb-4">
+              Gracias por tu compra, <strong>{resultadoPago.datos.comprador.nombre}</strong>.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 className="text-danger fw-bold mb-3"> Pago Rechazado</h2>
+            <p className="fs-5">Motivo: <strong>{resultadoPago.motivo}</strong></p>
+          </>
+        )}
+
+        {/*  Detalles comunes a ambos casos */}
+        <div className="card shadow-sm p-4 text-start mx-auto" style={{ maxWidth: "700px" }}>
+          <h5 className="fw-bold mb-3"> Detalles de la Compra</h5>
+          <p><strong>Fecha:</strong> {resultadoPago.datos.fecha}</p>
+          <p><strong>Correo:</strong> {resultadoPago.datos.comprador.correo}</p>
+          <p><strong>Dirección:</strong> {resultadoPago.datos.comprador.direccion}, {resultadoPago.datos.comprador.ciudad}</p>
+          <p><strong>Tarjeta:</strong> **** **** **** {resultadoPago.datos.tarjeta.numero.slice(-4)}</p>
+
+          <hr />
+          <h6 className="fw-bold">Productos:</h6>
+          <ul className="list-group mb-3">
+            {resultadoPago.datos.productos.map((item) => (
+              <li key={item.sku} className="list-group-item d-flex justify-content-between">
+                <span>{item.nombre} (x{item.cantidad})</span>
+                <strong>${(item.precio * item.cantidad).toLocaleString("es-CL")}</strong>
+              </li>
+            ))}
+          </ul>
+
+          <p><strong>Subtotal:</strong> ${total.toLocaleString("es-CL")}</p>
+          <p><strong>IVA (19%):</strong> ${iva.toLocaleString("es-CL")}</p>
+          <p><strong>Envío:</strong> ${envio.toLocaleString("es-CL")}</p>
+          <h5 className="text-primary fw-bold">Total: ${totalFinal.toLocaleString("es-CL")}</h5>
+        </div>
+
+        {resultadoPago.exito ? (
+          <button className="btn btn-primary mt-4" onClick={() => navigate("/FutbolPrime/pedidos")}>
+             Ver mis pedidos
+          </button>
+        ) : (
+          <button className="btn btn-secondary mt-4" onClick={() => setResultadoPago(null)}>
+             Intentar nuevamente
+          </button>
+        )}
+      </div>
+    )
+  }
+
+  //  Formulario con resumen
   return (
     <div className="container my-5">
-      <h2 className="text-center mb-4">Detalle de Compra</h2>
+      <h2 className="text-center mb-4"> Finalizar Compra</h2>
 
       <div className="row g-4">
-        {/* 🛍️ Productos */}
-        <div className="col-md-7">
+        {/*  Resumen de compra siempre visible */}
+        <div className="col-md-5">
           <div className="card shadow-sm p-4">
-            <h4 className="mb-3">Productos en tu carrito</h4>
-            {cart.length === 0 ? (
-              <p className="text-muted">Tu carrito está vacío.</p>
-            ) : (
-              <ul className="list-group list-group-flush">
-                {cart.map((item) => (
-                  <li
-                    key={item.sku}
-                    className="list-group-item d-flex justify-content-between align-items-center"
-                  >
-                    <div className="d-flex align-items-center gap-3">
-                      <img
-                        src={`${import.meta.env.BASE_URL}${item.imagen.replace(/^\//, "")}`}
-                        alt={item.nombre}
-                        style={{ width: "60px", height: "60px", objectFit: "cover" }}
-                        className="rounded"
-                      />
-                      <div>
-                        <p className="mb-0 fw-semibold">{item.nombre}</p>
-                        <small className="text-muted">x{item.cantidad}</small>
-                      </div>
-                    </div>
-                    <strong>${(item.precio * item.cantidad).toLocaleString("es-CL")}</strong>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <h5 className="fw-bold mb-3 text-center">Resumen de la Compra</h5>
+            <ul className="list-group mb-3">
+              {cart.map((item) => (
+                <li key={item.sku} className="list-group-item d-flex justify-content-between">
+                  <span>{item.nombre} (x{item.cantidad})</span>
+                  <strong>${(item.precio * item.cantidad).toLocaleString("es-CL")}</strong>
+                </li>
+              ))}
+            </ul>
+            <p><strong>Subtotal:</strong> ${total.toLocaleString("es-CL")}</p>
+            <p><strong>IVA (19%):</strong> ${iva.toLocaleString("es-CL")}</p>
+            <p><strong>Envío:</strong> {envioCalculado ? `$${envio.toLocaleString("es-CL")}` : "Por calcular "}</p>
+            <h5 className="fw-bold text-primary">Total: ${totalFinal.toLocaleString("es-CL")}</h5>
           </div>
         </div>
 
-        {/* 💳 Resumen del Pedido */}
-        <div className="col-md-5">
-          <div className="card shadow-sm p-4 mb-4">
-            <h5 className="mb-3">Resumen del Pedido</h5>
-            <div className="d-flex justify-content-between">
-              <span>Subtotal</span>
-              <strong>${total.toLocaleString("es-CL")}</strong>
-            </div>
-            <div className="d-flex justify-content-between">
-              <span>IVA (19%)</span>
-              <strong>${iva.toLocaleString("es-CL")}</strong>
-            </div>
-
-            {costoEnvio > 0 ? (
-              <div className="d-flex justify-content-between fade-in">
-                <span>Envío</span>
-                <strong>${costoEnvio.toLocaleString("es-CL")}</strong>
-              </div>
-            ) : (
-              <div className="text-muted small mt-2">
-                Ingresa tu dirección y ciudad, luego sal del campo para calcular envío 🚚
-              </div>
-            )}
-
-            <hr />
-            <div className="d-flex justify-content-between fs-5">
-              <span>Total a pagar</span>
-              <strong>${totalFinal.toLocaleString("es-CL")}</strong>
-            </div>
-
-            {envioListo && (
-              <div className="text-success small mt-2 fade-in">
-                ✅ Envío calculado correctamente
-              </div>
-            )}
-          </div>
-
-          {/* 📦 Formulario */}
+        {/* Formulario */}
+        <div className="col-md-7">
           <div className="card shadow-sm p-4">
-            <h5 className="mb-3">Datos del Envío</h5>
-            <form onSubmit={manejarEnvio}>
-              {/* Campos... */}
-              <button type="submit" className="btn btn-primary w-100 fw-semibold">
-                Confirmar Pedido
+            <form onSubmit={procesarPago}>
+              <h5 className="fw-bold mb-3">Datos del Envío</h5>
+              <input name="nombre" className="form-control mb-2" placeholder="Nombre completo" onChange={handleChange} required />
+              <input name="run" className="form-control mb-2" placeholder="RUN (ej: 12345678-5)" onChange={handleChange} required />
+              {warningRun && <small className="text-danger">{warningRun}</small>}
+              <input name="correo" type="email" className="form-control mb-2" placeholder="Correo electrónico" onChange={handleChange} required />
+              {warningCorreo && <small className="text-danger">{warningCorreo}</small>}
+              <input name="direccion" className="form-control mb-2" placeholder="Dirección" onChange={handleChange} onBlur={calcularEnvio} required />
+              <input name="ciudad" className="form-control mb-3" placeholder="Ciudad" onChange={handleChange} onBlur={calcularEnvio} required />
+
+              <h5 className="fw-bold mb-3 mt-4"> Datos de la Tarjeta</h5>
+              <input name="titular" className="form-control mb-2" placeholder="Titular de la tarjeta" onChange={handleTarjetaChange} required />
+              <input name="numero" className="form-control mb-2" placeholder="Número de tarjeta (16 dígitos)" onChange={handleTarjetaChange} required />
+              <div className="row">
+                <div className="col-6">
+                  <input name="expiracion" className="form-control mb-2" placeholder="MM/AA" onChange={handleTarjetaChange} required />
+                </div>
+                <div className="col-6">
+                  <input name="cvv" className="form-control mb-2" placeholder="CVV" onChange={handleTarjetaChange} required />
+                </div>
+              </div>
+              {warningTarjeta && <small className="text-danger">{warningTarjeta}</small>}
+
+              <button type="submit" className="btn btn-primary w-100 mt-3 fw-semibold">
+                 Finalizar Compra
               </button>
             </form>
           </div>
