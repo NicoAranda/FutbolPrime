@@ -5,22 +5,14 @@ export const OfertasPage = () => {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/productos.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        // Combinar todos los productos de las categorías
-        const todosLosProductos = [
-          ...(data.balones || []),
-          ...(data.camisetas || []),
-          ...(data.guantes || []),
-          ...(data.canilleras || []),
-          ...(data.medias || [])
-        ]
-
-        // Guardar en el estado solo los productos en oferta
-        setProductos(todosLosProductos.filter((p) => p.oferta >= 0))
-      })
-  }, [])
+      fetch(`http://35.175.191.144:8080/api/productos`)
+        .then((res) => res.json())
+        .then((data) => {
+          const productosEnOferta = data.filter(p => p.oferta !== null);
+          setProductos(productosEnOferta);
+        })
+        .catch((err) => console.error("Error al cargar productos:", err));
+    }, []);
 
   return (
     <div className="container my-5">

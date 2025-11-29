@@ -11,19 +11,13 @@ export const DetallePage = () => {
   const [mostrarNotificacion, setMostrarNotificacion] = useState(false)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/productos.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        const todosLosProductos = [
-          ...(data.balones || []),
-          ...(data.camisetas || []),
-          ...(data.canilleras || []),
-          ...(data.guantes || []),
-          ...(data.medias || [])
-        ]
-        const encontrado = todosLosProductos.find((p) => p.sku === sku)
-        setProducto(encontrado || null)
+    fetch(`http://35.175.191.144:8080/api/productos`)
+      .then(res => res.json())
+      .then(data => {
+        const encontrado = data.find(p => p.sku == sku)
+        setProducto(encontrado)
       })
+      .catch(err => console.error("Error cargando producto:", err))
   }, [sku])
 
   if (!producto) {
@@ -34,23 +28,26 @@ export const DetallePage = () => {
     )
   }
 
-
   const manejarAgregarCarrito = () => {
     addToCart(producto)
     setMostrarNotificacion(true)
   }
 
-  const urlImagen = `${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`
-
   return (
     <div className="detalle-container container py-5">
       <div className="detalle-layout">
         <div className="detalle-imagen">
-          <img src={urlImagen} alt={producto.nombre} className="img-fluid shadow-lg rounded" />
+          <img
+            src={producto.imagen}
+            alt={producto.nombre}
+            className="img-fluid shadow-lg rounded"
+          />
         </div>
+
         <div className="detalle-info">
           <h2 className="fw-bold mb-2">{producto.nombre}</h2>
           <p className="text-muted mb-3">{producto.tipo}</p>
+
           {producto.descripcion && (
             <p className="descripcion mb-4">{producto.descripcion}</p>
           )}
@@ -71,12 +68,13 @@ export const DetallePage = () => {
             className="btn btn-primary w-100 fw-semibold"
             onClick={manejarAgregarCarrito}
           >
-             Agregar al carrito
+            Agregar al carrito
           </button>
         </div>
       </div>
+
       <NotificacionEmergente
-        mensaje="Producto agregado al carrito "
+        mensaje="Producto agregado al carrito"
         mostrar={mostrarNotificacion}
         cerrar={() => setMostrarNotificacion(false)}
       />
