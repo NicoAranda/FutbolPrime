@@ -76,6 +76,12 @@ export const Header = () => {
               </NavLink>
             </li>
 
+            <li className="nav-item">
+              <NavLink className="nav-link" to="zapatillas">
+                Zapatillas
+              </NavLink>
+            </li>
+
 
             <li className="nav-item position-relative mx-2">
               <NavLink className="nav-link" to="listadeseos" title="Lista de deseos">

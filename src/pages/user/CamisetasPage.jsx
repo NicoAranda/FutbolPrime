@@ -5,11 +5,14 @@ export const CamisetasPage = () => {
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
-        fetch(`${import.meta.env.BASE_URL}data/productos.json`)
-            .then((res) => res.json())
-            .then((data) => setProductos(data.camisetas));
-
-    }, [])
+        fetch(`http://35.175.191.144:8080/api/productos`)
+          .then((res) => res.json())
+          .then((data) => {
+            const camisetas = data.filter(p => p.tipo == 'CAMISETA');
+            setProductos(camisetas);
+          })
+          .catch((err) => console.error("Error al cargar productos:", err));
+      }, []);
 
     return (
         <>

@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Card } from '../../components/Card'
-export const AccesoriosPage = () => {
+
+export const ZapatillasPage = () => {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
       fetch(`http://35.175.191.144:8080/api/productos`)
         .then((res) => res.json())
         .then((data) => {
-          const accesorios = data.filter(p => p.tipo == 'CANILLERAS' || p.tipo == 'MEDIAS' || p.tipo == 'GUANTES' || p.tipo == 'BOLSO');
-          setProductos(accesorios);
+          const zapatillas = data.filter(p => p.tipo == 'ZAPATILLAS' || p.tipo == 'BOTINES');
+          setProductos(zapatillas);
         })
         .catch((err) => console.error("Error al cargar productos:", err));
     }, []);
 
   return (
     <>
-      <h2 className='mt-4 text-center'>Accesorios</h2>
+      <h2 className='mt-4 text-center'>Zapatillas y Botines</h2>
       <div className="container my-5">
         <div className="row g-4 justify-content-center">
           {productos.map((p) => (

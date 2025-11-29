@@ -5,11 +5,14 @@ export const BalonesPage = () => {
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
-        fetch(`${import.meta.env.BASE_URL}data/productos.json`)
-            .then((res) => res.json())
-            .then((data) => setProductos(data.balones));
-
-    }, [])
+        fetch(`http://35.175.191.144:8080/api/productos`)
+          .then((res) => res.json())
+          .then((data) => {
+            const balones = data.filter(p => p.tipo == 'BALON');
+            setProductos(balones);
+          })
+          .catch((err) => console.error("Error al cargar productos:", err));
+      }, []);
 
     return (
         <>

@@ -24,6 +24,7 @@ import './App.css'
 import { Usuario } from "./pages/admin/Usuarios"
 import { CrearUsuario } from "./pages/admin/CrearUsuario"
 import { ModificarUsuario } from "./pages/admin/ModificarUsuario"
+import { ZapatillasPage } from "./pages/user/ZapatillasPage"
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="balones" element={<BalonesPage />} />
           <Route path="camisetas" element={<CamisetasPage />} />
           <Route path="accesorios" element={<AccesoriosPage />} />
+          <Route path="zapatillas" element={<ZapatillasPage />} />
           <Route path="/FutbolPrime/detalle-producto/:sku" element={<DetallePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="registro" element={<RegisterPage />} />
