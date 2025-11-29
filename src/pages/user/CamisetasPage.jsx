@@ -5,7 +5,7 @@ export const CamisetasPage = () => {
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
-        fetch(`http://35.175.191.144:8080/api/productos`)
+        fetch(`http://98.92.165.178:8080/api/productos`)
           .then((res) => res.json())
           .then((data) => {
             const camisetas = data.filter(p => p.tipo == 'CAMISETA');

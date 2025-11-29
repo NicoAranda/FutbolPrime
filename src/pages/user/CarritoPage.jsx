@@ -34,7 +34,7 @@ export const CarritoPage = () => {
                 >
                   <div className="d-flex align-items-center gap-3 text-center text-sm-start">
                     <img
-                      src={`${import.meta.env.BASE_URL}${item.imagen.replace(/^\//, "")}`}
+                      src={item.imagen}
                       alt={item.nombre}
                       className="rounded carrito-img"
                     />

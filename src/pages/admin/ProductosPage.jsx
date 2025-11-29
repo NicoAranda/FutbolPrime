@@ -7,19 +7,10 @@ export const Productos = () => {
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/productos.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        const todosLosProductos = [
-          ...(data.balones || []),
-          ...(data.camisetas || []),
-          ...(data.guantes || []),
-          ...(data.canilleras || []),
-          ...(data.medias || [])
-        ]
-        setProductos(todosLosProductos)
-      })
-  }, [])
+        fetch("http://98.92.165.178:8080/api/productos")
+            .then(res => res.json())
+            .then(data => setProductos(data));
+    }, []);
 
   return (
     <>

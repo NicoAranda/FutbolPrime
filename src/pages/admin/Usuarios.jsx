@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ListaUsuarios } from '../../components/ListaUsuarios'
 import { ModificarUsuario } from './ModificarUsuario'
 
+
 export const Usuario = () => {
+
+    
+
     return (
         <>
             <div className="container my-5">

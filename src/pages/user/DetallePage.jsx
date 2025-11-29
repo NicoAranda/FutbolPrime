@@ -11,7 +11,7 @@ export const DetallePage = () => {
   const [mostrarNotificacion, setMostrarNotificacion] = useState(false)
 
   useEffect(() => {
-    fetch(`http://35.175.191.144:8080/api/productos`)
+    fetch(`http://98.92.165.178:8080/api/productos`)
       .then(res => res.json())
       .then(data => {
         const encontrado = data.find(p => p.sku == sku)
@@ -54,7 +54,7 @@ export const DetallePage = () => {
 
           <ul className="list-unstyled mb-4">
             <li><strong>SKU:</strong> {producto.sku}</li>
-            {producto.marca && <li><strong>Marca:</strong> {producto.marca}</li>}
+            {producto.marcaNombre && <li><strong>Marca:</strong> {producto.marcaNombre}</li>}
             {producto.talla && <li><strong>Talla:</strong> {producto.talla}</li>}
             <li><strong>Color:</strong> {producto.color}</li>
             <li><strong>Stock:</strong> {producto.stock} unidades</li>

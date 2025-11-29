@@ -32,7 +32,7 @@ export const ListaDeseosPage = () => {
                 className="text-decoration-none text-dark"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}${producto.imagen.replace(/^\//, "")}`}
+                  src={producto.imagen}
                   className="card-img-top p-3"
                   alt={producto.nombre}
                   style={{ height: "220px", objectFit: "contain" }}
