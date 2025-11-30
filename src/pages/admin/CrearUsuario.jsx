@@ -76,18 +76,6 @@ export const CrearUsuario = () => {
             id="formCrearUsuario"
           >
             <div className="row g-3">
-              
-              <div className="col-md-4">
-                <label htmlFor="id" className="form-label">ID</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="id"
-                  placeholder="Se generará automáticamente"
-                  disabled              
-                />
-              </div>
-
               <div className="col-md-8">
                 <label htmlFor="nombre" className="form-label">Nombre Completo</label>
                 <input
@@ -138,7 +126,6 @@ export const CrearUsuario = () => {
                   <option value="">Seleccione un rol...</option>
                   <option value="ADMIN">Administrador</option>
                   <option value="CLIENTE">Cliente</option>
-                  <option value="VENDEDOR">Vendedor</option>
                 </select>
                 <div className="invalid-feedback">Selecciona un rol.</div>
               </div>
