@@ -11,23 +11,28 @@ export const ListaUsuarios = () => {
             .catch(error => console.error('Error cargando usuarios:', error));
     }, []);
 
-    const handleEliminar = (id) => {
-        if (window.confirm('¿Desea eliminar este usuario?')) {
-            // Primero hacer la petición DELETE al servidor
-            fetch(`http://52.203.16.208:8080/api/usuarios/${id}`, {
-                method: 'DELETE'
-            })
-            .then(res => {
-                if (res.ok) {
-                    // Solo actualizar el estado si la petición fue exitosa
-                    setUsuarios(usuarios.filter(u => u.id !== id))
-                } else {
-                    console.error('Error al eliminar usuario')
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }
+ const handleEliminar = async (id) => {
+    if (!window.confirm('¿Desea eliminar este usuario?')) return
+
+    try {
+        const res = await fetch(`http://52.203.16.208:8080/api/usuarios/${id}`, {
+            method: 'DELETE'
+        })
+
+       if (!res.ok) {
+  const texto = await res.text()
+  console.error("Error al eliminar usuario:", res.status, texto)
+  alert(texto || "No se pudo eliminar el usuario")
+  return
+}
+    
+
+        setUsuarios(prev => prev.filter(u => u.id !== id))
+    } catch (err) {
+        console.error('Error de red al eliminar usuario:', err)
+        alert('Error de red al eliminar usuario')
     }
+}
 
     return (
         <>
@@ -56,7 +61,7 @@ export const ListaUsuarios = () => {
                                 <tr key={usuario.id}>
                                     <td>{usuario.id}</td>
                                     <td>{usuario.nombre}</td>
-                                    <td>{usuario.correo}</td>
+                                    <td>{usuario.email}</td>
                                     <td>{usuario.rol}</td>
                                     <td>
                                         <Link 
