@@ -5,7 +5,7 @@ export const ListaUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]) // Inicializar como array vacío
 
     useEffect(() => {
-        fetch("http://98.92.165.178:8080/api/usuarios")
+        fetch("http://52.203.16.208:8080/api/usuarios")
             .then(res => res.json())
             .then(data => setUsuarios(data))
             .catch(error => console.error('Error cargando usuarios:', error));
@@ -14,7 +14,7 @@ export const ListaUsuarios = () => {
     const handleEliminar = (id) => {
         if (window.confirm('¿Desea eliminar este usuario?')) {
             // Primero hacer la petición DELETE al servidor
-            fetch(`http://98.92.165.178:8080/api/usuarios/${id}`, {
+            fetch(`http://52.203.16.208:8080/api/usuarios/${id}`, {
                 method: 'DELETE'
             })
             .then(res => {

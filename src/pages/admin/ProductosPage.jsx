@@ -7,7 +7,7 @@ export const Productos = () => {
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
-        fetch("http://98.92.165.178:8080/api/productos")
+        fetch("http://52.203.16.208:8080/api/productos")
             .then(res => res.json())
             .then(data => setProductos(data));
     }, []);

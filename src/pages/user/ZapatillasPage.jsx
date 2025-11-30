@@ -5,7 +5,7 @@ export const ZapatillasPage = () => {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
-      fetch(`http://98.92.165.178:8080/api/productos`)
+      fetch(`http://52.203.16.208:8080/api/productos`)
         .then((res) => res.json())
         .then((data) => {
           const zapatillas = data.filter(p => p.tipo == 'ZAPATILLAS' || p.tipo == 'BOTINES');
