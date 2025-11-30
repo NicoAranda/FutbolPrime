@@ -25,6 +25,7 @@ import { Usuario } from "./pages/admin/Usuarios"
 import { CrearUsuario } from "./pages/admin/CrearUsuario"
 import { ModificarUsuario } from "./pages/admin/ModificarUsuario"
 import { ZapatillasPage } from "./pages/user/ZapatillasPage"
+import { BlogPage } from "./pages/user/BlogPage"
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="pago" element={<PagoPage />} />
           <Route path="listadeseos" element={<ListaDeseosPage />} />
           <Route path="confirmacion" element={<ConfirmacionPage />} />
+          <Route path="blog" element={<BlogPage/>} />
           
           
         </Route>
