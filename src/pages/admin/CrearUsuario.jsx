@@ -1,22 +1,57 @@
 import React, { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const CrearUsuario = () => {
   const formRef = useRef(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const form = formRef.current
     if (!form) return
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault()
       event.stopPropagation()
 
       if (!form.checkValidity()) {
         form.classList.add('was-validated')
-      } else {
+        return
+      }
+
+      // ✅ Tomamos los datos del formulario
+      const formData = new FormData(form)
+      const payload = {
+        nombre: formData.get('nombre'),
+        email: formData.get('email'),
+        password: formData.get('password'),
+        rol: formData.get('rol'),
+        habilitado: true       // el backend lo setea en true igual, pero lo mandamos por claridad
+      }
+
+      try {
+        const res = await fetch('http://52.203.16.208:8080/api/usuarios', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+
+        if (!res.ok) {
+          const texto = await res.text()
+          console.error('Error al crear usuario:', res.status, texto)
+          alert(texto || 'No se pudo crear el usuario')
+          return
+        }
+
         alert('Usuario creado correctamente')
         form.reset()
         form.classList.remove('was-validated')
+
+        navigate('/administrador/usuarios')
+      } catch (err) {
+        console.error('Error de red al crear usuario:', err)
+        alert('Ocurrió un error de red al crear el usuario')
       }
     }
 
@@ -25,7 +60,7 @@ export const CrearUsuario = () => {
     return () => {
       form.removeEventListener('submit', handleSubmit)
     }
-  }, [])
+  }, [navigate])
 
   return (
     <div className="agregar-container d-flex justify-content-center align-items-center">
@@ -48,10 +83,9 @@ export const CrearUsuario = () => {
                   type="number"
                   className="form-control"
                   id="id"
-                  placeholder="Ej: 1"
-                  required
+                  placeholder="Se generará automáticamente"
+                  disabled              
                 />
-                <div className="invalid-feedback">El ID es obligatorio.</div>
               </div>
 
               <div className="col-md-8">
@@ -60,6 +94,7 @@ export const CrearUsuario = () => {
                   type="text"
                   className="form-control"
                   id="nombre"
+                  name="nombre"                     
                   placeholder="Ej: Juan Pérez"
                   required
                 />
@@ -72,6 +107,7 @@ export const CrearUsuario = () => {
                   type="email"
                   className="form-control"
                   id="correo"
+                  name="email"                       
                   placeholder="Ej: juan.perez@gmail.com"
                   required
                 />
@@ -79,16 +115,30 @@ export const CrearUsuario = () => {
               </div>
 
               <div className="col-md-6">
+                <label htmlFor="password" className="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"                  
+                  placeholder="Mínimo 6 caracteres"
+                  required
+                />
+                <div className="invalid-feedback">La contraseña es obligatoria.</div>
+              </div>
+
+              <div className="col-md-6">
                 <label htmlFor="rol" className="form-label">Rol</label>
                 <select
                   className="form-select"
                   id="rol"
+                  name="rol"                       
                   required
                 >
                   <option value="">Seleccione un rol...</option>
-                  <option value="Administrador">Administrador</option>
-                  <option value="Cliente">Cliente</option>
-                  <option value="Vendedor">Vendedor</option>
+                  <option value="ADMIN">Administrador</option>
+                  <option value="CLIENTE">Cliente</option>
+                  <option value="VENDEDOR">Vendedor</option>
                 </select>
                 <div className="invalid-feedback">Selecciona un rol.</div>
               </div>
