@@ -1,45 +1,84 @@
-import { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
 export const ModificarUsuario = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const formRef = useRef(null)
-    const [usuario, setUsuario] = useState(null)
 
-   useEffect(() => {
-    fetch(`http://52.203.16.208:8080/api/usuarios/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            setUsuario(data)
-        })
-        .catch(err => console.error('Error cargando usuario:', err))
-}, [id])
+    const [formData, setFormData] = useState({
+        nombre: '',
+        email: '',
+        rol: ''
+    })
+    const [cargando, setCargando] = useState(true)
 
-
+    // Cargar usuario desde backend
     useEffect(() => {
-        const form = formRef.current
-        if (!form) return
+        fetch(`http://52.203.16.208:8080/api/usuarios/${id}`)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('No se pudo cargar el usuario')
+                }
+                return res.json()
+            })
+            .then(data => {
+                setFormData({
+                    nombre: data.nombre || '',
+                    email: data.email || '',
+                    rol: data.rol || ''
+                })
+            })
+            .catch(err => {
+                console.error('Error cargando usuario:', err)
+                alert('No se pudo cargar el usuario')
+            })
+            .finally(() => setCargando(false))
+    }, [id])
 
-        const handleSubmit = (event) => {
-            event.preventDefault()
-            event.stopPropagation()
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
-            if (!form.checkValidity()) {
-                form.classList.add('was-validated')
-            } else {
-                alert('Usuario modificado correctamente')
-                form.classList.remove('was-validated')
-                navigate('/administrador/usuarios')
-            }
+    const handleSubmit = async (event) => {
+        event.preventDefault()        
+        event.stopPropagation()
+        if (!formData.nombre || !formData.rol) {
+            alert('Completa nombre y rol')
+            return
         }
+        const payload = {
+            nombre: formData.nombre,
+            rol: formData.rol
+        }
+        try {
+            const res = await fetch(`http://52.203.16.208:8080/api/usuarios/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
 
-        form.addEventListener('submit', handleSubmit)
-        return () => form.removeEventListener('submit', handleSubmit)
-    }, [usuario, navigate])
+            if (!res.ok) {
+                const texto = await res.text()
+                console.error('Error al actualizar usuario:', res.status, texto)
+                alert(texto || 'No se pudo actualizar el usuario')
+                return
+            }
 
-    if (!usuario) {
+            alert('Usuario modificado correctamente')
+            navigate('/administrador/usuarios')
+        } catch (err) {
+            console.error('Error de red al actualizar usuario:', err)
+            alert('Ocurrió un error de red al actualizar el usuario')
+        }
+    }
+
+    if (cargando) {
         return (
             <div className="text-center mt-5">
                 <h5>Cargando datos del usuario...</h5>
@@ -55,7 +94,7 @@ export const ModificarUsuario = () => {
                 </div>
                 <div className="card-body p-4">
                     <form
-                        ref={formRef}
+                        onSubmit={handleSubmit}       
                         className="needs-validation"
                         noValidate
                         id="formModificarUsuario"
@@ -67,7 +106,7 @@ export const ModificarUsuario = () => {
                                     type="number"
                                     className="form-control"
                                     id="id"
-                                    value={usuario.id}
+                                    value={id}
                                     disabled
                                 />
                             </div>
@@ -78,7 +117,9 @@ export const ModificarUsuario = () => {
                                     type="text"
                                     className="form-control"
                                     id="nombre"
-                                    defaultValue={usuario.nombre}
+                                    name="nombre"
+                                    value={formData.nombre}
+                                    onChange={handleChange}
                                     required
                                 />
                                 <div className="invalid-feedback">El nombre es obligatorio.</div>
@@ -90,7 +131,9 @@ export const ModificarUsuario = () => {
                                     type="email"
                                     className="form-control"
                                     id="correo"
-                                    defaultValue={usuario.correo}
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                     required
                                 />
                                 <div className="invalid-feedback">Ingresa un correo válido.</div>
@@ -101,13 +144,14 @@ export const ModificarUsuario = () => {
                                 <select
                                     className="form-select"
                                     id="rol"
-                                    defaultValue={usuario.rol}
+                                    name="rol"
+                                    value={formData.rol}
+                                    onChange={handleChange}
                                     required
                                 >
                                     <option value="">Seleccione un rol...</option>
-                                    <option value="Administrador">Administrador</option>
-                                    <option value="Cliente">Cliente</option>
-                                    <option value="Vendedor">Vendedor</option>
+                                    <option value="ADMIN">Administrador</option>
+                                    <option value="CLIENTE">Cliente</option>
                                 </select>
                                 <div className="invalid-feedback">Selecciona un rol.</div>
                             </div>
@@ -117,8 +161,12 @@ export const ModificarUsuario = () => {
                             <button type="submit" className="btn btn-primary">
                                 Guardar Cambios
                             </button>
-                            <button type="reset" className="btn btn-secondary ms-2">
-                                Restablecer
+                            <button
+                                type="button"
+                                className="btn btn-secondary ms-2"
+                                onClick={() => navigate('/administrador/usuarios')}
+                            >
+                                Cancelar
                             </button>
                         </div>
                     </form>
