@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
-import loginImg from '../../../public/img/login.jpg'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import loginImg from '../../../public/img/login.jpg';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterPage = () => {
 
@@ -15,7 +17,9 @@ export const RegisterPage = () => {
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
 
-    form.addEventListener('submit', function (event) {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+
       // Validación de contraseñas iguales
       if (password.value !== confirmPassword.value) {
         confirmPassword.setCustomValidity('Las contraseñas no coinciden');
@@ -24,17 +28,45 @@ export const RegisterPage = () => {
       }
 
       if (!form.checkValidity()) {
-        event.preventDefault();
         event.stopPropagation();
         form.classList.add('was-validated');
-      } else {
-        event.preventDefault();
-        alert('Registro exitoso');
-        navigate('/FutbolPrime');
+        return;
       }
-    });
 
-    return () => form.removeEventListener('submit', () => {});
+      // Si pasa las validaciones HTML, enviamos al backend
+      const nuevoUsuario = {
+        nombre: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        rol: "CLIENTE"
+      };
+
+      try {
+        const res = await fetch("http://52.203.16.208:8080/api/usuarios", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(nuevoUsuario)
+        });
+
+        if (!res.ok) {
+          const msg = await res.text();
+          toast.error(msg || "Error al registrar");
+          return;
+        }
+
+        toast.success("Registro exitoso 🎉");
+
+        setTimeout(() => navigate("/FutbolPrime/login"), 1500);
+
+      } catch (error) {
+        toast.error("Error de servidor");
+        console.error(error);
+      }
+    };
+
+    form.addEventListener('submit', handleSubmit);
+
+    return () => form.removeEventListener('submit', handleSubmit);
   }, [navigate]);
 
   return (
@@ -45,12 +77,15 @@ export const RegisterPage = () => {
             <div className="col-lg-12 col-xl-10">
               <div className="card shadow">
                 <div className="row g-0">
+
                   <div className="col-md-6 col-lg-6 d-none d-md-flex align-items-center">
                     <img src={loginImg} className="img-fluid" alt="Registro" />
                   </div>
+
                   <div className="col-md-6 col-lg-6 d-flex align-items-center">
                     <div className="card-body p-4 p-lg-5 text-black">
-                      <form id="registerForm" className="needs-validation" novalidate>
+
+                      <form id="registerForm" className="needs-validation" noValidate>
                         <h3 className="fw-normal mb-4 text-center">Crear cuenta</h3>
 
                         <div className="form-outline mb-4 position-relative">
@@ -89,18 +124,22 @@ export const RegisterPage = () => {
                           <button className="btn btn-dark btn-lg col-12" type="submit">Registrarse</button>
                         </div>
 
-                        <p className="mb-5 pb-lg-2 text-center" >¿Ya tienes cuenta?
-                          <NavLink to="/FutbolPrime/login" >Inicia sesión aquí</NavLink>
+                        <p className="mb-5 pb-lg-2 text-center">
+                          ¿Ya tienes cuenta? <NavLink to="/FutbolPrime/login">Inicia sesión aquí</NavLink>
                         </p>
                       </form>
+
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </>
-  )
-}
+  );
+};

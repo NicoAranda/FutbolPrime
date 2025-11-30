@@ -5,30 +5,70 @@ import { PedidosClientes } from '../../components/PedidosClientes'
 import '../../assets/sidebar.css'
 
 export const AdministradorPage = () => {
-  const [productos, setProductos] = useState([])
 
+  const [productos, setProductos] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [gananciasTotales, setGananciasTotales] = useState(0);
+
+  // --- Cargar productos ---
   useEffect(() => {
-        fetch("http://52.203.16.208:8080/api/productos")
-            .then(res => res.json())
-            .then(data => setProductos(data));
-    }, []);
+    fetch("http://52.203.16.208:8080/api/productos")
+      .then(res => res.json())
+      .then(data => setProductos(data));
+  }, []);
+
+  // --- Cargar usuarios y luego calcular ganancias ---
+  useEffect(() => {
+    fetch("http://52.203.16.208:8080/api/usuarios")
+      .then(res => res.json())
+      .then(async (dataUsuarios) => {
+        setUsuarios(dataUsuarios);
+
+        // Aquí calculamos las ganancias recorriendo todos los usuarios
+        let total = 0;
+
+        for (const user of dataUsuarios) {
+          try {
+            const res = await fetch(`http://52.203.16.208:8080/api/pedidos/${user.id}`);
+            if (!res.ok) continue;
+
+            const dataPedidos = await res.json();
+            const pedidosArray = Array.isArray(dataPedidos) ? dataPedidos : [dataPedidos];
+
+            // Sumar el total de cada pedido del usuario
+            pedidosArray.forEach(p => {
+              if (p.total) total += p.total;
+            });
+
+          } catch (error) {
+            console.error(`Error cargando pedidos del usuario ${user.id}`, error);
+          }
+        }
+
+        setGananciasTotales(total);
+      })
+      .catch(error => console.error("Error cargando usuarios:", error));
+  }, []);
 
   return (
     <div className="content-admin d-flex flex-column align-items-center p-4">
       <div className="dashboard-container w-100" style={{ maxWidth: "1200px" }}>
+
         {/* Tarjetas superiores */}
         <div className="dashboard-cards">
           <div className="dashboard-card blue">
             <h5>Productos</h5>
             <p>{productos.length}</p>
           </div>
+
           <div className="dashboard-card green">
-            <h5>Ganancias Mensuales</h5>
-            <p>$1.076.990</p>
+            <h5>Ganancias Totales</h5>
+            <p>${gananciasTotales}</p>
           </div>
+
           <div className="dashboard-card yellow">
             <h5>Usuarios</h5>
-            <p>110</p>
+            <p>{usuarios.length}</p>
           </div>
         </div>
 
@@ -75,6 +115,7 @@ export const AdministradorPage = () => {
         <div className="card shadow mt-4">
           <PedidosClientes />
         </div>
+
       </div>
     </div>
   )
