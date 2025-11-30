@@ -56,7 +56,7 @@ export const ListaUsuarios = () => {
                                 <tr key={usuario.id}>
                                     <td>{usuario.id}</td>
                                     <td>{usuario.nombre}</td>
-                                    <td>{usuario.correo}</td>
+                                    <td>{usuario.email}</td>
                                     <td>{usuario.rol}</td>
                                     <td>
                                         <Link 
