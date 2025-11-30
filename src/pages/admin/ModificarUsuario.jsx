@@ -8,19 +8,15 @@ export const ModificarUsuario = () => {
     const formRef = useRef(null)
     const [usuario, setUsuario] = useState(null)
 
-    useEffect(() => {
-        fetch('/data/usuarios.json')
-            .then(res => res.json())
-            .then(json => {
-                const usuarioEncontrado = json.usuarios.find(u => u.id === parseInt(id))
-                if (usuarioEncontrado) {
-                    setUsuario(usuarioEncontrado)
-                } else {
-                    alert('Usuario no encontrado')
-                }
-            })
-            .catch(err => console.error('Error cargando usuarios:', err))
-    }, [id])
+   useEffect(() => {
+    fetch(`http://52.203.16.208:8080/api/usuarios/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            setUsuario(data)
+        })
+        .catch(err => console.error('Error cargando usuario:', err))
+}, [id])
+
 
     useEffect(() => {
         const form = formRef.current

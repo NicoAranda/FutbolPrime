@@ -61,7 +61,7 @@ function App() {
           <Route path="pedidos" element={<PedidosPage />} />
           <Route path="usuarios" element={<Usuario />} />
           <Route path="crear-usuario" element={<CrearUsuario />} />
-          <Route path="/administrador/modificar-usuario/:id" element={<ModificarUsuario />} />
+          <Route path="modificar-usuario/:id" element={<ModificarUsuario />} />
           <Route path="agregar-producto" element={<AgregarProductoPage />} />
           <Route path="agregar-categoria" element={<AgregarCategoriaPage/>} />
         </Route>
