@@ -141,11 +141,88 @@ export const PagoPage = () => {
       }
 
       if (exito) {
+        // ✅ AQUÍ agregamos la integración con el backend, sin cambiar la UI
+        ;(async () => {
+          try {
+            const baseUrl = "http://52.203.16.208:8080"
 
-        const pedidosPrevios = JSON.parse(localStorage.getItem("pedidos") || "[]")
-        localStorage.setItem("pedidos", JSON.stringify([...pedidosPrevios, datosCompra]))
-        setResultadoPago({ exito: true, datos: datosCompra })
-        setTimeout(() => clearCart(), 1000)
+            // Obtenemos el usuario logueado para usar su ID en el pedido
+            const usuario = JSON.parse(localStorage.getItem("usuario") || "null")
+            if (!usuario || !usuario.id) {
+              throw new Error("No se encontró el usuario logueado para registrar el pedido.")
+            }
+
+            // Armar items para CrearPedidoItemDTO
+            const items = cart.map((item) => ({
+              // IMPORTANTE: item.id debe ser el ID del producto en la BD
+              productoId: item.id,
+              cantidad: item.cantidad,
+            }))
+
+            // Armar CrearPedidoDTO
+            const crearPedidoBody = {
+              usuarioId: usuario.id,
+              items,
+              envio: envio,
+              descuento: 0,
+              dirNombre: datosCompra.comprador.nombre,
+              dirLinea1: datosCompra.comprador.direccion,
+              dirLinea2: null,
+              dirCiudad: datosCompra.comprador.ciudad,
+              dirRegion: "Región Metropolitana",
+              dirZip: "0000000",
+              dirPais: "Chile",
+              dirTelefono: "", // si después quieres, puedes pedir este dato en el form
+            }
+
+            const respPedido = await fetch(`${baseUrl}/api/pedidos`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(crearPedidoBody),
+            })
+
+            if (!respPedido.ok) {
+              const text = await respPedido.text()
+              throw new Error(`Error creando pedido: ${respPedido.status} - ${text}`)
+            }
+
+            const pedidoCreado = await respPedido.json()
+
+            // Armar RegistrarPagoDTO
+            const pagoBody = {
+              proveedor: "SIMULADO_FRONT",
+              metodo: "TARJETA",
+              monto: pedidoCreado.total, // debe coincidir con el total del pedido
+              transaccionRef: `SIM-${pedidoCreado.id}-${Date.now()}`,
+              estado: "APROBADO",
+            }
+
+            const respPago = await fetch(`${baseUrl}/api/pedidos/${pedidoCreado.id}/pagos`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(pagoBody),
+            })
+
+            if (!respPago.ok) {
+              const text = await respPago.text()
+              throw new Error(`Error registrando pago: ${respPago.status} - ${text}`)
+            }
+
+            // Si todo salió bien en el backend, mantenemos tu comportamiento original
+            const pedidosPrevios = JSON.parse(localStorage.getItem("pedidos") || "[]")
+            localStorage.setItem("pedidos", JSON.stringify([...pedidosPrevios, datosCompra]))
+            setResultadoPago({ exito: true, datos: datosCompra })
+            setTimeout(() => clearCart(), 1000)
+          } catch (error) {
+            console.error(error)
+            // Si falla el backend, mostramos pago rechazado por error técnico
+            setResultadoPago({
+              exito: false,
+              motivo: "Error al registrar el pedido en el sistema. Intenta nuevamente.",
+              datos: datosCompra,
+            })
+          }
+        })()
       } else {
         const motivos = [
           "Fondos insuficientes",
@@ -159,8 +236,6 @@ export const PagoPage = () => {
     }, 2000)
   }
 
-
-
   //  Pantalla de carga
   if (procesando) {
     return (
@@ -171,7 +246,6 @@ export const PagoPage = () => {
       </div>
     )
   }
-
 
   if (resultadoPago) {
     return (
@@ -221,14 +295,13 @@ export const PagoPage = () => {
             Ver mis pedidos
           </button>
         ) : (
-          <button className="btn btn-secondary mt-4" onClick={() => setResultadoPago(null)}>
+          <button className="btn btn.secondary mt-4" onClick={() => setResultadoPago(null)}>
             Intentar nuevamente
           </button>
         )}
       </div>
     )
   }
-
 
   return (
     <div className="container my-5">
@@ -253,7 +326,6 @@ export const PagoPage = () => {
             <h5 className="fw-bold text-primary">Total: ${totalFinal.toLocaleString("es-CL")}</h5>
           </div>
         </div>
-
 
         <div className="col-md-7">
           <div className="card shadow-sm p-4">

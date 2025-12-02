@@ -15,10 +15,12 @@ export const PedidosClientes = () => {
 
         let pedidosGlobal = []
 
-        // 2. Iterar usuarios → traer pedidos
+        // 2. Iterar usuarios → traer pedidos por usuario
         for (const user of usuarios) {
           try {
-            const res = await fetch(`http://52.203.16.208:8080/api/pedidos/${user.id}`)
+            // Ajusta este endpoint a como lo tengas en tu backend:
+            // si usas @GetMapping("/usuario/{usuarioId}") -> /api/pedidos/usuario/{id}
+            const res = await fetch(`http://52.203.16.208:8080/api/pedidos/usuario/${user.id}`)
             if (!res.ok) continue
 
             const dataPedidos = await res.json()
@@ -52,10 +54,20 @@ export const PedidosClientes = () => {
 
   const badgeColor = (estado) => {
     switch (estado) {
-      case "ENTREGADO": return "bg-success"
-      case "PENDIENTE": return "bg-warning text-dark"
-      case "CANCELADO": return "bg-danger"
-      default: return "bg-secondary"
+      case "PAGADO":
+        return "bg-success"
+      case "ENVIADO":
+        return "bg-info"
+      case "COMPLETADO":
+      case "ENTREGADO":
+        return "bg-primary"
+      case "PENDIENTE":
+        return "bg-warning text-dark"
+      case "CANCELADO":
+      case "RECHAZADO":
+        return "bg-danger"
+      default:
+        return "bg-secondary"
     }
   }
 
@@ -83,14 +95,18 @@ export const PedidosClientes = () => {
             </thead>
             <tbody>
               {pedidos.length === 0 ? (
-                <tr><td colSpan="6" className="text-center">No hay pedidos</td></tr>
+                <tr><td colSpan="5" className="text-center">No hay pedidos</td></tr>
               ) : (
                 pedidos.map((p) => (
                   <tr key={p.id}>
                     <td>{p.id}</td>
                     <td>{p.usuarioNombre}</td>
                     <td>{p.items?.map(i => i.producto.nombre).join(", ")}</td>
-                    <td><span className={`badge ${badgeColor(p.estado)}`}>{p.estado}</span></td>
+                    <td>
+                      <span className={`badge ${badgeColor(p.estado)}`}>
+                        {p.estado}
+                      </span>
+                    </td>
                     <td>${p.total?.toLocaleString("es-CL")}</td>
                   </tr>
                 ))

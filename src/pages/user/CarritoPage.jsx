@@ -1,6 +1,7 @@
 import { useCart } from "../../context/CartContext"
 import { useNavigate } from "react-router-dom"
 import "../../assets/cart.css"
+import React from "react"
 
 export const CarritoPage = () => {
   const { cart, total, removeFromCart, updateQuantity, applyCoupon } = useCart()
@@ -11,7 +12,7 @@ export const CarritoPage = () => {
   const totalFinal = total + iva + envio
 
   const handleCheckout = () => {
-    navigate("/FutbolPrime/pago") 
+    navigate("/FutbolPrime/pago")
   }
 
   return (
@@ -88,6 +89,10 @@ export const CarritoPage = () => {
                   <span>IVA (19%)</span>
                   <strong>${iva.toLocaleString("es-CL")}</strong>
                 </div>
+                <div className="d-flex justify-content-between">
+                  <span>Envío</span>
+                  <strong>${envio.toLocaleString("es-CL")}</strong>
+                </div>
                 <hr />
                 <div className="d-flex justify-content-between fs-5">
                   <span>Total</span>
@@ -110,7 +115,8 @@ export const CarritoPage = () => {
               <button
                 className="btn btn-outline-success w-100 mt-2"
                 onClick={() => {
-                  const code = document.getElementById("cupon").value
+                  const input = document.getElementById("cupon")
+                  const code = input ? input.value : ""
                   applyCoupon(code)
                 }}
                 disabled={cart.length === 0}
