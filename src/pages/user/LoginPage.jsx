@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loginImg from "../../../public/img/login.jpg";
+import { useAuth } from "../../context/AuthContext";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -44,12 +46,15 @@ export const LoginPage = () => {
       }
 
       // Guardar usuario + token JWT en localStorage
-      localStorage.setItem("usuario", JSON.stringify({
-        id: data.id,
-        nombre: data.nombre,
-        email: data.email,
-        rol: data.rol,
-      }));
+      login(
+        {
+          id: data.id,
+          nombre: data.nombre,
+          email: data.email,
+          rol: data.rol,
+        },
+        data.token
+      );
 
       localStorage.setItem("token", data.token);
 

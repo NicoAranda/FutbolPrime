@@ -17,7 +17,6 @@ export const HomePage = () => {
       .catch((err) => console.error("Error al cargar productos:", err));
   }, []);
 
-
   return (
     <>
       <Carrusel />

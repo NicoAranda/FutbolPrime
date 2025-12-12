@@ -2,10 +2,13 @@ import { Link, NavLink } from "react-router-dom"
 import { useCart } from "../context/CartContext"
 import { useListaDeseos } from "../context/ListaDeseosContext"
 import { Heart, ShoppingCart } from "lucide-react"
+import { useAuth } from "../context/AuthContext";
+
 
 export const Header = () => {
   const { cart } = useCart()
   const { listaDeseos } = useListaDeseos()
+  const { usuario, logout } = useAuth();
 
 
   const cantidadCarrito = cart.reduce((acc, item) => acc + item.cantidad, 0)
@@ -60,7 +63,7 @@ export const Header = () => {
 
             <li className="nav-item">
               <NavLink className="nav-link" to="blog">
-                Blog  
+                Blog
               </NavLink>
             </li>
 
@@ -119,15 +122,41 @@ export const Header = () => {
             </li>
 
 
-            <li className="nav-item">
-              <NavLink className="nav-link" to="login" title="Iniciar sesión">
-                <img
-                  src={`${import.meta.env.BASE_URL}img/cuenta.png`}
-                  alt="Cuenta"
-                  className="icono-cuenta"
-                />
-              </NavLink>
+            <li className="nav-item dropdown">
+              {usuario ? (
+                <>
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    {usuario.nombre}
+                  </a>
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <NavLink className="dropdown-item" to="perfil">
+                        Mi perfil
+                      </NavLink>
+                    </li>
+                    <li>
+                      <button className="dropdown-item text-danger" onClick={logout}>
+                        Cerrar sesión
+                      </button>
+                    </li>
+                  </ul>
+                </>
+              ) : (
+                <NavLink className="nav-link" to="login">
+                  <img
+                    src={`${import.meta.env.BASE_URL}img/cuenta.png`}
+                    alt="Cuenta"
+                    className="icono-cuenta"
+                  />
+                </NavLink>
+              )}
             </li>
+
           </ul>
         </div>
       </div>

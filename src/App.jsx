@@ -26,6 +26,7 @@ import { CrearUsuario } from "./pages/admin/CrearUsuario"
 import { ModificarUsuario } from "./pages/admin/ModificarUsuario"
 import { ZapatillasPage } from "./pages/user/ZapatillasPage"
 import { BlogPage } from "./pages/user/BlogPage"
+import { PerfilPage } from "./pages/user/PerfilPage"
 
 function App() {
   return (
@@ -52,8 +53,7 @@ function App() {
           <Route path="listadeseos" element={<ListaDeseosPage />} />
           <Route path="confirmacion" element={<ConfirmacionPage />} />
           <Route path="blog" element={<BlogPage/>} />
-          
-          
+          <Route path="perfil" element={<PerfilPage/>} />        
         </Route>
 
         {/* RUTAS DEL ADMINISTRADOR */}

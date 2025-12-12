@@ -6,13 +6,16 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import App from './App.jsx'
 import { CartProvider } from './context/CartContext.jsx' // ✅ Import correcto
 import { ListaDeseosProvider } from './context/ListaDeseosContext.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <CartProvider>
-      <ListaDeseosProvider>
-      <App />
-      </ListaDeseosProvider>
-    </CartProvider> 
+    <AuthProvider>
+      <CartProvider>
+        <ListaDeseosProvider>
+          <App />
+        </ListaDeseosProvider>
+      </CartProvider>
+    </AuthProvider>
   </BrowserRouter>
 )
