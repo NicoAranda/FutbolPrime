@@ -27,6 +27,9 @@ import { ModificarUsuario } from "./pages/admin/ModificarUsuario"
 import { ZapatillasPage } from "./pages/user/ZapatillasPage"
 import { BlogPage } from "./pages/user/BlogPage"
 import { PerfilPage } from "./pages/user/PerfilPage"
+import { NotificacionesPage } from "./pages/user/NotifiacionesPage"
+import CatalogoPage from "./pages/user/CatalogoPage"
+
 
 function App() {
   return (
@@ -53,8 +56,10 @@ function App() {
           <Route path="listadeseos" element={<ListaDeseosPage />} />
           <Route path="confirmacion" element={<ConfirmacionPage />} />
           <Route path="blog" element={<BlogPage/>} />
-          <Route path="perfil" element={<PerfilPage/>} />        
-        </Route>
+          <Route path="perfil" element={<PerfilPage/>} /> 
+           <Route path="notifiaciones" element={<NotificacionesPage/>} /> 
+           <Route path="catalogo"element={<CatalogoPage/>}/>
+         </Route>
 
         {/* RUTAS DEL ADMINISTRADOR */}
         <Route path="/administrador" element={<AdminLayout />}>
