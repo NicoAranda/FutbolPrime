@@ -1,0 +1,30 @@
+.buscador-item:hover {
+  background-color: #f5f5f5;
+}
+
+.buscador-img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.buscador-title {
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+.buscador-dropdown {
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.buscador-ver-todo:hover {
+  background: rgba(13, 110, 253, 0.06);
+}
+
+/* Panel buscador en móvil (se ve “pegado” al navbar) */
+.buscador-mobile-panel {
+  width: 100%;
+  background: rgba(0,0,0,0.08);
+  backdrop-filter: blur(4px);
+}

@@ -1,20 +1,23 @@
 import { Link, NavLink } from "react-router-dom"
 import { useCart } from "../context/CartContext"
 import { useListaDeseos } from "../context/ListaDeseosContext"
-import { Heart, ShoppingCart } from "lucide-react"
-import { useAuth } from "../context/AuthContext";
-
+import { Heart, ShoppingCart, Search } from "lucide-react"
+import { useAuth } from "../context/AuthContext"
+import { useState } from "react"
+import BuscadorHeader from "./BuscadorHeader"
+import "../assets/buscador.css"
 
 export const Header = () => {
   const { cart } = useCart()
   const { listaDeseos } = useListaDeseos()
-  const { usuario, logout } = useAuth();
+  const { usuario, logout } = useAuth()
 
+  const [mostrarBuscadorMobile, setMostrarBuscadorMobile] = useState(false)
 
   const cantidadCarrito = cart.reduce((acc, item) => acc + item.cantidad, 0)
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary position-relative">
       <div className="container-fluid">
 
         <Link className="navbar-brand d-flex align-items-center gap-2" to="/FutbolPrime">
@@ -26,6 +29,20 @@ export const Header = () => {
           <h1 className="h4 m-0">Fútbol Prime</h1>
         </Link>
 
+        {/* Desktop buscador (solo lg+) */}
+        <div className="d-none d-lg-block mx-3">
+          <BuscadorHeader variant="desktop" />
+        </div>
+
+        {/* Botón lupa móvil */}
+        <button
+          className="btn btn-outline-light d-lg-none ms-auto me-2"
+          type="button"
+          onClick={() => setMostrarBuscadorMobile((v) => !v)}
+          aria-label="Abrir buscador"
+        >
+          <Search size={18} />
+        </button>
 
         <button
           className="navbar-toggler"
@@ -39,58 +56,42 @@ export const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-
         <div className="collapse navbar-collapse" id="navbarColor01">
           <ul className="navbar-nav ms-auto text-center align-items-center">
 
             <li className="nav-item">
-              <NavLink
-                to="/FutbolPrime"
-                end
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }
-              >
+              <NavLink to="/FutbolPrime" end className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
                 Inicio
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="nosotros">
-                Nosotros
-              </NavLink>
+              <NavLink className="nav-link" to="catalogo">Catálogo</NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="blog">
-                Blog
-              </NavLink>
+              <NavLink className="nav-link" to="nosotros">Nosotros</NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="balones">
-                Balones
-              </NavLink>
+              <NavLink className="nav-link" to="blog">Blog</NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="camisetas">
-                Camisetas
-              </NavLink>
+              <NavLink className="nav-link" to="balones">Balones</NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="accesorios">
-                Accesorios
-              </NavLink>
+              <NavLink className="nav-link" to="camisetas">Camisetas</NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="zapatillas">
-                Zapatillas
-              </NavLink>
+              <NavLink className="nav-link" to="accesorios">Accesorios</NavLink>
             </li>
 
+            <li className="nav-item">
+              <NavLink className="nav-link" to="zapatillas">Zapatillas</NavLink>
+            </li>
 
             <li className="nav-item position-relative mx-2">
               <NavLink className="nav-link" to="listadeseos" title="Lista de deseos">
@@ -106,7 +107,6 @@ export const Header = () => {
               </NavLink>
             </li>
 
-
             <li className="nav-item position-relative mx-2">
               <NavLink className="nav-link" to="carrito" title="Ver carrito">
                 <ShoppingCart size={22} />
@@ -121,16 +121,10 @@ export const Header = () => {
               </NavLink>
             </li>
 
-
             <li className="nav-item dropdown">
               {usuario ? (
                 <>
-                  <a
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                  >
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                     {usuario.nombre}
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
@@ -160,6 +154,18 @@ export const Header = () => {
           </ul>
         </div>
       </div>
+
+      {/* Panel buscador móvil (debajo del navbar) */}
+      {mostrarBuscadorMobile && (
+        <div className="d-lg-none buscador-mobile-panel">
+          <div className="container-fluid py-2">
+            <BuscadorHeader
+              variant="mobile"
+              onClose={() => setMostrarBuscadorMobile(false)}
+            />
+          </div>
+        </div>
+      )}
     </nav>
   )
 }
