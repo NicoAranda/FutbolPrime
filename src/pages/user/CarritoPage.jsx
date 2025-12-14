@@ -30,7 +30,7 @@ export const CarritoPage = () => {
             ) : (
               cart.map((item) => (
                 <div
-                  key={item.sku}
+                  key={`${item.sku}-${item.tallaSeleccionada || "unica"}`}
                   className="d-flex flex-column flex-sm-row align-items-center justify-content-between border-bottom py-3 gap-3"
                 >
                   <div className="d-flex align-items-center gap-3 text-center text-sm-start">
@@ -41,6 +41,20 @@ export const CarritoPage = () => {
                     />
                     <div>
                       <h6 className="mb-1">{item.nombre}</h6>
+                      <div className="mb-1">
+                        {/* Mostrar talla si existe */}
+                        {item.tallaSeleccionada && (
+                          <span className="badge bg-primary me-2">
+                            Talla: {item.tallaSeleccionada}
+                          </span>
+                        )}
+                        {/* Mostrar color si existe */}
+                        {item.color && (
+                          <span className="badge bg-secondary">
+                            Color: {item.color}
+                          </span>
+                        )}
+                      </div>
                       <small className="text-muted">
                         ${item.precio.toLocaleString("es-CL")}
                       </small>
@@ -48,19 +62,21 @@ export const CarritoPage = () => {
                   </div>
 
                   <div className="d-flex align-items-center justify-content-center gap-2 flex-wrap">
-                    <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => updateQuantity(item.sku, item.cantidad - 1)}
-                    >
-                      -
-                    </button>
-                    <span className="fw-semibold">{item.cantidad}</span>
-                    <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => updateQuantity(item.sku, item.cantidad + 1)}
-                    >
-                      +
-                    </button>
+                    <div className="d-flex align-items-center">
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => updateQuantity(item.sku, item.cantidad - 1)}
+                      >
+                        -
+                      </button>
+                      <span className="fw-semibold mx-2">{item.cantidad}</span>
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => updateQuantity(item.sku, item.cantidad + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
                     <button
                       className="btn btn-danger btn-sm eliminar-btn"
                       onClick={() => removeFromCart(item.sku)}
