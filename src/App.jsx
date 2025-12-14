@@ -28,6 +28,7 @@ import { ZapatillasPage } from "./pages/user/ZapatillasPage"
 import { BlogPage } from "./pages/user/BlogPage"
 import { PerfilPage } from "./pages/user/PerfilPage"
 
+
 function App() {
   return (
     <>
@@ -70,6 +71,7 @@ function App() {
 
         {/* Redirección por defecto si la ruta no existe */}
         <Route path="*" element={<Navigate to="/FutbolPrime" />} />
+
       </Routes>
     </>
   )
