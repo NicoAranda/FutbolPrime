@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 
 
 export const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <footer className="bg-dark text-white pt-5 pb-4 mt-5 w-100">
     <div className="container">
@@ -41,7 +42,7 @@ export const Footer = () => {
 
       <div className="row align-items-center text-center text-md-start mt-4"> 
         <div className="col-md-7 col-lg-8">
-          <p className="mb-0">© 2025 Fútbol Prime - Todos los derechos reservados</p>
+          <p className="mb-0">© {year} Fútbol Prime - Todos los derechos reservados</p>
         </div>
       </div>
     </div>
