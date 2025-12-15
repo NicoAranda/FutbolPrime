@@ -11,7 +11,7 @@
   letter-spacing: .3px;
 }
 
-/* “cinta” */
+/* cinta */
 .ci2-marquee{
   width: 100%;
   overflow: hidden;
@@ -19,7 +19,7 @@
   height: var(--ci2-h);
 }
 
-/* Track que se mueve infinito */
+/* track infinito */
 .ci2-track{
   display: flex;
   align-items: center;
@@ -32,43 +32,46 @@
 
 @keyframes ci2-scroll{
   from{ transform: translateX(0); }
-  to{ transform: translateX(-33.333%); } /* como duplicamos/triplicamos, esto queda suave */
+  to{ transform: translateX(-33.333%); }
 }
 
-/* Item grande tipo “tile” */
+/* item de logo */
 .ci2-item{
   border: none;
-  background: white;
+  background: transparent;
   padding: 0;
-  cursor: pointer;
 
   height: calc(var(--ci2-h) - 10px);
-  width: clamp(160px, 20vw, 260px);
+  width: clamp(140px, 18vw, 220px);
 
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 8px 18px rgba(0,0,0,.10);
-  transition: transform .18s ease, box-shadow .18s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease;
+  opacity: 0.85;
 }
 
 .ci2-item:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 14px 26px rgba(0,0,0,.16);
+  transform: translateY(-2px);
+  opacity: 1;
 }
 
+/* LOGOS SVG */
 .ci2-img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 85%;
+  max-height: 70%;
+  object-fit: contain;
   display: block;
 }
 
-/* Pausar al pasar el mouse (como muchas tiendas) */
+/* pausa al hover */
 .ci2-marquee:hover .ci2-track{
   animation-play-state: paused;
 }
 
-/* Responsive */
+/* responsive */
 @media (max-width: 768px){
   .ci2-wrap{ padding: 24px 0 12px; }
   .ci2-title{ font-size: 1.05rem; }

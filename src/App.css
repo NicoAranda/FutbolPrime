@@ -61,3 +61,11 @@ footer {
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
+/* 🔧 FIX: evitar col anidada dentro de Card SOLO en Ofertas */
+.ofertas-fix > .col-12,
+.ofertas-fix > .col-sm-6,
+.ofertas-fix > .col-md-4,
+.ofertas-fix > .col-lg-3 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}

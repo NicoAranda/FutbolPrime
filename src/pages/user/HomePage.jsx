@@ -15,7 +15,16 @@ export const HomePage = () => {
   }, [])
 
   const camisetas = useMemo(
-    () => productos.filter((p) => p?.tipo === "camiseta").slice(0, 5),
+    () =>
+      productos
+        .filter(
+          (p) =>
+            p?.tipo === "CAMISETA" &&
+            p?.oferta !== null &&
+            p?.oferta !== undefined &&
+            Number(p?.oferta) > 0
+        )
+        .slice(0, 5),
     [productos]
   )
   const balones = useMemo(
@@ -78,42 +87,21 @@ export const HomePage = () => {
       <section className="container my-5">
         <h2 className="text-center mb-5 display-6">Camisetas Destacadas</h2>
 
-        <div className="row g-5 justify-content-center">
-          {camisetas.map((p) => (
-            <div key={p.sku} className="col-12 col-md-4 col-lg-3">
-              {/* ✅ Hover wrapper */}
-              <div
-                className="hover-card"
-                onClick={() => irDetalle(p.sku)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && irDetalle(p.sku)}
-              >
-                <Card producto={p} />
-              </div>
-            </div>
-          ))}
+        <div className="container my-5">
+          <div className="row g-4 justify-content-center">
+            {camisetas.map((p) => (
+              <Card key={p.sku} producto={p} />
+            ))}
+          </div>
         </div>
-
-        {/* mini imágenes clickeables */}
-        <div className="row mt-5 g-4 justify-content-center">
-          {[
-            { img: "PoleraPSG.webp", to: "/FutbolPrime/catalogo" },
-            { img: "PoleraRealM.jpg", to: "/FutbolPrime/catalogo" },
-            { img: "PoleraMilan.avif", to: "/FutbolPrime/catalogo" },
-            { img: "PoleraCity.avif", to: "/FutbolPrime/catalogo" },
-            { img: "PoleraRoma.avif", to: "/FutbolPrime/catalogo" },
-          ].map((x, i) => (
-            <div className="col-4 col-md-2" key={i}>
-              <Link to={x.to}>
-                <img
-                  src={`${import.meta.env.BASE_URL}img/${x.img}`}
-                  className="img-fluid rounded shadow-lg mini-hover"
-                  alt={x.img}
-                />
-              </Link>
-            </div>
-          ))}
+        <div className="hero-descubrir-wrapper">
+          <Link
+            to="/FutbolPrime/camisetas"
+            className="btn btn-primary btn-sm fw-semibold px-3 btn-descubrir-puma"
+            style={{ width: "fit-content" }}
+          >
+            Ver Más
+          </Link>
         </div>
       </section>
 
@@ -150,7 +138,30 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* ✅ ZAPATILLAS (separador Puma) */}
+
+      <section className="py-5" style={{ background: "#f6f7fb" }}>
+        <div className="container">
+          <div className="d-flex align-items-center justify-content-between mb-3">
+            <h2 className="m-0">Explora en Oferta</h2>
+            <Link to="/FutbolPrime/ofertas" className="btn btn-outline-primary btn-sm">
+              Ver todo
+            </Link>
+          </div>
+
+          {ofertas.length === 0 ? (
+            <p className="text-muted">No hay productos en oferta por ahora.</p>
+          ) : (
+            <div className="container my-5">
+              <div className="row g-4 justify-content-center">
+                {ofertas.slice(0, 4).map((p) => (
+                  <Card key={p.sku} producto={p} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
       <section
         className="position-relative"
         style={{
@@ -183,51 +194,17 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* ✅ CARRUSEL FINAL CON PRODUCTOS (vuelve) */}
-      <section className="py-5" style={{ background: "#f6f7fb" }}>
-        <div className="container">
-          <div className="d-flex align-items-center justify-content-between mb-3">
-            <h2 className="m-0">Explora en Oferta</h2>
-            <Link to="/FutbolPrime/ofertas" className="btn btn-outline-primary btn-sm">
-              Ver todo
-            </Link>
-          </div>
-
-          {ofertas.length === 0 ? (
-            <p className="text-muted">No hay productos en oferta por ahora.</p>
-          ) : (
-            <div className="ofertas-row">
-              {ofertas.slice(0, 12).map((p) => (
-                <div
-                  key={p.sku}
-                  className="ofertas-item hover-card"
-                  onClick={() => irDetalle(p.sku)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && irDetalle(p.sku)}
-                >
-                  <Card producto={p} />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
       {/* ✅ CARRUSEL INFINITO (más grande vía CSS) */}
       <CarruselInfinito
         titulo="Marcas y Destacados"
         velocidad={30}
         imagenes={[
-          "medias_adidas.webp",
-          "medias_grisPuma.webp",
-          "canilleraOferta.webp",
-          "pelotaOferta.webp",
-          "guantesOferta.webp",
-          "ofertabalones.png",
-          "ofertacamisetas.png",
+          "nikeLogo.svg",
+          "pumaLogo.svg",
+          "adidasLogo.svg"
         ]}
       />
+
     </>
   )
 }

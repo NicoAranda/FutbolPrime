@@ -5,22 +5,21 @@ import { useNavigate } from "react-router-dom"
 const CarruselInfinito = ({
   titulo = "Marcas y Destacados",
   imagenes = [],
-  velocidad = 28, // segundos (más bajo = más rápido)
-  height = 180, // alto del carrusel
-  gap = 22, // separación entre imágenes
-  to = "/FutbolPrime/catalogo", // a dónde navega al hacer click
+  velocidad = 28,
+  height = 180,
+  gap = 22,
+  to = "/FutbolPrime/catalogo",
 }) => {
   const navigate = useNavigate()
 
-  // duplicamos para loop infinito
   const lista = useMemo(() => {
     const base = Array.isArray(imagenes) ? imagenes : []
-    return [...base, ...base, ...base] // triple para que no “se note” el corte
+    return [...base, ...base, ...base]
   }, [imagenes])
 
   return (
     <section className="ci2-wrap">
-      {titulo ? <h3 className="ci2-title">{titulo}</h3> : null}
+      {titulo && <h3 className="ci2-title">{titulo}</h3>}
 
       <div
         className="ci2-marquee"
@@ -41,7 +40,7 @@ const CarruselInfinito = ({
             >
               <img
                 src={`${import.meta.env.BASE_URL}img/${src}`}
-                alt={src}
+                alt={src.replace(".svg", "")}
                 className="ci2-img"
                 loading="lazy"
               />
