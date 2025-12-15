@@ -73,15 +73,16 @@ export const HomePage = () => {
 
           {/* ✅ Descubrir cuadrado y más abajo */}
           <div className="hero-descubrir-wrapper">
-            <Link
+            <span
               to="/FutbolPrime/catalogo"
               className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
               style={{ width: "fit-content" }}
             >
               Descubrir
-            </Link>
+            </span>
           </div>
         </div>
+        </Link>
       </section>
 
       {/* ✅ CAMISETAS */}
@@ -125,15 +126,16 @@ export const HomePage = () => {
 
           {/* ✅ Descubrir cuadrado y más abajo */}
           <div className="hero-descubrir-wrapper">
-            <Link
+            <span
               to="/FutbolPrime/catalogo"
               className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
               style={{ width: "fit-content" }}
             >
               Descubrir
-            </Link>
+            </span>
           </div>
         </div>
+        </Link>
       </section>
 
 
@@ -182,15 +184,16 @@ export const HomePage = () => {
 
           {/* ✅ Descubrir cuadrado y más abajo */}
           <div className="hero-descubrir-wrapper">
-            <Link
+            <span
               to="/FutbolPrime/catalogo"
               className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
               style={{ width: "fit-content" }}
             >
               Descubrir
-            </Link>
+            </span>
           </div>
         </div>
+        </Link>
       </section>
 
       {/* ✅ CARRUSEL INFINITO (más grande vía CSS) */}
