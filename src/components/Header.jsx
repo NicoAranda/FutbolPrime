@@ -97,7 +97,7 @@ export const Header = () => {
 
   const handleVerTodosResultados = () => {
     if (busqueda.trim()) {
-      navigate(`/buscar?q=${encodeURIComponent(busqueda.trim())}`);
+      navigate(`/FutbolPrime/catalogo?search=${encodeURIComponent(busqueda.trim())}`);
       setBusqueda("");
       setMostrarResultados(false);
     }
