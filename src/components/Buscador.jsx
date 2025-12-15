@@ -1,6 +1,10 @@
-    import React from "react";
+import React from "react";
 
-export const Buscador = ({ value, onChange, placeholder = "Buscar..." }) => {
+export const Buscador = ({
+  value,
+  onChange,
+  placeholder = "Buscar..."
+}) => {
   return (
     <div className="input-group">
       <span className="input-group-text bg-white">

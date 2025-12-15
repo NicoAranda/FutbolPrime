@@ -20,8 +20,8 @@ const BuscadorHeader = ({ variant = "desktop", onClose }) => {
         setMostrar(false)
       }
     }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    document.addEventListener("click", handleClickOutside)
+    return () => document.removeEventListener("click", handleClickOutside)
   }, [])
 
   useEffect(() => {
@@ -155,7 +155,11 @@ const BuscadorHeader = ({ variant = "desktop", onClose }) => {
                 key={p.id}
                 className="d-flex align-items-center gap-2 p-2 buscador-item"
                 style={{ cursor: "pointer" }}
-                onClick={() => seleccionarProducto(p.sku)}
+                onMouseDown={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  seleccionarProducto(p.sku)
+                }}
               >
                 <img
                   src={p.imagen}

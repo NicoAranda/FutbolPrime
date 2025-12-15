@@ -60,32 +60,38 @@ export const HomePage = () => {
           height: "62vh",
         }}
       >
-        {/* ✅ overlay más suave para que se vea más la imagen */}
-        <div
-          className="position-absolute top-0 start-0 w-100 h-100"
-          style={{ background: "rgba(0,0,0,0.25)" }}
-        ></div>
+        <Link to="/FutbolPrime/catalogo" className="text-decoration-none text-reset d-block h-100">
+          {/* ✅ overlay más suave para que se vea más la imagen */}
+          <div
+            className="position-absolute top-0 start-0 w-100 h-100"
+            style={{ background: "rgba(0,0,0,0.25)" }}
+          ></div>
 
-        <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
-          <h1 className="display-4 fw-bold">Colección Colo-Colo</h1>
-          <p className="fs-5 mb-3">Vístete como los grandes</p>
+          <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
+            <h1 className="display-4 fw-bold">Colección Colo-Colo</h1>
+            <p className="fs-5 mb-3">Vístete como los grandes</p>
 
-          {/* ✅ Descubrir cuadrado y más abajo */}
-          <div className="hero-descubrir-wrapper">
-            <Link
-              to="/FutbolPrime/catalogo"
-              className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
-              style={{ width: "fit-content" }}
-            >
-              Descubrir
-            </Link>
+            {/* ✅ Descubrir cuadrado y más abajo */}
+            <div className="hero-descubrir-wrapper">
+              <span
+                className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
+                style={{ width: "fit-content" }}
+              >
+                Descubrir
+              </span>
+            </div>
           </div>
-        </div>
+        </Link>
       </section>
 
       {/* ✅ CAMISETAS */}
       <section className="container my-5">
-        <h2 className="text-center mb-5 display-6">Camisetas Destacadas</h2>
+        <div className="d-flex align-items-center justify-content-between mb-3">
+          <h2 className="m-0">Camisetas Destacadas</h2>
+          <Link to="/FutbolPrime/camisetas" className="btn btn-outline-primary btn-sm">
+            Ver todo
+          </Link>
+        </div>
 
         <div className="container my-5">
           <div className="row g-4 justify-content-center">
@@ -93,15 +99,6 @@ export const HomePage = () => {
               <Card key={p.sku} producto={p} />
             ))}
           </div>
-        </div>
-        <div className="hero-descubrir-wrapper">
-          <Link
-            to="/FutbolPrime/camisetas"
-            className="btn btn-primary btn-sm fw-semibold px-3 btn-descubrir-puma"
-            style={{ width: "fit-content" }}
-          >
-            Ver Más
-          </Link>
         </div>
       </section>
 
@@ -115,27 +112,29 @@ export const HomePage = () => {
           height: "62vh",
         }}
       >
-        {/* ✅ overlay más suave */}
-        <div
-          className="position-absolute top-0 start-0 w-100 h-100"
-          style={{ background: "rgba(0,0,0,0.25)" }}
-        ></div>
+        <Link to="/FutbolPrime/catalogo" className="text-decoration-none text-reset d-block h-100">
+          {/* ✅ overlay más suave */}
+          <div
+            className="position-absolute top-0 start-0 w-100 h-100"
+            style={{ background: "rgba(0,0,0,0.25)" }}
+          ></div>
 
-        <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
-          <h1 className="display-4 fw-bold">Colección La U</h1>
-          <p className="fs-5 mb-3">Vístete como los grandes</p>
+          <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
+            <h1 className="display-4 fw-bold">Colección La U</h1>
+            <p className="fs-5 mb-3">Vístete como los grandes</p>
 
-          {/* ✅ Descubrir cuadrado y más abajo */}
-          <div className="hero-descubrir-wrapper">
-            <Link
-              to="/FutbolPrime/catalogo"
-              className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
-              style={{ width: "fit-content" }}
-            >
-              Descubrir
-            </Link>
+            {/* ✅ Descubrir cuadrado y más abajo */}
+            <div className="hero-descubrir-wrapper">
+              <span
+                to="/FutbolPrime/catalogo"
+                className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
+                style={{ width: "fit-content" }}
+              >
+                Descubrir
+              </span>
+            </div>
           </div>
-        </div>
+        </Link>
       </section>
 
 
@@ -171,27 +170,29 @@ export const HomePage = () => {
           height: "62vh",
         }}
       >
-        {/* ✅ overlay más suave */}
-        <div
-          className="position-absolute top-0 start-0 w-100 h-100"
-          style={{ background: "rgba(0,0,0,0.25)" }}
-        ></div>
+        <Link to="/FutbolPrime/catalogo" className="text-decoration-none text-reset d-block h-100">
+          {/* ✅ overlay más suave */}
+          <div
+            className="position-absolute top-0 start-0 w-100 h-100"
+            style={{ background: "rgba(0,0,0,0.25)" }}
+          ></div>
 
-        <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
-          <h1 className="display-4 fw-bold"></h1>
-          <p className="fs-5 mb-3"></p>
+          <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
+            <h1 className="display-4 fw-bold"></h1>
+            <p className="fs-5 mb-3"></p>
 
-          {/* ✅ Descubrir cuadrado y más abajo */}
-          <div className="hero-descubrir-wrapper">
-            <Link
-              to="/FutbolPrime/catalogo"
-              className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
-              style={{ width: "fit-content" }}
-            >
-              Descubrir
-            </Link>
+            {/* ✅ Descubrir cuadrado y más abajo */}
+            <div className="hero-descubrir-wrapper">
+              <span
+                to="/FutbolPrime/catalogo"
+                className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
+                style={{ width: "fit-content" }}
+              >
+                Descubrir
+              </span>
+            </div>
           </div>
-        </div>
+        </Link>
       </section>
 
       {/* ✅ CARRUSEL INFINITO (más grande vía CSS) */}

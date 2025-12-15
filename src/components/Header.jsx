@@ -90,7 +90,7 @@ export const Header = () => {
   }
 
   const handleSeleccionarProducto = (producto) => {
-    navigate(`/producto/${producto.sku}`);
+    navigate(`/FutbolPrime/detalle-producto/${producto.sku}`);
     setBusqueda("");
     setMostrarResultados(false);
   }
