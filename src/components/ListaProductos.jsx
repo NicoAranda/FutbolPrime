@@ -3,6 +3,7 @@ import ProductoCardCatalogo from "./ProductoCardCatalogo";
 import Buscador from "./Buscador";
 import OrdenarCatalogo from "./OrdenarCatalogo";
 import SeparadorMarca from "./SeparadorMarca";
+import Card from "./Card";
 
 const BASE_URL = "http://52.203.16.208:8080";
 
@@ -157,14 +158,12 @@ export const ListaProducto = () => {
         </div>
       ) : (
         porMarca.map(([marcaTitulo, lista]) => (
-          <div key={marcaTitulo}>
+          <div key={marcaTitulo} className="mb-5">
             <SeparadorMarca titulo={marcaTitulo} />
 
-            <div className="row g-3">
+            <div className="row g-4">
               {lista.map((p) => (
-                <div key={p.id || p.sku} className="col-6 col-md-4 col-lg-3">
-                  <ProductoCardCatalogo producto={p} />
-                </div>
+                <Card key={p.id || p.sku} producto={p} />
               ))}
             </div>
           </div>

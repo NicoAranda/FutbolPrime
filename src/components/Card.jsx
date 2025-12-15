@@ -57,7 +57,7 @@ export const Card = ({ producto }) => {
             />
             <div className="card-body d-flex flex-column text-center mt-auto">
               <h5 className="card-title">{producto.nombre}</h5>
-              <p className="card-text">{producto.tipo}</p>
+              <p className="card-text">{producto.marcaNombre}</p>
 
               <div className="mt-auto d-flex justify-content-center gap-4">
                 {producto.oferta && (
