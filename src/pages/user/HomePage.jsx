@@ -67,21 +67,21 @@ export const HomePage = () => {
             style={{ background: "rgba(0,0,0,0.25)" }}
           ></div>
 
-          <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
-            <h1 className="display-4 fw-bold">Colección Colo-Colo</h1>
-            <p className="fs-5 mb-3">Vístete como los grandes</p>
+        <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
+          <h1 className="display-4 fw-bold">Colección Colo-Colo</h1>
+          <p className="fs-5 mb-3">Vístete como los grandes</p>
 
-            {/* ✅ Descubrir cuadrado y más abajo */}
-            <div className="hero-descubrir-wrapper">
-              <span
-                className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
-                style={{ width: "fit-content" }}
-              >
-                Descubrir
-              </span>
-            </div>
+          {/* ✅ Descubrir cuadrado y más abajo */}
+          <div className="hero-descubrir-wrapper">
+            <Link
+              to="/FutbolPrime/catalogo"
+              className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
+              style={{ width: "fit-content" }}
+            >
+              Descubrir
+            </Link>
           </div>
-        </Link>
+        </div>
       </section>
 
       {/* ✅ CAMISETAS */}
@@ -119,22 +119,21 @@ export const HomePage = () => {
             style={{ background: "rgba(0,0,0,0.25)" }}
           ></div>
 
-          <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
-            <h1 className="display-4 fw-bold">Colección La U</h1>
-            <p className="fs-5 mb-3">Vístete como los grandes</p>
+        <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
+          <h1 className="display-4 fw-bold">Colección La U</h1>
+          <p className="fs-5 mb-3">Vístete como los grandes</p>
 
-            {/* ✅ Descubrir cuadrado y más abajo */}
-            <div className="hero-descubrir-wrapper">
-              <span
-                to="/FutbolPrime/catalogo"
-                className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
-                style={{ width: "fit-content" }}
-              >
-                Descubrir
-              </span>
-            </div>
+          {/* ✅ Descubrir cuadrado y más abajo */}
+          <div className="hero-descubrir-wrapper">
+            <Link
+              to="/FutbolPrime/catalogo"
+              className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
+              style={{ width: "fit-content" }}
+            >
+              Descubrir
+            </Link>
           </div>
-        </Link>
+        </div>
       </section>
 
 
@@ -177,22 +176,21 @@ export const HomePage = () => {
             style={{ background: "rgba(0,0,0,0.25)" }}
           ></div>
 
-          <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
-            <h1 className="display-4 fw-bold"></h1>
-            <p className="fs-5 mb-3"></p>
+        <div className="container position-relative h-100 d-flex flex-column justify-content-center text-white">
+          <h1 className="display-4 fw-bold"></h1>
+          <p className="fs-5 mb-3"></p>
 
-            {/* ✅ Descubrir cuadrado y más abajo */}
-            <div className="hero-descubrir-wrapper">
-              <span
-                to="/FutbolPrime/catalogo"
-                className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
-                style={{ width: "fit-content" }}
-              >
-                Descubrir
-              </span>
-            </div>
+          {/* ✅ Descubrir cuadrado y más abajo */}
+          <div className="hero-descubrir-wrapper">
+            <Link
+              to="/FutbolPrime/catalogo"
+              className="btn btn-light btn-sm fw-semibold px-3 btn-descubrir-puma"
+              style={{ width: "fit-content" }}
+            >
+              Descubrir
+            </Link>
           </div>
-        </Link>
+        </div>
       </section>
 
       {/* ✅ CARRUSEL INFINITO (más grande vía CSS) */}
