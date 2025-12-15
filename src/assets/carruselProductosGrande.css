@@ -1,0 +1,94 @@
+.cp-wrapper {
+  width: 100%;
+  padding: 60px 0;
+  background: #fff;
+}
+
+.cp-header {
+  max-width: 1400px;
+  margin: 0 auto 24px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cp-header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.cp-controls button {
+  border: none;
+  background: #000;
+  color: #fff;
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.cp-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 0 20px;
+}
+
+.cp-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* CARD GRANDE */
+.cp-card {
+  min-width: 320px;
+  height: 460px;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cp-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
+}
+
+.cp-card img {
+  width: 100%;
+  height: 75%;
+  object-fit: contain;
+  background: #fff;
+}
+
+.cp-info {
+  padding: 14px;
+}
+
+.cp-nombre {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.cp-precio {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cp-card {
+    min-width: 260px;
+    height: 400px;
+  }
+
+  .cp-header h2 {
+    font-size: 1.6rem;
+  }
+}

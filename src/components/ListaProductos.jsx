@@ -12,29 +12,6 @@ const normalizar = (v) =>
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
-const inferirGenero = (p) => {
-  // Esto es “heurístico” (porque tu BD no tiene género).
-  // Busca palabras claves en nombre/descripcion/tipo.
-  const texto = normalizar(
-    `${p.nombre} ${p.descripcion || ""} ${p.tipo || ""}`
-  );
-
-  const esHombre =
-    texto.includes("hombre") || texto.includes("men") || texto.includes("man");
-  const esMujer =
-    texto.includes("mujer") ||
-    texto.includes("women") ||
-    texto.includes("woman") ||
-    texto.includes("dama");
-
-  if (esHombre && !esMujer) return "HOMBRE";
-  if (esMujer && !esHombre) return "MUJER";
-  if (esHombre && esMujer) return "UNISEX";
-
-  // si no dice nada, lo tomamos como UNISEX para no ocultar productos
-  return "UNISEX";
-};
-
 export const ListaProducto = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,7 +21,6 @@ export const ListaProducto = () => {
   const [q, setQ] = useState("");
   const [orden, setOrden] = useState("relevancia");
   const [marca, setMarca] = useState("TODAS");
-  const [genero, setGenero] = useState("TODOS"); // TODOS | HOMBRE | MUJER | UNISEX
 
   useEffect(() => {
     const cargar = async () => {
@@ -80,19 +56,17 @@ export const ListaProducto = () => {
 
     return productos.filter((p) => {
       // buscador
-      const texto = normalizar(`${p.nombre} ${p.descripcion || ""} ${p.tipo || ""} ${p.marcaNombre || ""}`);
+      const texto = normalizar(
+        `${p.nombre} ${p.descripcion || ""} ${p.tipo || ""} ${p.marcaNombre || ""}`
+      );
       const matchQ = query.length === 0 ? true : texto.includes(query);
 
       // marca
       const matchMarca = marca === "TODAS" ? true : p.marcaNombre === marca;
 
-      // género (inferido)
-      const gen = inferirGenero(p);
-      const matchGenero = genero === "TODOS" ? true : gen === genero;
-
-      return matchQ && matchMarca && matchGenero;
+      return matchQ && matchMarca;
     });
-  }, [productos, q, marca, genero]);
+  }, [productos, q, marca]);
 
   const ordenados = useMemo(() => {
     const arr = [...filtrados];
@@ -102,9 +76,13 @@ export const ListaProducto = () => {
     } else if (orden === "precio_desc") {
       arr.sort((a, b) => (b.precio || 0) - (a.precio || 0));
     } else if (orden === "nombre_asc") {
-      arr.sort((a, b) => String(a.nombre || "").localeCompare(String(b.nombre || "")));
+      arr.sort((a, b) =>
+        String(a.nombre || "").localeCompare(String(b.nombre || ""))
+      );
     } else if (orden === "nombre_desc") {
-      arr.sort((a, b) => String(b.nombre || "").localeCompare(String(a.nombre || "")));
+      arr.sort((a, b) =>
+        String(b.nombre || "").localeCompare(String(a.nombre || ""))
+      );
     }
     // relevancia = deja el orden del backend
     return arr;
@@ -143,25 +121,15 @@ export const ListaProducto = () => {
     <div className="container my-4">
       {/* Toolbar */}
       <div className="row g-3 align-items-end mb-3">
-        <div className="col-12 col-md-5">
-          <Buscador value={q} onChange={setQ} placeholder="Buscar producto, marca, tipo..." />
+        <div className="col-12 col-md-6">
+          <Buscador
+            value={q}
+            onChange={setQ}
+            placeholder="Buscar producto, marca, tipo..."
+          />
         </div>
 
         <div className="col-6 col-md-3">
-          <label className="form-label mb-1">Género</label>
-          <select
-            className="form-select"
-            value={genero}
-            onChange={(e) => setGenero(e.target.value)}
-          >
-            <option value="TODOS">Todos</option>
-            <option value="HOMBRE">Hombre</option>
-            <option value="MUJER">Mujer</option>
-            <option value="UNISEX">Unisex</option>
-          </select>
-        </div>
-
-        <div className="col-6 col-md-2">
           <label className="form-label mb-1">Marca</label>
           <select
             className="form-select"
@@ -176,7 +144,7 @@ export const ListaProducto = () => {
           </select>
         </div>
 
-        <div className="col-12 col-md-2">
+        <div className="col-6 col-md-3">
           <label className="form-label mb-1">Orden</label>
           <OrdenarCatalogo value={orden} onChange={setOrden} />
         </div>

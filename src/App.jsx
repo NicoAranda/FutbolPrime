@@ -31,6 +31,7 @@ import { NotificacionesPage } from "./pages/user/NotifiacionesPage"
 import CatalogoPage from "./pages/user/CatalogoPage"
 
 
+
 function App() {
   return (
     <>
@@ -75,6 +76,7 @@ function App() {
 
         {/* Redirección por defecto si la ruta no existe */}
         <Route path="*" element={<Navigate to="/FutbolPrime" />} />
+
       </Routes>
     </>
   )

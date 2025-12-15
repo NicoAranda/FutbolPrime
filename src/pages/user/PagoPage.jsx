@@ -122,7 +122,8 @@ export const PagoPage = () => {
     setTimeout(() => {
       setProcesando(false)
 
-      const exito = Math.random() < 0.7
+      // ✅ ACEPTAR TODOS LOS PAGOS (para demo)
+      const exito = true
 
       // ⚠️ Guardamos una copia literal de los datos antes de limpiar el carrito
       const subtotalFijo = total
@@ -141,27 +142,24 @@ export const PagoPage = () => {
       }
 
       if (exito) {
-        // ✅ AQUÍ agregamos la integración con el backend, sin cambiar la UI
+        // ✅ Integración backend: permite invitado (sin sesión)
         ;(async () => {
           try {
             const baseUrl = "http://52.203.16.208:8080"
 
-            // Obtenemos el usuario logueado para usar su ID en el pedido
+            // ✅ Usuario opcional
             const usuario = JSON.parse(localStorage.getItem("usuario") || "null")
-            if (!usuario || !usuario.id) {
-              throw new Error("No se encontró el usuario logueado para registrar el pedido.")
-            }
+            const usuarioId = usuario && usuario.id ? usuario.id : null
 
             // Armar items para CrearPedidoItemDTO
             const items = cart.map((item) => ({
-              // IMPORTANTE: item.id debe ser el ID del producto en la BD
-              productoId: item.id,
+              productoId: item.id, // importante: que sea el ID real de BD
               cantidad: item.cantidad,
             }))
 
-            // Armar CrearPedidoDTO
+            // Armar CrearPedidoDTO (usuarioId puede ser null)
             const crearPedidoBody = {
-              usuarioId: usuario.id,
+              usuarioId: usuarioId,
               items,
               envio: envio,
               descuento: 0,
@@ -172,7 +170,7 @@ export const PagoPage = () => {
               dirRegion: "Región Metropolitana",
               dirZip: "0000000",
               dirPais: "Chile",
-              dirTelefono: "", // si después quieres, puedes pedir este dato en el form
+              dirTelefono: "",
             }
 
             const respPedido = await fetch(`${baseUrl}/api/pedidos`, {
@@ -188,11 +186,11 @@ export const PagoPage = () => {
 
             const pedidoCreado = await respPedido.json()
 
-            // Armar RegistrarPagoDTO
+            // Registrar pago (aprobado)
             const pagoBody = {
               proveedor: "SIMULADO_FRONT",
               metodo: "TARJETA",
-              monto: pedidoCreado.total, // debe coincidir con el total del pedido
+              monto: pedidoCreado.total,
               transaccionRef: `SIM-${pedidoCreado.id}-${Date.now()}`,
               estado: "APROBADO",
             }
@@ -208,14 +206,14 @@ export const PagoPage = () => {
               throw new Error(`Error registrando pago: ${respPago.status} - ${text}`)
             }
 
-            // Si todo salió bien en el backend, mantenemos tu comportamiento original
+            // ✅ Mantener tu flujo original (localStorage + pantalla)
             const pedidosPrevios = JSON.parse(localStorage.getItem("pedidos") || "[]")
             localStorage.setItem("pedidos", JSON.stringify([...pedidosPrevios, datosCompra]))
+
             setResultadoPago({ exito: true, datos: datosCompra })
             setTimeout(() => clearCart(), 1000)
           } catch (error) {
             console.error(error)
-            // Si falla el backend, mostramos pago rechazado por error técnico
             setResultadoPago({
               exito: false,
               motivo: "Error al registrar el pedido en el sistema. Intenta nuevamente.",
@@ -285,9 +283,7 @@ export const PagoPage = () => {
           <p><strong>Subtotal:</strong> ${resultadoPago.datos.subtotal.toLocaleString("es-CL")}</p>
           <p><strong>IVA (19%):</strong> ${resultadoPago.datos.iva.toLocaleString("es-CL")}</p>
           <p><strong>Envío:</strong> ${resultadoPago.datos.envio.toLocaleString("es-CL")}</p>
-          <h5 className="text-primary fw-bold"> Total: ${resultadoPago.datos.total.toLocaleString("es-CL")}
-          </h5>
-
+          <h5 className="text-primary fw-bold"> Total: ${resultadoPago.datos.total.toLocaleString("es-CL")}</h5>
         </div>
 
         {resultadoPago.exito ? (
@@ -358,6 +354,7 @@ export const PagoPage = () => {
             </form>
           </div>
         </div>
+
       </div>
     </div>
   )
